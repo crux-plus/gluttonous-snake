@@ -23,12 +23,12 @@ export default {
             'postcss-loader'
           ]
         })
-      }
-    ]
+      },
+    ],
   },
 
   // list of additional plugins
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
   ],
 };

@@ -32,6 +32,6 @@ export default {
           { loader: 'postcss-loader', options: { parser: 'sugarss', exec: true } },
         ]
       },
-    ]
+    ],
   },
 };
