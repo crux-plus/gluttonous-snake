@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack-dev-server",
+    "start": "electron ./dist/main.js",
     "build": "webpack",
-    "start": "electron",
     "test": "ava",
+    "watch": "webpack-dev-server",
     "lint": "eslint src"
   },
   "repository": {
@@ -51,7 +51,7 @@
   },
   "ava": {
     "files": [
-      "spec/**/*.spec.js",
+      "spec/**/*.spec.js"
     ],
     "source": [
       "**/*.{js,jsx}",
@@ -62,7 +62,9 @@
     "tap": false,
     "powerAssert": true,
     "failWithoutAssertions": true,
-    "require": [ "babel-register" ],
+    "require": [
+      "babel-register"
+    ],
     "babel": "inherit"
   }
 }

@@ -1,10 +1,13 @@
-import common from './webpack.common.config.babel.js';
-
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+import common from './webpack.common.config.babel.js';
 
 export default {
   ...common,
+
+  // configuration regarding modules
   module: {
+    // rules for modules (configure loaders, parser options, etc.)
     rules: [
       {
         test: /\.css$/,
@@ -18,6 +21,8 @@ export default {
       }
     ]
   },
+
+  // list of additional plugins
   plugins: [
     new ExtractTextPlugin('[name].css')
   ],
