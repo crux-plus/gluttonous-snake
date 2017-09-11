@@ -7,7 +7,7 @@
     "test": "ava",
     "build": "webpack",
     "start": "electron ./dist/main.js",
-    "lint": "eslint src",
+    "lint": "eslint src/scripts",
     "watch": "webpack-dev-server --config webpack.visual.config.babel.js"
   },
   "repository": {
@@ -56,8 +56,7 @@
       "spec/**/*.spec.js"
     ],
     "source": [
-      "**/*.{js,jsx}",
-      "!/**/*"
+      "**/*.{js,jsx}"
     ],
     "concurrency": 5,
     "failFast": true,
