@@ -1,6 +1,6 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import common from './webpack.common.config.babel.js';
+import common from './webpack.common.config.js';
 
 export default {
   ...common,
@@ -9,6 +9,11 @@ export default {
   module: {
     // rules for modules (configure loaders, parser options, etc.)
     rules: [
+      {
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
