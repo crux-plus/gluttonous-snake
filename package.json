@@ -6,8 +6,8 @@
   "scripts": {
     "watch": "webpack-dev-server",
     "build": "webpack",
-    "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
