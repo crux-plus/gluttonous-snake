@@ -1,17 +1,13 @@
 import './common.css';
 
 import ReactDOM from 'react-dom';
-
 import React from 'react';
 
 import { Provider } from 'react-redux';
-
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import { Router, Route } from 'react-router-dom';
-
 import createHistory from 'history/createBrowserHistory';
-
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
