@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 import React from 'react';
 
-import '../../styles/common.css';
+import './common.css';
 
 ReactDOM.render(
   <div>John</div>,

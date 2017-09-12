@@ -5,7 +5,7 @@ export default {
   // and webpack starts bundling
   entry: [
     'babel-polyfill',
-    './src/scripts/app/entry.js',
+    './src/app/entry.js',
   ],
 
   // options related to how webpack emits results
