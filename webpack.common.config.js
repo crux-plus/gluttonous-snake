@@ -3,7 +3,10 @@ import path from 'path';
 export default {
   // Here the application starts executing
   // and webpack starts bundling
-  entry: './src/scripts/app/entry.js',
+  entry: [
+    'babel-polyfill',
+    './src/scripts/app/entry.js',
+  ],
 
   // options related to how webpack emits results
   output: {

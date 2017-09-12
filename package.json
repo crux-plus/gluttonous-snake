@@ -54,7 +54,9 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "extract-text-webpack-plugin": "^3.0.0"
+    "extract-text-webpack-plugin": "^3.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "ava": {
     "files": [
