@@ -5,7 +5,12 @@
       "transform-runtime",
       "module-resolver",
       {
-        "root": ["./src"]
+        "root": ["./src"],
+        "alias": {
+          "containers": "./app/containers",
+          "components": "./app/components",
+          "routers": "./app/routers"
+        }
       }
     ]
   ]
