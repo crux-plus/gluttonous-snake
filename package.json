@@ -59,9 +59,6 @@
     "files": [
       "spec/**/*.spec.js"
     ],
-    "source": [
-      "**/*.{js,jsx}"
-    ],
     "concurrency": 5,
     "failFast": true,
     "tap": false,
