@@ -15,7 +15,7 @@ export default {
     path: path.resolve(__dirname, "dist"), // string
 
     // the filename template for entry chunks
-    filename: "[name].[hash].bundle.js", // for multiple entry points
+    filename: "[name].bundle.js", // for multiple entry points
   },
 
   // configuration regarding modules

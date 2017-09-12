@@ -18,11 +18,16 @@ export default {
     },
     // boolean | string | array, static file location
     contentBase: path.join(__dirname, 'assets'),
-    compress: true, // enable gzip compression
-    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
-    https: false, // true for self-signed, object for cert authority
-    noInfo: true, // only errors & warns on hot reload
+    // enable gzip compression
+    compress: true,
+    // true for index.html upon 404, object for multiple paths
+    historyApiFallback: true,
+    // hot module replacement. Depends on HotModuleReplacementPlugin
+    hot: true,
+    // true for self-signed, object for cert authority
+    https: false,
+    // only errors & warns on hot reload
+    noInfo: true,
     // ...
   },
 
@@ -31,7 +36,7 @@ export default {
     // This is a webpack plugin that simplifies creation of
     // HTML files to serve your webpack bundles.
     new HtmlWebpackPlugin({
-      filename: 'assets/index.html'
+      filename: 'assets/index.html',
     })
   ],
 };

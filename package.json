@@ -8,7 +8,7 @@
     "build": "webpack",
     "start": "electron ./dist/main.js",
     "lint": "eslint src/scripts",
-    "watch": "webpack-dev-server --config webpack.visual.config.babel.js"
+    "watch": "gio open http://localhost:8080 && webpack-dev-server --config webpack.visual.config.babel.js"
   },
   "repository": {
     "type": "git",
