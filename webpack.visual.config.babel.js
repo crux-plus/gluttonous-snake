@@ -1,3 +1,5 @@
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 import common from './webpack.common.config.js';
 
 import path from 'path';
@@ -10,10 +12,12 @@ export default {
   devtool: "source-map", // enum
 
   devServer: {
-    proxy: { // proxy URLs to backend development server
+    // proxy URLs to backend development server
+    proxy: {
       '/api': 'http://localhost:3000'
     },
-    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
+    // boolean | string | array, static file location
+    contentBase: path.join(__dirname, 'assets'),
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
@@ -21,4 +25,13 @@ export default {
     noInfo: true, // only errors & warns on hot reload
     // ...
   },
+
+  // adding plugins to your configuration
+  plugins: [
+    // This is a webpack plugin that simplifies creation of
+    // HTML files to serve your webpack bundles.
+    new HtmlWebpackPlugin({
+      filename: 'assets/index.html'
+    })
+  ],
 };
