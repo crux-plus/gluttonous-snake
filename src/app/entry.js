@@ -15,7 +15,6 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
-import Home from './routers/Home';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -34,11 +33,13 @@ const store = createStore(
   ),
 );
 
+import IndexSwitch from './routers/IndexSwitch';
+
 // Mount the component to the DOM.
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={Home}>
+      <Route path="/" component={IndexSwitch}>
       </Route>
     </Router>
   </Provider>,

@@ -5,8 +5,8 @@
       "transform-runtime",
       "module-resolver",
       {
-        "extensions": [".js", ".jsx"],
         "root": ["./src"],
+        "extensions": [".js", ".jsx"],
         "alias": {
           "containers": "./app/containers",
           "components": "./app/components",
