@@ -1,6 +1,3 @@
-// Load the common styles.
-import './common.css';
-
 // A declarative, efficient, and flexible JavaScript library for building user interfaces.
 import ReactDOM from 'react-dom';
 import React from 'react';
@@ -14,6 +11,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+
+// Load the common styles.
+import './common.css';
+import IndexSwitch from './routers/IndexSwitch';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -32,13 +33,11 @@ const store = createStore(
   ),
 );
 
-import IndexSwitch from './routers/IndexSwitch';
-
 // Mount the component to the DOM.
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={IndexSwitch}>
+      <Route component={IndexSwitch}>
       </Route>
     </Router>
   </Provider>,
