@@ -1,16 +1,19 @@
 import './common.css';
 
+// A declarative, efficient, and flexible JavaScript library for building user interfaces.
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import { Provider } from 'react-redux';
+// Predictable state container for JavaScript apps.
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
+// Declarative routing for React.
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 import Home from './routers/Home';
 
@@ -31,6 +34,7 @@ const store = createStore(
   ),
 );
 
+// Mount the component to the DOM.
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
