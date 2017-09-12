@@ -15,7 +15,7 @@ export default {
     path: path.resolve(__dirname, "dist"), // string
 
     // the filename template for entry chunks
-    filename: "entry.bundle.js", // for multiple entry points
+    filename: "[name]@[hash].js", // for multiple entry points
   },
 
   // configuration regarding modules
@@ -32,7 +32,7 @@ export default {
         use: [
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
-          { loader: 'postcss-loader', options: { parser: 'sugarss', exec: true } },
+          { loader: 'postcss-loader', options: { config: { path: path.resolve(__dirname, "postcss.config.js") } } },
         ]
       },
     ]

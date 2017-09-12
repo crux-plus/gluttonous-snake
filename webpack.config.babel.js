@@ -1,3 +1,4 @@
+import path from 'path';
 import webpack from 'webpack';
 
 // importing plugins that do not come by default in webpack
@@ -23,7 +24,7 @@ export default {
           fallback: 'style-loader',
           use: [
             { loader: 'css-loader', options: { importLoaders: 1 } },
-            'postcss-loader'
+            { loader: 'postcss-loader', options: { config: { path: path.resolve(__dirname, "postcss.config.js") } } },
           ]
         })
       },
