@@ -14,7 +14,6 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
-
 import Home from './routers/Home';
 
 // Create a history of your choosing (we're using a browser history in this case)
