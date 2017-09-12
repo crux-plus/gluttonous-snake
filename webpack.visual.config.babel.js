@@ -17,11 +17,11 @@ export default {
       '/api': 'http://localhost:3000'
     },
     // boolean | string | array, static file location
-    contentBase: path.join(__dirname, 'assets'),
+    contentBase: path.join(__dirname, 'content'),
     // enable gzip compression
     compress: true,
     // true for index.html upon 404, object for multiple paths
-    historyApiFallback: true,
+    //historyApiFallback: true,
     // hot module replacement. Depends on HotModuleReplacementPlugin
     hot: true,
     // true for self-signed, object for cert authority
@@ -36,7 +36,7 @@ export default {
     // This is a webpack plugin that simplifies creation of
     // HTML files to serve your webpack bundles.
     new HtmlWebpackPlugin({
-      filename: 'assets/index.html',
-    })
+      template: 'assets/index.html',
+    }),
   ],
 };
