@@ -1,3 +1,4 @@
+// Load the common styles.
 import './common.css';
 
 // A declarative, efficient, and flexible JavaScript library for building user interfaces.
