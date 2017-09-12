@@ -3,10 +3,7 @@ import path from 'path';
 export default {
   // Here the application starts executing
   // and webpack starts bundling
-  entry: [
-    'babel-polyfill',
-    './src/scripts/app/entry.js',
-  ],
+  entry: './src/scripts/app/entry.js',
 
   // options related to how webpack emits results
   output: {
@@ -15,7 +12,7 @@ export default {
     path: path.resolve(__dirname, "dist"), // string
 
     // the filename template for entry chunks
-    filename: "[name].bundle.js", // for multiple entry points
+    filename: "entry.bundle.js", // for multiple entry points
   },
 
   // configuration regarding modules

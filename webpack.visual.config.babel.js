@@ -1,3 +1,7 @@
+import webpack from 'webpack';
+
+// This is a webpack plugin that simplifies creation of
+// HTML files to serve your webpack bundles.
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import common from './webpack.common.config.js';
@@ -33,10 +37,9 @@ export default {
 
   // adding plugins to your configuration
   plugins: [
-    // This is a webpack plugin that simplifies creation of
-    // HTML files to serve your webpack bundles.
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
