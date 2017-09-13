@@ -7,10 +7,10 @@
     "flow": "flow",
     "test": "ava",
     "lint": "eslint src",
-    "sync": "browser-sync start --server",
     "serve": "node dist/app.js",
     "build": "webpack && babel src/ctrls -d dist",
     "start": "nodemon src/ctrls/app.js --exec babel-node",
+    "sync": "gio open http://localhost:3001 && browser-sync start",
     "watch": "gio open http://localhost:8080 && webpack-dev-server --config webpack.visual.config.babel.js"
   },
   "repository": {
