@@ -38,6 +38,29 @@ export default {
     ]
   },
 
+  // options for resolving module requests
+  // (does not apply to resolving to loaders)
+  resolve: {
+    // directories where to look for modules
+    modules: [
+      "node_modules",
+      path.resolve(__dirname, "src", "app"),
+    ],
+
+    // extensions that are used
+    extensions: [".js", ".json", ".jsx", ".css"],
+
+    // a list of module name aliases
+    alias: {
+      "containers": "./app/containers",
+      "components": "./app/components",
+      "routers": "./app/routers",
+    },
+    /* alternative alias syntax (click to show) */
+
+    /* Advanced resolve configuration (click to show) */
+  },
+
   performance: {
     hints: "warning", // enum
     maxAssetSize: 200000, // int (in bytes),

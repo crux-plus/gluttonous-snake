@@ -6,9 +6,9 @@ import Home from './Home';
 
 class IndexSwitch extends React.Component {
   render() {
-    return(
+    return (
       <Switch>
-        <Route exact path='/' component={Home}/>
+        <Route exact path="/" component={Home} />
       </Switch>
     );
   }

@@ -10,7 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // Declarative routing for React.
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // Load the common styles.
 import './common.css';
@@ -29,7 +29,7 @@ const store = createStore(
   }),
   composeWithDevTools(
     // other store enhancers if any
-    applyMiddleware(middleware)
+    applyMiddleware(middleware),
   ),
 );
 
@@ -37,8 +37,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route component={IndexSwitch}>
-      </Route>
+      <Route component={IndexSwitch} />
     </Router>
   </Provider>,
   document.querySelector('main'),
