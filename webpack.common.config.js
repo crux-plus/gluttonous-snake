@@ -5,17 +5,17 @@ export default {
   // and webpack starts bundling
   entry: [
     'babel-polyfill',
-    './src/app/entry.js',
+    './src/app/entry.jsx',
   ],
 
   // options related to how webpack emits results
   output: {
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    path: path.resolve(__dirname, "dist"), // string
+    path: path.resolve(__dirname, 'dist'), // string
 
     // the filename template for entry chunks
-    filename: "[name]@[hash].js", // for multiple entry points
+    filename: '[name]@[hash].js', // for multiple entry points
   },
 
   // configuration regarding modules
@@ -43,18 +43,18 @@ export default {
   resolve: {
     // directories where to look for modules
     modules: [
-      "node_modules",
-      path.resolve(__dirname, "src", "app"),
+      'node_modules',
+      path.resolve(__dirname, 'src', 'app'),
     ],
 
     // extensions that are used
-    extensions: [".js", ".json", ".jsx", ".css"],
+    extensions: ['.js', '.json', '.jsx', '.css'],
 
     // a list of module name aliases
     alias: {
-      "containers": "./app/containers",
-      "components": "./app/components",
-      "routers": "./app/routers",
+      'containers': './app/containers',
+      'components': './app/components',
+      'routers': './app/routers',
     },
     /* alternative alias syntax (click to show) */
 
@@ -62,7 +62,7 @@ export default {
   },
 
   performance: {
-    hints: "warning", // enum
+    hints: 'warning', // enum
     maxAssetSize: 200000, // int (in bytes),
     maxEntrypointSize: 400000, // int (in bytes)
     assetFilter: function(assetFilename) {
@@ -71,7 +71,7 @@ export default {
     }
   },
 
-  devtool: "source-map", // enum
+  devtool: 'source-map', // enum
   // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.
 
@@ -80,7 +80,7 @@ export default {
   // the entry and module.rules.loader option
   //   is resolved relative to this directory
 
-  target: "web", // enum
+  target: 'web', // enum
   // the environment in which the bundle should run
   // changes chunk loading behavior and available modules
 };
