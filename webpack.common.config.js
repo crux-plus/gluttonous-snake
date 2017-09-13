@@ -5,7 +5,7 @@ export default {
   // and webpack starts bundling
   entry: [
     'babel-polyfill',
-    './src/app/entry.jsx',
+    './src/apps/entry.jsx',
   ],
 
   // options related to how webpack emits results
@@ -44,7 +44,7 @@ export default {
     // directories where to look for modules
     modules: [
       'node_modules',
-      path.resolve(__dirname, 'src', 'app'),
+      path.resolve(__dirname, 'src', 'apps'),
     ],
 
     // extensions that are used
@@ -52,9 +52,10 @@ export default {
 
     // a list of module name aliases
     alias: {
-      'containers': './app/containers',
-      'components': './app/components',
-      'routers': './app/routers',
+      'containers': './containers',
+      'components': './components',
+      'styles': './styles',
+      'routers': './routers',
     },
     /* alternative alias syntax (click to show) */
 
