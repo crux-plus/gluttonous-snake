@@ -1,4 +1,5 @@
 import path from 'path';
+
 import webpack from 'webpack';
 
 // importing plugins that do not come by default in webpack
@@ -13,20 +14,66 @@ export default {
   module: {
     // rules for modules (configure loaders, parser options, etc.)
     rules: [
+      // Webpack plugin for Babel
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      // css loader module for webpack.
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', options: { importLoaders: 1 } },
-            { loader: 'postcss-loader', options: { config: { path: path.resolve(__dirname, "postcss.config.js") } } },
+            {
+              loader: 'css-loader',
+              options: {
+              importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: {
+                  path: path.resolve(__dirname, 'postcss.config.js'),
+                },
+              },
+            },
           ]
         })
+      },
+      // Image loader module for webpack.
+      {
+        test: /\.(gif|png|jpe?g|svg|webp)$/i,
+        loaders: [
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+           {
+            loader: 'image-webpack-loader',
+            options: {
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              // Lossy PNG compressor — pngquant command and libimagequant library.
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              // Improved JPEG encoder.
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // Specifying webp here will create a WEBP version of your JPG/PNG images
+              webp: {
+                quality: 75
+              }
+            }
+          },
+        ]
       },
     ],
   },

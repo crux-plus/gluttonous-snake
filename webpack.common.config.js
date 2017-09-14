@@ -15,24 +15,46 @@ export default {
     path: path.resolve(__dirname, 'dist'), // string
 
     // the filename template for entry chunks
-    filename: '[name]@[hash].js', // for multiple entry points
+    filename: '[name]-[hash].js', // for multiple entry points
   },
 
   // configuration regarding modules
   module: {
     // rules for modules (configure loaders, parser options, etc.)
     rules: [
+      // Webpack plugin for Babel
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      // css loader module for webpack.
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          { loader: 'postcss-loader', options: { config: { path: path.resolve(__dirname, "postcss.config.js") } } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
+        ]
+      },
+      // Image loader module for webpack.
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack-loader',
         ]
       },
     ]
