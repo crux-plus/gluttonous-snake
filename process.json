@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "unamed",
+      "exec_interpreter": "node",
+      "script": "dist/app.js"
+    }
+  ]
+}
