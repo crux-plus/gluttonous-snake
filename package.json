@@ -8,9 +8,9 @@
     "test": "ava",
     "lint": "eslint src",
     "build": "webpack && babel src/ctrls -d dist",
-    "start": "nodemon src/ctrls/app.js --exec babel-node",
     "sync": "gio open http://localhost:3001 && browser-sync start",
     "serve": "gio open http://localhost:3000 && node dist/app.js",
+    "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node",
     "watch": "gio open http://localhost:8080 && webpack-dev-server --config webpack.visual.config.babel.js"
   },
   "repository": {
