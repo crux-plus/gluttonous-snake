@@ -25,7 +25,6 @@ app.set('views', __dirname + '/views');
 // ex: res.render('index.jsx') instead of just res.render('index').
 app.set('view engine', 'jsx');
 
-
 const server = http.createServer(app);
 
 const io = socketIO(server);
