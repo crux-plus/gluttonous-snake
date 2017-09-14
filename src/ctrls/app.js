@@ -30,7 +30,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 app.get('/', (req, res) => {
-  // ...
+  res.send('hello world');
 });
 
 io.on('connection', (socket) => {
