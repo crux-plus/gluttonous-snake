@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "build": "webpack && babel src/ctrls -d dist",
     "sync": "gio open http://localhost:3001 && browser-sync start",
-    "serve": "gio open http://localhost:3000 && node dist/app.js",
+    "serve": "gio open http://localhost:3000 && pm2 start dist/app.js",
     "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node",
     "watch": "gio open http://localhost:8080 && webpack-dev-server --config webpack.visual.config.babel.js"
   },
@@ -47,6 +47,7 @@
     "flow-bin": "^0.54.1",
     "html-webpack-plugin": "^2.30.1",
     "nodemon": "^1.12.0",
+    "pm2": "^2.6.1",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
     "react-addons-test-utils": "^15.6.0",
