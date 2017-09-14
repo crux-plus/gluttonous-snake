@@ -14,8 +14,8 @@ import { createEngine } from 'express-react-views';
 
 const app = express();
 
-// set the engine
-app.engine('.jsx', engine);
+// set the engine.
+app.engine('jsx', createEngine());
 
 // set the view directory
 app.set('views', __dirname + '/views');
@@ -25,8 +25,6 @@ app.set('views', __dirname + '/views');
 // ex: res.render('index.jsx') instead of just res.render('index').
 app.set('view engine', 'jsx');
 
-// finally, set the custom view
-app.engine('jsx', createEngine());
 
 const server = http.createServer(app);
 
