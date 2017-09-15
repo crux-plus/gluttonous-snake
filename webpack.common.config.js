@@ -1,6 +1,9 @@
 // The NodeJS ’path’ module.
 import path from 'path';
 
+// Simple icon font handling for webpack.
+import IconfontWebpackPlugin from 'iconfont-webpack-plugin';
+
 export default {
   // Here the application starts executing
   // and webpack starts bundling
@@ -43,6 +46,13 @@ export default {
           {
             loader: 'postcss-loader',
             options: {
+              plugins: (loader) => [
+                // Add the plugin
+                new IconfontWebpackPlugin({
+                  resolve: loader.resolve,
+                  modules: false,
+                }),
+              ],
               config: {
                 path: path.resolve(__dirname, 'postcss.config.js'),
               },
@@ -55,7 +65,6 @@ export default {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader',
         ]
       },
       {

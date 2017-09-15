@@ -1,7 +1,10 @@
 // importing plugins that do not come by default in webpack
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-// webpack is a module bundler. Its main purpose is to bundle JavaScript
+// Simple icon font handling for webpack.
+import IconfontWebpackPlugin from 'iconfont-webpack-plugin';
+
+// Webpack is a module bundler. Its main purpose is to bundle JavaScript
 // files for usage in a browser, yet it is also capable of transforming,
 // bundling, or packaging just about any resource or asset.
 import webpack from 'webpack';
@@ -39,6 +42,13 @@ export default {
             {
               loader: 'postcss-loader',
               options: {
+                plugins: (loader) => [
+                  // Add the plugin
+                  new IconfontWebpackPlugin({
+                    resolve: loader.resolve,
+                    modules: false,
+                  }),
+                ],
                 config: {
                   path: path.resolve(__dirname, 'postcss.config.js'),
                 },
@@ -51,40 +61,13 @@ export default {
       {
         test: /\.(gif|png|jpe?g|svg|webp)$/i,
         loaders: [
-          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-           {
-            loader: 'image-webpack-loader',
-            options: {
-              gifsicle: {
-                interlaced: false,
-              },
-              optipng: {
-                optimizationLevel: 7,
-              },
-              // Lossy PNG compressor — pngquant command and libimagequant library.
-              pngquant: {
-                quality: '65-90',
-                speed: 4
-              },
-              // Improved JPEG encoder.
-              mozjpeg: {
-                progressive: true,
-                quality: 65
-              },
-              // Specifying webp here will create a WEBP version of your JPG/PNG images
-              webp: {
-                quality: 75
-              }
-            }
-          },
+          'file-loader',
         ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
-          {
-            loader: 'file-loader',
-          },
+          'file-loader',
         ],
       },
     ],
