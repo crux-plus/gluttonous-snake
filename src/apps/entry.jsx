@@ -13,8 +13,7 @@ import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // Load the common styles.
-import 'normalize.css/normalize.css';
-import 'semantic-ui-css/semantic.css';
+import 'styles/common.css';
 import IndexSwitch from 'routers/IndexSwitch';
 
 // Create a history of your choosing (we're using a browser history in this case)
