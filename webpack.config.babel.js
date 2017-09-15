@@ -62,6 +62,30 @@ export default {
         test: /\.(gif|png|jpe?g|svg|webp)$/i,
         loaders: [
           'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              // Lossy PNG compressor — pngquant command and libimagequant library
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // Specifying webp here will create a WEBP version of your JPG/PNG images
+              webp: {
+                quality: 75
+              },
+            },
+          },
         ]
       },
       {
