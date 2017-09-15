@@ -16,7 +16,7 @@ export default {
     path: path.resolve(__dirname, 'dist'), // string
 
     // the filename template for entry chunks
-    filename: '[name]-[hash].js', // for multiple entry points
+    filename: '[name]@[hash].js', // for multiple entry points
   },
 
   // configuration regarding modules
@@ -57,6 +57,14 @@ export default {
           'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
           'image-webpack-loader',
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ]
   },

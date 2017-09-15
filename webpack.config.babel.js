@@ -1,13 +1,13 @@
-// The NodeJS ’path’ module.
-import path from 'path';
+// importing plugins that do not come by default in webpack
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 // webpack is a module bundler. Its main purpose is to bundle JavaScript
 // files for usage in a browser, yet it is also capable of transforming,
 // bundling, or packaging just about any resource or asset.
 import webpack from 'webpack';
 
-// importing plugins that do not come by default in webpack
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+// The NodeJS ’path’ module.
+import path from 'path';
 
 import common from './webpack.common.config.js';
 
@@ -78,6 +78,14 @@ export default {
             }
           },
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },
