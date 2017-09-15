@@ -1,3 +1,6 @@
+// webpack is a module bundler. Its main purpose is to bundle JavaScript
+// files for usage in a browser, yet it is also capable of transforming,
+// bundling, or packaging just about any resource or asset.
 import webpack from 'webpack';
 
 // This is a webpack plugin that simplifies creation of
@@ -6,6 +9,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import common from './webpack.common.config.js';
 
+// The NodeJS ’path’ module.
 import path from 'path';
 
 export default {

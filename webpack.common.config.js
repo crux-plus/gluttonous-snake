@@ -1,3 +1,4 @@
+// The NodeJS ’path’ module.
 import path from 'path';
 
 export default {
