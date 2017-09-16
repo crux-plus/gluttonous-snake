@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "unamed",
+      "name": "gluttonous-snake",
       "exec_interpreter": "node",
       "script": "dist/app.js"
     }
