@@ -28,6 +28,32 @@ class Canvas extends React.Component {
   /**
    * @method
    */
+  componentWillMount() {
+    const {
+      canvas: {
+        width: defaultWidth,
+        height: defaultHeight,
+      },
+    } = Canvas.defaultProps;
+    const {
+      canvas: {
+        width,
+        height,
+      },
+    } = this.props;
+
+    if (width == defaultWidth && height == defaultHeight) {
+      const {
+        innerWidth: width,
+        innerHeight: height,
+      } = window;
+      this.props.actions.canvasSizeActionCreator({ width, height });
+    }
+  }
+
+  /**
+   * @method
+   */
   render() {
     return (
       <canvas
