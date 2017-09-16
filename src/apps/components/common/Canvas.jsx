@@ -26,11 +26,30 @@ class Canvas extends React.Component {
   }
 
   /**
+   * @static
+   */
+  static getInnerWidth() {
+    return window.innerWidth;
+  }
+
+  /**
+   * @static
+   */
+  static getInnerHeight() {
+    return window.innerHeight;
+  }
+
+  /**
    * @method
    */
   render() {
     return (
-      <canvas id={this.props.canvasId}></canvas>
+      <canvas
+        id={this.props.canvasId}
+        width={this.props.canvasWidth}
+        height={this.props.canvasHeight}
+      >
+      </canvas>
     );
   }
 }
@@ -42,6 +61,8 @@ Canvas.propTypes = {
 
 // Specifies the default values for props:
 Canvas.defaultProps = {
+  canvasHeight: Canvas.getInnerHeight(),
+  canvasWidth: Canvas.getInnerWidth(),
   canvasId: Canvas.getUniqueId(),
 };
 
