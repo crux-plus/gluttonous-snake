@@ -21,7 +21,6 @@ class Canvas extends React.Component {
   static getUniqueId() {
     const timestamp = (new Date()).getTime();
     const uniqueId = `canvas@${timestamp}`;
-
     return uniqueId;
   }
 
@@ -49,6 +48,13 @@ class Canvas extends React.Component {
       } = window;
       this.props.actions.canvasSizeActionCreator({ width, height });
     }
+  }
+
+  /**
+   * @method
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
   }
 
   /**
