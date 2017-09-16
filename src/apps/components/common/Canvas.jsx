@@ -42,7 +42,7 @@ class Canvas extends React.Component {
       },
     } = this.props;
 
-    if (width == defaultWidth && height == defaultHeight) {
+    if (width === defaultWidth && height === defaultHeight) {
       const {
         innerWidth: width,
         innerHeight: height,
