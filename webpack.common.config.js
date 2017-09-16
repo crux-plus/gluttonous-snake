@@ -109,7 +109,7 @@ export default {
     assetFilter: function(assetFilename) {
       // Function predicate that provides asset filenames
       return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
-    }
+    },
   },
 
   devtool: 'source-map', // enum
