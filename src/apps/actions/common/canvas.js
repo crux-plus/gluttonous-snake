@@ -1,6 +1,6 @@
-function resizeCanvas({ width=0, height=0 }) {
+function canvasSizeActionCreator({ width=0, height=0 }) {
   return {
-    type: RESIZE_CANVAS,
+    type: 'RESIZE_CANVAS',
     size: {
       width,
       height,
@@ -8,6 +8,6 @@ function resizeCanvas({ width=0, height=0 }) {
   };
 }
 
-export dafault {
-  resizeCanvas,
+export {
+  canvasSizeActionCreator,
 };

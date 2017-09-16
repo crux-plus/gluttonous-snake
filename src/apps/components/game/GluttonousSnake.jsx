@@ -12,6 +12,15 @@ class GluttonousSnake extends Canvas {
   constructor(props) {
     super(props);
   }
+
+  componentWillMount() {
+    const {
+      innerWidth: width,
+      innerHeight: height,
+    } = window;
+
+    this.props.actions.canvasSizeActionCreator({ width, height });
+  }
 }
 
 export default GluttonousSnake;

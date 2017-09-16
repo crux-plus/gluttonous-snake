@@ -31,9 +31,9 @@ class Canvas extends React.Component {
   render() {
     return (
       <canvas
-        id={this.props.canvasId}
-        width={this.props.canvasWidth}
-        height={this.props.canvasHeight}
+        id={this.props.canvas.id}
+        width={this.props.canvas.width}
+        height={this.props.canvas.height}
       >
       </canvas>
     );
@@ -42,16 +42,21 @@ class Canvas extends React.Component {
 
 // Specifies the verification rule for props:
 Canvas.propTypes = {
-  canvasId: PropTypes.string,
-  canvasHeight: PropTypes.number,
-  canvasWidth: PropTypes.number,
+  // An object taking on a particular shape
+  canvas: PropTypes.shape({
+    id: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
 };
 
 // Specifies the default values for props:
 Canvas.defaultProps = {
-  canvasId: Canvas.getUniqueId(),
-  canvasWidth: 300,
-  canvasHeight: 150,
+  canvas: {
+    id: Canvas.getUniqueId(),
+    width: 0,
+    height: 0,
+  },
 };
 
 export default Canvas;
