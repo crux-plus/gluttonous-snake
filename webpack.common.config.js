@@ -92,10 +92,9 @@ export default {
 
     // a list of module name aliases
     alias: {
-      'containers': './containers',
-      'components': './components',
-      'styles': './styles',
-      'routers': './routers',
+      'containers': 'containers',
+      'components': 'components',
+      'routers': 'routers',
     },
     /* alternative alias syntax (click to show) */
 
