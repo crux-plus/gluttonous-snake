@@ -7,10 +7,10 @@ import IconfontWebpackPlugin from 'iconfont-webpack-plugin';
 export default {
   // Here the application starts executing
   // and webpack starts bundling
-  entry: [
-    'babel-polyfill',
-    './src/apps/entry.jsx',
-  ],
+  entry: {
+    polyfills: './src/apps/polyfills.js',
+    entry: './src/apps/entry.jsx',
+  },
 
   // options related to how webpack emits results
   output: {
