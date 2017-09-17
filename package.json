@@ -9,9 +9,9 @@
     "lint": "eslint src",
     "build": "webpack && babel src/ctrls -d dist",
     "sync": "gio open http://localhost:3001 && browser-sync start",
+    "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
     "serve": "gio open http://localhost:3000 && pm2 kill && pm2 start process.json",
-    "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node",
-    "watch": "gio open http://localhost:8080 && webpack-dev-server --config webpack.visual.config.babel.js"
+    "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
