@@ -1,3 +1,5 @@
+import Immutable  from 'seamless-immutable';
+
 import PropTypes from 'prop-types';
 
 import React from 'react';
