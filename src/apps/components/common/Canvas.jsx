@@ -38,12 +38,14 @@ class Canvas extends React.Component {
   componentWillMount() {
     const {
       canvas: {
+        id: defaultId,
         width: defaultWidth,
         height: defaultHeight,
       },
     } = Canvas.defaultProps;
     const {
       canvas: {
+        id,
         width,
         height,
       },
@@ -57,8 +59,10 @@ class Canvas extends React.Component {
       this.props.actions.canvasSizeActionCreator({ width, height });
     }
 
-    const id = Canvas.getUniqueId();
-    this.props.actions.canvasIdActionCreator({ id });
+    if (id === defaultId) {
+      const id = Canvas.getUniqueId();
+      this.props.actions.canvasIdActionCreator({ id });
+    }
   }
 
   /**
