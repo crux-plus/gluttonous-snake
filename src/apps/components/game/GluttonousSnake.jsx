@@ -2,15 +2,10 @@ import React from 'react';
 
 import Canvas from 'components/common/Canvas';
 
-const Direction = Object.freeze({
-  None: 'None',
-  Up: 'Up',
-  Right: 'Right',
-  Down: 'Down',
-  Left: 'Left',
-});
+import Rtl from 'components/game/Rtl';
 
 /**
+ * @public
  * @class
  */
 class GluttonousSnake extends Canvas {
@@ -29,7 +24,7 @@ class GluttonousSnake extends Canvas {
           },
           size: 10,
           color: '#000',
-          direction: Direction.None,
+          rtl: Rtl.None,
         },
       },
     };
@@ -47,24 +42,29 @@ class GluttonousSnake extends Canvas {
 
   bindKeyboardEvent() {
     document.addEventListener('keydown', (event) => {
-      let direction = this.data.snake.head.direction;
+      const {
+        head: {
+          rtl: prevRtl,
+        },
+      } = this.data.snake;
+      let rtl = prevRtl;
       switch (event.code) {
         case 'KeyS':
-          direction = Direction.Down;
+          rtl = Rtl.Down;
           break;
         case 'KeyA':
-          direction = Direction.Left;
+          rtl = Rtl.Left;
           break;
         case 'KeyW':
-          direction = Direction.Up;
+          rtl = Rtl.Up;
           break;
         case 'KeyD':
-          direction = Direction.Right;
+          rtl = Rtl.Right;
           break;
       }
-      this.data.snake.head.direction = direction;
 
-      if (direction != Direction.None) {
+      if (rtl != Rtl.None && rtl !== Rtl.getReverse(prevRtl)) {
+        this.data.snake.head.rtl = rtl;
         this.cancelMotionAnimation();
         this.requestMotionAnimation();
       }
@@ -75,28 +75,28 @@ class GluttonousSnake extends Canvas {
     const {
       spread,
       head: {
-        direction,
+        rtl,
         location,
       },
     } = this.data.snake;
     let motion = null;
-    switch (direction) {
-      case Direction.Down:
+    switch (rtl) {
+      case Rtl.Down:
         motion = () => {
           location.y += spread;
         }
         break;
-      case Direction.Left:
+      case Rtl.Left:
         motion = () => {
           location.x -= spread;
         }
         break;
-      case Direction.Up:
+      case Rtl.Up:
         motion = () => {
           location.y -= spread;
         }
         break;
-      case Direction.Right:
+      case Rtl.Right:
         motion = () => {
           location.x += spread;
         }
