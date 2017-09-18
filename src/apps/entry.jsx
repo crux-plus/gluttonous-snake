@@ -14,6 +14,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // Load the common styles.
 import 'normalize.css/normalize.css';
+import 'styles/entry.css';
 import IndexSwitch from 'routers/IndexSwitch';
 import canvasReducer from 'reducers/common/canvas';
 
