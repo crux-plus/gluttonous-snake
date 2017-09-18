@@ -7,6 +7,41 @@ import Canvas from 'components/common/Canvas';
  */
 class GluttonousSnake extends Canvas {
   /**
+   * @method
+   */
+  init() {
+    const {
+      context,
+    } = this;
+
+    if (context != null) {
+      this.context = this.getContext();
+    }
+  }
+
+  /**
+   * @method
+   */
+  getContext() {
+    const {
+      canvas: {
+        id,
+      },
+    } = this.state;
+    const canvasEl = document.querySelector(`#${id}`);
+    const context = canvasEl.getContext('2d');
+    return context;
+  }
+
+  /**
+   * @method
+   */
+  redraw() {
+    this.context.fillStyle = '#000';
+    this.context.fillRect(50, 50, 10, 10);
+  }
+
+  /**
    * @constructor
    */
   constructor(props) {
@@ -16,24 +51,8 @@ class GluttonousSnake extends Canvas {
   /**
    * @method
    */
-  redraw() {
-    const {
-      canvas: {
-        id,
-      },
-    } = this.props;
-    const formateId = Canvas.formateId(id);
-    const canvasEl = document.querySelector(`#${formateId}`);
-    const context = canvasEl.getContext('2d');
-
-    context.fillStyle = '#000';
-    context.fillRect(50, 50, 10, 10);
-  }
-
-  /**
-   * @method
-   */
   componentDidUpdate() {
+    this.init();
     this.redraw();
   }
 }
