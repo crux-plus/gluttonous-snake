@@ -1,5 +1,3 @@
-import Immutable  from 'seamless-immutable';
-
 import PropTypes from 'prop-types';
 
 import React from 'react';
@@ -14,6 +12,21 @@ class Canvas extends React.Component {
    */
   constructor(props) {
     super(props);
+
+    const {
+      canvas: {
+        id,
+        width,
+        height,
+      },
+    } = props;
+    this.state = {
+      canvas: {
+        width,
+        height,
+        id: Canvas.formateId(id),
+      },
+    };
   }
 
   /**
@@ -82,12 +95,35 @@ class Canvas extends React.Component {
   /**
    * @method
    */
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState, props) => {
+      const {
+        canvas: {
+          id,
+          width,
+          height,
+        },
+      } = props;
+
+      return {
+        canvas: {
+          width,
+          height,
+          id: Canvas.formateId(id),
+        }
+      };
+    });
+  }
+
+  /**
+   * @method
+   */
   render() {
     return (
       <canvas
-        id={Canvas.formateId(this.props.canvas.id)}
-        width={this.props.canvas.width}
-        height={this.props.canvas.height}
+        id={this.state.canvas.id}
+        width={this.state.canvas.width}
+        height={this.state.canvas.height}
       >
       </canvas>
     );
