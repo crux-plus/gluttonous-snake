@@ -2,22 +2,25 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import { canvasSizeActionCreator } from 'actions/common/canvas';
-
 import GluttonousSnake from 'components/game/GluttonousSnake';
+
+import {
+  canvasSizeActionCreator,
+  canvasIdActionCreator,
+} from 'actions/common/canvas';
 
 function mapStateToProps(state, ownProps = {}) {
   const {
     canvas: {
-      size: {
-        width,
-        height,
-      },
+      id,
+      width,
+      height,
     },
   } = state;
 
   return {
     canvas: {
+      id,
       width,
       height,
     },
@@ -27,7 +30,10 @@ function mapStateToProps(state, ownProps = {}) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
-      { canvasSizeActionCreator },
+      {
+        canvasIdActionCreator,
+        canvasSizeActionCreator,
+      },
       dispatch,
     ),
   }

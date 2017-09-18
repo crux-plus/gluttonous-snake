@@ -21,9 +21,15 @@ class Canvas extends React.Component {
    * @static
    */
   static getUniqueId() {
-    const timestamp = (new Date()).getTime();
-    const uniqueId = `canvas@${timestamp}`;
-    return uniqueId;
+    return (new Date()).getTime();
+  }
+
+  /**
+   * @public
+   * @static
+   */
+  static formateId(id) {
+    return `canvas@${id}`;
   }
 
   /**
@@ -50,6 +56,9 @@ class Canvas extends React.Component {
       } = window;
       this.props.actions.canvasSizeActionCreator({ width, height });
     }
+
+    const id = Canvas.getUniqueId();
+    this.props.actions.canvasIdActionCreator({ id });
   }
 
   /**
@@ -65,7 +74,7 @@ class Canvas extends React.Component {
   render() {
     return (
       <canvas
-        id={this.props.canvas.id}
+        id={Canvas.formateId(this.props.canvas.id)}
         width={this.props.canvas.width}
         height={this.props.canvas.height}
       >
@@ -78,7 +87,7 @@ class Canvas extends React.Component {
 Canvas.propTypes = {
   // An object taking on a particular shape
   canvas: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     width: PropTypes.number,
     height: PropTypes.number,
   }),
@@ -87,7 +96,7 @@ Canvas.propTypes = {
 // Specifies the default values for props:
 Canvas.defaultProps = {
   canvas: {
-    id: Canvas.getUniqueId(),
+    id: 0,
     width: 0,
     height: 0,
   },
