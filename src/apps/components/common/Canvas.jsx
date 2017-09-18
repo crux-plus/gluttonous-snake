@@ -29,13 +29,13 @@ class Canvas extends React.Component {
    * @static
    */
   static formateId(id) {
-    return `canvas@${id}`;
+    return `canvas${id}`;
   }
 
   /**
    * @method
    */
-  componentWillMount() {
+  setDefaultProps() {
     const {
       canvas: {
         id: defaultId,
@@ -63,6 +63,13 @@ class Canvas extends React.Component {
       const id = Canvas.getUniqueId();
       this.props.actions.canvasIdActionCreator({ id });
     }
+  }
+
+  /**
+   * @method
+   */
+  componentWillMount() {
+    this.setDefaultProps();
   }
 
   /**
