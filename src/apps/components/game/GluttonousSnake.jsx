@@ -12,14 +12,27 @@ class GluttonousSnake extends Canvas {
   /**
    * @method
    */
-  static getInitData() {
+  getInitData() {
+    const size = 10;
+    const {
+      canvas: {
+        width,
+        height,
+      },
+    } = this.props;
+
     return {
       motion: null,
       requestID: -1,
-
+      boundary: {
+        top: 0,
+        right: width - size,
+        bottom: height - size,
+        left: 0,
+      },
       snake: {
+        size,
         spread: 2,
-        size: 10,
         color: '#000',
         head: {
           location: {
@@ -37,11 +50,14 @@ class GluttonousSnake extends Canvas {
    */
   init() {
     this.context = this.getContext();
-    this.data = GluttonousSnake.getInitData();
+    this.data = this.getInitData();
 
     this.bindKeyboardEvent();
   }
 
+  /**
+   * @method
+   */
   bindKeyboardEvent() {
     document.addEventListener('keydown', (event) => {
       const {
@@ -68,12 +84,17 @@ class GluttonousSnake extends Canvas {
 
       if (rtl != Rtl.None) {
         this.data.snake.head.rtl = rtl;
-        this.cancelMotionAnimation();
+        if (this.data.requestID !== -1) {
+          this.cancelMotionAnimation();
+        }
         this.requestMotionAnimation();
       }
     });
   }
 
+  /**
+   * @method
+   */
   getMotionCallback() {
     const {
       spread,
@@ -108,11 +129,41 @@ class GluttonousSnake extends Canvas {
     return motion;
   }
 
+  /**
+   * @method
+   */
+  boundaryDetection() {
+    const {
+      boundary: {
+        top,
+        right,
+        bottom,
+        left,
+      },
+      snake: {
+        head: {
+          location: {
+            x,
+            y,
+          },
+        },
+      },
+    } = this.data;
+    let flag = false;
+    if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
+      flag = true;
+    }
+    return flag;
+  }
+
+  /**
+   * @method
+   */
   requestMotionAnimation() {
     this.data.motion = this.getMotionCallback();
     this.data.requestID = window.requestAnimationFrame(() => {
-      this.redraw();
-      this.requestMotionAnimation();
+        this.redraw();
+        this.requestMotionAnimation();
     });
   }
 
@@ -120,9 +171,21 @@ class GluttonousSnake extends Canvas {
    * @method
    */
   redraw() {
+    const {
+      head: {
+        location: {
+          x,
+          y,
+        },
+      },
+    } = this.data.snake;
     if (this.data.motion != null) {
       this.clearPrevHead();
       this.data.motion();
+    }
+    if (!this.boundaryDetection()) {
+      this.data.snake.head.location = { x, y };
+      this.cancelMotionAnimation();
     }
     this.drawHead();
   }
