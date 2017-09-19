@@ -15,17 +15,10 @@ class GluttonousSnake extends Canvas {
    * @method
    */
   getInitData() {
-    const {
-      canvas: {
-        width,
-        height,
-      },
-    } = this.props;
-    const outer = {
-      width,
-      height,
-    };
     const context = this.getContext();
+    const {
+      canvas: outer,
+    } = this.props;
     const snake = new Snake({ context, outer });
     return {
       context,
