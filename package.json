@@ -78,6 +78,7 @@
     "imagemin-pngquant": "^5.0.1",
     "immutable": "^3.8.1",
     "normalize.css": "^7.0.0",
+    "raf": "^3.3.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",

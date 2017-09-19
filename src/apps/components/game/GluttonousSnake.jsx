@@ -14,16 +14,18 @@ class GluttonousSnake extends Canvas {
    */
   static getInitData() {
     return {
+      motion: null,
       requestID: -1,
+
       snake: {
         spread: 2,
+        size: 10,
+        color: '#000',
         head: {
           location: {
             x: 0,
             y: 0,
           },
-          size: 10,
-          color: '#000',
           rtl: Rtl.None,
         },
       },
@@ -47,6 +49,7 @@ class GluttonousSnake extends Canvas {
           rtl: prevRtl,
         },
       } = this.data.snake;
+
       let rtl = prevRtl;
       switch (event.code) {
         case 'KeyS':
@@ -63,7 +66,7 @@ class GluttonousSnake extends Canvas {
           break;
       }
 
-      if (rtl != Rtl.None && rtl !== Rtl.getReverse(prevRtl)) {
+      if (rtl != Rtl.None) {
         this.data.snake.head.rtl = rtl;
         this.cancelMotionAnimation();
         this.requestMotionAnimation();
@@ -106,14 +109,57 @@ class GluttonousSnake extends Canvas {
   }
 
   requestMotionAnimation() {
-    const motion = this.getMotionCallback();
+    this.data.motion = this.getMotionCallback();
     this.data.requestID = window.requestAnimationFrame(() => {
-      if (motion != null) {
-        motion();
-      }
       this.redraw();
       this.requestMotionAnimation();
     });
+  }
+
+  /**
+   * @method
+   */
+  redraw() {
+    if (this.data.motion != null) {
+      this.clearPrevHead();
+      this.data.motion();
+    }
+    this.drawHead();
+  }
+
+  /**
+   * @method
+   */
+  drawHead() {
+    const {
+      size,
+      color,
+      head: {
+        location: {
+          x,
+          y,
+        },
+      },
+    } = this.data.snake;
+    this.context.fillStyle = color;
+    this.context.fillRect(x, y, size, size);
+  }
+
+  /**
+   * @method
+   */
+  clearPrevHead() {
+    const {
+      size,
+      color,
+      head: {
+        location: {
+          x,
+          y,
+        },
+      },
+    } = this.data.snake;
+    this.context.clearRect(x, y, size, size);
   }
 
   /**
@@ -127,25 +173,6 @@ class GluttonousSnake extends Canvas {
     if (requestID != -1) {
       window.cancelAnimationFrame(requestID);
     }
-  }
-
-  /**
-   * @method
-   */
-  redraw() {
-    const {
-      head: {
-        location: {
-          x,
-          y,
-        },
-        size,
-        color,
-      },
-    } = this.data.snake;
-
-    this.context.fillStyle = color;
-    this.context.fillRect(x, y, size, size);
   }
 
   /**

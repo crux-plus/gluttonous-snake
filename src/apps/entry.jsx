@@ -12,7 +12,7 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
-// Load the common styles.
+// A collection of HTML element and attribute style-normalizations
 import 'normalize.css/normalize.css';
 import 'styles/entry.css';
 import IndexSwitch from 'routers/IndexSwitch';

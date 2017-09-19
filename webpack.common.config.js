@@ -96,6 +96,7 @@ export default {
       'components': 'components',
       'actions': 'actions',
       'routers': 'routers',
+      'styles': 'styles',
     },
     /* alternative alias syntax (click to show) */
 
