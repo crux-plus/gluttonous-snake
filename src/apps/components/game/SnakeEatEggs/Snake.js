@@ -1,4 +1,4 @@
-import Rtl from 'components/game/Rtl';
+import Rtl from './Rtl';
 
 /**
  * @class

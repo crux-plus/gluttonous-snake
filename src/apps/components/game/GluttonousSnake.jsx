@@ -2,11 +2,7 @@ import React from 'react';
 
 import Canvas from 'components/common/Canvas';
 
-import Rtl from 'components/game/Rtl';
-
-import Eggs from 'components/game/Eggs';
-
-import Snake from 'components/game/Snake';
+import SnakeEatEggs from './SnakeEatEggs';
 
 /**
  * @public
@@ -16,45 +12,24 @@ class GluttonousSnake extends Canvas {
   /**
    * @method
    */
-  getInitData() {
+  initData() {
     const context = this.getContext();
     const {
       canvas: outer,
     } = this.props;
-    const snake = new Snake({ context, outer });
-    const eggs = new Eggs({ context, outer });
-    return {
+    const snakeEatEggs = new SnakeEatEggs({ context, outer });
+    const data = {
       context,
-      eggs,
-      snake,
+      snakeEatEggs,
     };
+    this.data = data;
   }
 
   /**
    * @method
    */
   init() {
-    this.data = this.getInitData();
-
-    this.bindKeyboardEvent();
-  }
-
-  /**
-   * @method
-   */
-  bindKeyboardEvent() {
-    document.addEventListener('keydown', (event) => {
-      const {
-        code,
-      } = event;
-      const rtl = Rtl.fromCode(code);
-      if (rtl != Rtl.None) {
-        const {
-          snake,
-        } = this.data;
-        snake.setHeadRtl(rtl);
-      }
-    });
+    this.initData();
   }
 
   /**
@@ -62,11 +37,9 @@ class GluttonousSnake extends Canvas {
    */
   redraw() {
     const {
-      snake,
-      eggs,
+      snakeEatEggs,
     } = this.data;
-    eggs.draw();
-    snake.drawHead();
+    snakeEatEggs.draw();
   }
 
   /**
