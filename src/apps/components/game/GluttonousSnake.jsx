@@ -4,7 +4,7 @@ import Canvas from 'components/common/Canvas';
 
 import Rtl from 'components/game/Rtl';
 
-import Egg from 'components/game/Eggs';
+import Eggs from 'components/game/Eggs';
 
 import Snake from 'components/game/Snake';
 
@@ -22,7 +22,7 @@ class GluttonousSnake extends Canvas {
       canvas: outer,
     } = this.props;
     const snake = new Snake({ context, outer });
-    const eggs = new Egg({ context, outer });
+    const eggs = new Eggs({ context, outer });
     return {
       context,
       eggs,
@@ -47,7 +47,7 @@ class GluttonousSnake extends Canvas {
       const {
         code,
       } = event;
-      const rtl = Rtl.getRtlFromCode(code);
+      const rtl = Rtl.fromCode(code);
       if (rtl != Rtl.None) {
         const {
           snake,

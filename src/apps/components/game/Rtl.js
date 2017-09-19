@@ -27,7 +27,7 @@ class Rtl {
   /**
    * @static
    */
-  static getRtlFromCode(code) {
+  static fromCode(code) {
     let rtl = Rtl.None;
     switch (code) {
       case 'KeyS':
