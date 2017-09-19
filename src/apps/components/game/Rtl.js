@@ -2,6 +2,9 @@
  * @class
  */
 class Rtl {
+  /**
+   * @static
+   */
   static getReverse(rtl) {
     let reverse = Rtl.None;
     switch (rtl) {
@@ -19,6 +22,28 @@ class Rtl {
         break;
     }
     return reverse;
+  }
+
+  /**
+   * @static
+   */
+  static getRtlFromCode(code) {
+    let rtl = Rtl.None;
+    switch (code) {
+      case 'KeyS':
+        rtl = Rtl.Down;
+        break;
+      case 'KeyA':
+        rtl = Rtl.Left;
+        break;
+      case 'KeyW':
+        rtl = Rtl.Up;
+        break;
+      case 'KeyD':
+        rtl = Rtl.Right;
+        break;
+    }
+    return rtl;
   }
 }
 

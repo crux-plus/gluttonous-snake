@@ -4,7 +4,7 @@ import Canvas from 'components/common/Canvas';
 
 import Rtl from 'components/game/Rtl';
 
-import Egg from 'components/game/Egg';
+import Egg from 'components/game/Eggs';
 
 import Snake from 'components/game/Snake';
 
@@ -45,26 +45,9 @@ class GluttonousSnake extends Canvas {
   bindKeyboardEvent() {
     document.addEventListener('keydown', (event) => {
       const {
-        head: {
-          rtl: prevRtl,
-        },
-      } = this.data.snake;
-      let rtl = prevRtl;
-      switch (event.code) {
-        case 'KeyS':
-          rtl = Rtl.Down;
-          break;
-        case 'KeyA':
-          rtl = Rtl.Left;
-          break;
-        case 'KeyW':
-          rtl = Rtl.Up;
-          break;
-        case 'KeyD':
-          rtl = Rtl.Right;
-          break;
-      }
-
+        code,
+      } = event;
+      const rtl = Rtl.getRtlFromCode(code);
       if (rtl != Rtl.None) {
         const {
           snake,
