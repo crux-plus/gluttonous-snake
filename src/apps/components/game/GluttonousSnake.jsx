@@ -39,6 +39,10 @@ class GluttonousSnake extends Canvas {
             x: 0,
             y: 0,
           },
+          prevLocation: {
+            x: 0,
+            y: 0,
+          },
           rtl: Rtl.None,
         },
       },
@@ -167,26 +171,45 @@ class GluttonousSnake extends Canvas {
     });
   }
 
+  saveHeadLocation() {
+    const {
+      snake: {
+        head,
+      },
+    } = this.data;
+    const {
+      location,
+    } = head;
+    head.prevLocation = { ...location };
+  }
+
+  restoreHeadLocation() {
+    const {
+      snake: {
+        head,
+      },
+    } = this.data;
+    const {
+      prevLocation,
+    } = head;
+    head.location = { ...prevLocation };
+  }
+
   /**
    * @method
    */
   redraw() {
-    const {
-      head: {
-        location: {
-          x,
-          y,
-        },
-      },
-    } = this.data.snake;
     if (this.data.motion != null) {
       this.clearPrevHead();
+      this.saveHeadLocation();
       this.data.motion();
     }
+
     if (!this.boundaryDetection()) {
-      this.data.snake.head.location = { x, y };
+      this.restoreHeadLocation();
       this.cancelMotionAnimation();
     }
+
     this.drawHead();
   }
 
