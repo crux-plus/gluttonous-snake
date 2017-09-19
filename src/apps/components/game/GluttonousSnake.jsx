@@ -22,10 +22,10 @@ class GluttonousSnake extends Canvas {
       canvas: outer,
     } = this.props;
     const snake = new Snake({ context, outer });
-    const egg = new Egg({ context, outer });
+    const eggs = new Egg({ context, outer });
     return {
       context,
-      egg,
+      eggs,
       snake,
     };
   }
@@ -80,9 +80,9 @@ class GluttonousSnake extends Canvas {
   redraw() {
     const {
       snake,
-      egg,
+      eggs,
     } = this.data;
-    egg.draw();
+    eggs.draw();
     snake.drawHead();
   }
 
