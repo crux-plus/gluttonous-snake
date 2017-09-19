@@ -52,14 +52,15 @@ class Egg {
    */
   getRandomLocation() {
     const {
+      size,
       multiple: {
         x,
         y,
       },
     } = this;
     const location = {
-      x: Math.ceil(Math.random() * x),
-      y: Math.ceil(Math.random() * y),
+      x: Math.ceil(Math.random() * x) * size,
+      y: Math.ceil(Math.random() * y) * size,
     };
     return location;
   }
