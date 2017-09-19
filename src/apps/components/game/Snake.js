@@ -7,7 +7,7 @@ class Snake {
   /**
    * @constructor
    */
-  constructor(options = { size: 10, spread: 2, color: '#000', context: null }) {
+  constructor(options = { size: 10, spread: 2, color: '#000' }) {
     const defaultOptitons = Snake.getDefaultOptions();
     const instances = Snake.getInstances();
 
@@ -39,6 +39,7 @@ class Snake {
   static getInstances() {
     return {
       requestID: -1,
+      boundary: null,
       motionOperate: null,
       head: {
         location: {

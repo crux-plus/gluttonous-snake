@@ -4,6 +4,8 @@ import Canvas from 'components/common/Canvas';
 
 import Rtl from 'components/game/Rtl';
 
+import Egg from 'components/game/Egg';
+
 import Snake from 'components/game/Snake';
 
 /**
@@ -20,8 +22,10 @@ class GluttonousSnake extends Canvas {
       canvas: outer,
     } = this.props;
     const snake = new Snake({ context, outer });
+    const egg = new Egg({ context, outer });
     return {
       context,
+      egg,
       snake,
     };
   }
@@ -76,7 +80,9 @@ class GluttonousSnake extends Canvas {
   redraw() {
     const {
       snake,
+      egg,
     } = this.data;
+    egg.draw();
     snake.drawHead();
   }
 
