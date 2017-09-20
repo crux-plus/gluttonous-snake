@@ -1,6 +1,6 @@
 function snakeMove({ x=0, y=0 }) {
   return {
-    type: 'SNAKE::MOVE',
+    type: 'SNAKE_MOVE',
     location: {
       x,
       y,
@@ -10,7 +10,7 @@ function snakeMove({ x=0, y=0 }) {
 
 function eggMove({ x=0, y=0 }) {
   return {
-    type: 'EGG::MOVE',
+    type: 'EGG_MOVE',
     location: {
       x,
       y,
