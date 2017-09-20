@@ -1,6 +1,6 @@
-function snakeMove({ x=0, y=0 }) {
+function moveSnake({ x=0, y=0 }) {
   return {
-    type: 'SNAKE_MOVE',
+    type: 'MOVE_SNAKE',
     location: {
       x,
       y,
@@ -8,6 +8,14 @@ function snakeMove({ x=0, y=0 }) {
   };
 }
 
+function transformSnake({ size=0 }) {
+  return {
+    type: 'TRANSFORM_EGGS',
+    size,
+  };
+}
+
 export {
-  snakeMove,
+  moveSnake,
+  transformSnake,
 };

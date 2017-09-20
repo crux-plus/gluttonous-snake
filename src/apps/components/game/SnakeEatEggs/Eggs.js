@@ -9,8 +9,10 @@ class Eggs {
     const defaultOptitons = Eggs.getDefaultOptions();
     Object.assign(this, defaultOptitons, options);
 
-    this.initMultiple();
-    this.location = this.getRandomLocation();
+    const {
+      size,
+    } = this;
+    this.actions.transformEggs({ size });
   }
 
   /**
@@ -29,40 +31,12 @@ class Eggs {
     };
   }
 
-  /**
-   * @method
-   */
-  initMultiple() {
-    const {
-      size,
-      outer: {
-        width,
-        height,
-      },
-    } = this;
-    const multiple = {
-      x: Math.floor((width - size) / size),
-      y: Math.floor((height - size) / size),
+  createEgg({ x, y }) {
+    this.location = {
+      x,
+      y,
     };
-    this.multiple = multiple;
-  }
-
-  /**
-   * @method
-   */
-  getRandomLocation() {
-    const {
-      size,
-      multiple: {
-        x,
-        y,
-      },
-    } = this;
-    const location = {
-      x: Math.ceil(Math.random() * x) * size,
-      y: Math.ceil(Math.random() * y) * size,
-    };
-    return location;
+    this.draw();
   }
 
   /**

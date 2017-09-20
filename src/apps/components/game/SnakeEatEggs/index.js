@@ -4,9 +4,9 @@ import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection } from 'middlewares/game/snakeEatEggs';
 
-import { snakeMove } from 'actions/game/snake';
+import { moveSnake, transformSnake } from 'actions/game/snake';
 
-import { createEgg } from 'actions/game/eggs';
+import { createEgg, transformEggs } from 'actions/game/eggs';
 
 import { resizeBoundary } from 'actions/game/snakeEatEggs';
 
@@ -25,10 +25,10 @@ class SnakeEatEggs {
    */
   constructor(options = { context: null, boundary: null }) {
     Object.assign(this, options);
-    Object.assign(this, this.getInstances());
-    SnakeEatEggs.getStore();
 
-    this.bindSubscribe();
+    this.initStore();
+    this.initInstances();
+
     this.bindKeyboardEvent();
   }
 
@@ -36,13 +36,26 @@ class SnakeEatEggs {
    * @static
    * @method
    */
-  static getStore() {
+  initStore() {
     const middleware = [collisionDetection];
     const store = createStore(
       snakeEatEggs,
-      applyMiddleware(...middleware),
+      //applyMiddleware(...middleware),
     );
-    return store;
+    const {
+      dispatch,
+    } = store;
+    const actions = bindActionCreators({
+      resizeBoundary,
+    }, dispatch);
+    this.actions = actions;
+    this.store = store;
+
+    const {
+      boundary,
+    } = this;
+    this.bindSubscribe();
+    this.actions.resizeBoundary(boundary);
   }
 
   bindSubscribe() {
@@ -50,43 +63,51 @@ class SnakeEatEggs {
       store,
     } = this;
     store.subscribe(() => {
-      // @TODO
+      const state = store.getState();
+      const {
+        eggs: {
+          location: {
+            x,
+            y,
+          },
+        },
+      } = state;
+        const {
+          eggs,
+        } = this;
+        if (eggs) {
+          eggs.createEgg({ x, y });
+        }
+      //}
     });
   }
 
   /**
    * @method
    */
-  getInstances() {
-    const store = SnakeEatEggs.getStore();
+  initInstances() {
     const {
-      dispatch,
-    } = store;
-    const {
+      store,
       context,
       boundary: outer,
     } = this;
+    const {
+      dispatch,
+    } = store;
 
     let actions = bindActionCreators({
-      snakeMove,
+      moveSnake,
+      transformSnake,
     }, dispatch);
     const snake = new Snake({ context, outer, actions });
+    this.snake = snake;
 
     actions = bindActionCreators({
       createEgg,
+      transformEggs,
     }, dispatch);
-    const eggs = new Eggs({ context, outer, actions });
-
-    actions = bindActionCreators({
-      resizeBoundary,
-    }, dispatch);
-
-    return {
-      store,
-      eggs,
-      snake,
-      actions,
-    };
+    const eggs = new Eggs({ context, actions });
+    this.eggs = eggs;
   }
 
   /**
@@ -112,11 +133,11 @@ class SnakeEatEggs {
    */
   draw() {
     const {
-      snake,
       eggs,
+      snake,
     } = this;
-    eggs.draw();
     snake.drawHead();
+    eggs.actions.createEgg();
   }
 }
 

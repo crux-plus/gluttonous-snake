@@ -14,6 +14,12 @@ class Snake {
     Object.assign(this, defaultOptitons, options, instances);
     this.initBoundary();
     this.saveHeadLocation();
+
+    const {
+      size,
+    } = this;
+    this.actions.transformSnake({ size });
+    this.actions.moveSnake({ x: 0, y: 0 });
   }
 
   /**
@@ -25,6 +31,7 @@ class Snake {
       spread: 2,
       color: '#000',
       context: null,
+      actions: null,
       outer: {
         width: 0,
         height: 0,

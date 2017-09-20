@@ -1,13 +1,17 @@
-function createEgg({ x=0, y=0 }) {
+function createEgg() {
   return {
-    type: 'EGG_MOVE',
-    location: {
-      x,
-      y,
-    },
+    type: 'CREATE_EGG',
+  };
+}
+
+function transformEggs({ size=0 }) {
+  return {
+    type: 'TRANSFORM_EGGS',
+    size,
   };
 }
 
 export {
   createEgg,
+  transformEggs,
 };
