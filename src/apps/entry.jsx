@@ -32,7 +32,7 @@ const store = createStore(
   }),
   composeWithDevTools(
     // other store enhancers if any
-    applyMiddleware(middleware),
+    applyMiddleware(),
   ),
 );
 

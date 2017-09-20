@@ -1,6 +1,6 @@
 import snakeEatEggs from 'reducers/game/snakeEatEggs';
 
-import { createStore } from 'redux';
+import { createStore, bindActionCreators, applyMiddleware } from 'redux';
 
 import Rtl from './Rtl';
 
@@ -27,7 +27,11 @@ class SnakeEatEggs {
    * @method
    */
   static getStore() {
-    const store = createStore(snakeEatEggs);
+    const middleware = [];
+    const store = createStore(
+      snakeEatEggs,
+      applyMiddleware(),
+    );
   }
 
 
@@ -36,7 +40,6 @@ class SnakeEatEggs {
       context,
       outer,
     } = this;
-
     const snake = new Snake({ context, outer });
     const eggs = new Eggs({ context, outer });
 

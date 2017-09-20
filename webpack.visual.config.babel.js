@@ -43,6 +43,7 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
+      'process.env.NODE_ENV': JSON.stringify('development'),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
