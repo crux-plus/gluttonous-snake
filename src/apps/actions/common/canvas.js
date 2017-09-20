@@ -15,7 +15,6 @@ function markCanvas({ id=0, }) {
   };
 }
 
-
 export {
   transformCanvas,
   markCanvas,

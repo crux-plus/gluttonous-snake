@@ -1,6 +1,6 @@
-import { createStore } from 'redux';
-
 import snakeEatEggs from 'reducers/game/snakeEatEggs';
+
+import { createStore } from 'redux';
 
 import Rtl from './Rtl';
 
@@ -27,7 +27,7 @@ class SnakeEatEggs {
    * @method
    */
   static getStore() {
-    const store = createStore();
+    const store = createStore(snakeEatEggs);
   }
 
 
