@@ -11,22 +11,25 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor({ context, outer }) {
-    this.initData({ context, outer });
+  constructor(options = { context: null, outer: null }) {
+    Object.assing(this, options);
+    Object.assign(this, this.getInstances());
+
     this.bindKeyboardEvent();
   }
 
-  initData({ context, outer }) {
-    const eggs = new Eggs({ context, outer });
-    const snake = new Snake({ context, outer });
-
-    const data = {
-      outer,
+  getInstance() {
+    const {
       context,
+      outer,
+    } = this;
+    const snake = new Snake({ context, outer });
+    const eggs = new Eggs({ context, outer });
+
+    return  {
       eggs,
       snake,
     };
-    this.data = data;
   }
 
   /**
@@ -41,7 +44,7 @@ class SnakeEatEggs {
       if (rtl != Rtl.None) {
         const {
           snake,
-        } = this.data;
+        } = this;
         snake.setHeadRtl(rtl);
       }
     });
@@ -54,7 +57,7 @@ class SnakeEatEggs {
     const {
       snake,
       eggs,
-    } = this.data;
+    } = this;
     eggs.draw();
     snake.drawHead();
   }
