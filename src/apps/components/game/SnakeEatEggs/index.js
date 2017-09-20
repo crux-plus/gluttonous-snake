@@ -28,6 +28,7 @@ class SnakeEatEggs {
     Object.assign(this, this.getInstances());
     SnakeEatEggs.getStore();
 
+    this.bindSubscribe();
     this.bindKeyboardEvent();
   }
 
@@ -44,6 +45,18 @@ class SnakeEatEggs {
     return store;
   }
 
+  bindSubscribe() {
+    const {
+      store,
+    } = this;
+    store.subscribe(() => {
+      // @TODO
+    });
+  }
+
+  /**
+   * @method
+   */
   getInstances() {
     const store = SnakeEatEggs.getStore();
     const {
