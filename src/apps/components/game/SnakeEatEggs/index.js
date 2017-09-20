@@ -12,13 +12,13 @@ class SnakeEatEggs {
    * @constructor
    */
   constructor(options = { context: null, outer: null }) {
-    Object.assing(this, options);
+    Object.assign(this, options);
     Object.assign(this, this.getInstances());
 
     this.bindKeyboardEvent();
   }
 
-  getInstance() {
+  getInstances() {
     const {
       context,
       outer,
