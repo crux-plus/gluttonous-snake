@@ -1,12 +1,12 @@
 /**
  * @class
  */
-class Egg {
+class Eggs {
   /**
    * @constructor
    */
   constructor(options = { size: 10, color: '#000' }) {
-    const defaultOptitons = Egg.getDefaultOptions();
+    const defaultOptitons = Eggs.getDefaultOptions();
     Object.assign(this, defaultOptitons, options);
 
     this.initMultiple();
@@ -82,4 +82,4 @@ class Egg {
   }
 }
 
-export default Egg;
+export default Eggs;
