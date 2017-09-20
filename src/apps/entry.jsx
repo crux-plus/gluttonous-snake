@@ -20,8 +20,6 @@ import 'styles/entry.css';
 import IndexSwitch from 'routers/IndexSwitch';
 import routers from 'reducers/routers/routers';
 
-console.log(routers);
-
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 
