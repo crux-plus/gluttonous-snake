@@ -20,6 +20,7 @@ class SnakeEatEggs {
   constructor(options = { context: null, outer: null }) {
     Object.assign(this, options);
     Object.assign(this, this.getInstances());
+    SnakeEatEggs.getStore();
 
     this.bindKeyboardEvent();
   }
@@ -29,13 +30,12 @@ class SnakeEatEggs {
    * @method
    */
   static getStore() {
-    const middleware = [];
+    const middleware = [collisionDetection];
     const store = createStore(
       snakeEatEggs,
-      applyMiddleware(),
+      applyMiddleware(...middleware),
     );
   }
-
 
   getInstances() {
     const {

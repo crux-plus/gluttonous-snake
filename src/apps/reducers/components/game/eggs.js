@@ -9,6 +9,13 @@ function createEgg(state, action) {
   };
 }
 
+const initialState = {
+  location: {
+    x: 0,
+    y: 0,
+  },
+};
+
 function eggs(state = initialState, action) {
   switch (action.type) {
     case 'CREATE_EGG':

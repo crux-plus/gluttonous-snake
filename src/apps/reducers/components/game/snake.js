@@ -9,6 +9,13 @@ function snakeMove(state, action) {
   };
 }
 
+const initialState = {
+  location: {
+    x: 0,
+    y: 0,
+  },
+};
+
 function snake(state = initialState, action) {
   switch (action.type) {
     case 'SNAKE_MOVE':
