@@ -11,10 +11,12 @@ import {
 
 function mapStateToProps(state, ownProps = {}) {
   const {
-    canvas: {
-      id,
-      width,
-      height,
+    game: {
+      canvas: {
+        id,
+        width,
+        height,
+      },
     },
   } = state;
 

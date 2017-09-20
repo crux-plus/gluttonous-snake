@@ -16,7 +16,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import 'normalize.css/normalize.css';
 import 'styles/entry.css';
 import IndexSwitch from 'routers/IndexSwitch';
-import canvas from 'reducers/components/common/canvas';
+import game from 'reducers/routers/game';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -28,7 +28,7 @@ const middleware = routerMiddleware(history);
 const store = createStore(
   combineReducers({
     routing: routerReducer,
-    canvas,
+    game,
   }),
   composeWithDevTools(
     // other store enhancers if any
