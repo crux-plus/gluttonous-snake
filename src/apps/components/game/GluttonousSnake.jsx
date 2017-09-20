@@ -15,9 +15,9 @@ class GluttonousSnake extends Canvas {
   initData() {
     const context = this.getContext();
     const {
-      canvas: outer,
+      canvas: boundary,
     } = this.props;
-    const snakeEatEggs = new SnakeEatEggs({ context, outer });
+    const snakeEatEggs = new SnakeEatEggs({ context, boundary });
     const data = {
       context,
       snakeEatEggs,

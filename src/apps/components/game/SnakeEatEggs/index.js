@@ -19,7 +19,7 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor(options = { context: null, outer: null }) {
+  constructor(options = { context: null, boundary: null }) {
     Object.assign(this, options);
     Object.assign(this, this.getInstances());
     SnakeEatEggs.getStore();
@@ -47,7 +47,7 @@ class SnakeEatEggs {
     } = store;
     const {
       context,
-      outer,
+      boundary: outer,
     } = this;
 
     let actions = bindActionCreators({
