@@ -72,13 +72,12 @@ class SnakeEatEggs {
           },
         },
       } = state;
-        const {
-          eggs,
-        } = this;
-        if (eggs) {
-          eggs.createEgg({ x, y });
-        }
-      //}
+      const {
+        eggs,
+      } = this;
+      if (eggs) {
+        eggs.createEgg({ x, y });
+      }
     });
   }
 
