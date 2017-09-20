@@ -69,12 +69,12 @@ class Canvas extends React.Component {
         innerWidth: width,
         innerHeight: height,
       } = window;
-      this.props.actions.canvasSizeActionCreator({ width, height });
+      this.props.actions.transformCanvas({ width, height });
     }
 
     if (id === defaultId) {
       const id = Canvas.getUniqueId();
-      this.props.actions.canvasIdActionCreator({ id });
+      this.props.actions.markCanvas({ id });
     }
   }
 

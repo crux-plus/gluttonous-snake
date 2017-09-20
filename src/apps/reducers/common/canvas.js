@@ -30,7 +30,7 @@ const initialState = {
   height: 0,
 };
 
-function canvasReducer(state = initialState, action) {
+function canvas(state = initialState, action) {
   switch (action.type) {
     case 'TRANSFORM_CANVAS':
       return transformCanvas(state, action);
@@ -41,4 +41,4 @@ function canvasReducer(state = initialState, action) {
   }
 }
 
-export default canvasReducer;
+export default canvas;

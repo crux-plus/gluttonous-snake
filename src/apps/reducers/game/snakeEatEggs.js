@@ -11,7 +11,7 @@ function snakeMove(state, action) {
   };
 }
 
-function eggsMove(state, action) {
+function eggMove(state, action) {
   const {
     location,
   } = action;
@@ -39,15 +39,15 @@ const initialState = {
   },
 };
 
-function snakeEatEggsReducer(state = initialState, action) {
+function snakeEatEggs(state = initialState, action) {
   switch (action.type) {
-    case 'SNAKE::MOVE':
+    case 'SNAKE_MOVE':
       return snakeMove(state, action);
-    case 'EGG::MOVE':
-      return eggsMove(state, action);
+    case 'EGG_MOVE':
+      return eggMove(state, action);
     default:
       return state;
   }
 }
 
-export default snakeEatEggsReducer;
+export default snakeEatEggs;
