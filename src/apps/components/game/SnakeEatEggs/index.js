@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+
 import Rtl from './Rtl';
 
 import Eggs from './Eggs';
