@@ -1,4 +1,6 @@
-import snakeEatEggs from 'reducers/game/snakeEatEggs';
+import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
+
+import { collisionDetection } from 'middlewares/game/snakeEatEggs';
 
 import { createStore, bindActionCreators, applyMiddleware } from 'redux';
 
