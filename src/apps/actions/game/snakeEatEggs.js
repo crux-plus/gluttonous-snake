@@ -8,7 +8,7 @@ function snakeMove({ x=0, y=0 }) {
   };
 }
 
-function eggMove({ x=0, y=0 }) {
+function createEgg({ x=0, y=0 }) {
   return {
     type: 'EGG_MOVE',
     location: {
@@ -20,5 +20,5 @@ function eggMove({ x=0, y=0 }) {
 
 export {
   snakeMove,
-  eggMove,
+  createEgg,
 };
