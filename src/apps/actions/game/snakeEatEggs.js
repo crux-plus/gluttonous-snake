@@ -1,24 +1,13 @@
-function snakeMove({ x=0, y=0 }) {
+function resizeBoundary({ width=0, height=0 }) {
   return {
-    type: 'SNAKE_MOVE',
-    location: {
-      x,
-      y,
-    },
-  };
-}
-
-function createEgg({ x=0, y=0 }) {
-  return {
-    type: 'EGG_MOVE',
-    location: {
-      x,
-      y,
+    type: 'RESIZE_BOUNDARY',
+    boundary: {
+      width,
+      height,
     },
   };
 }
 
 export {
-  snakeMove,
-  createEgg,
+  resizeBoundary,
 };
