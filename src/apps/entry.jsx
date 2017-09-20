@@ -15,8 +15,12 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 // A collection of HTML element and attribute style-normalizations
 import 'normalize.css/normalize.css';
 import 'styles/entry.css';
+
+// Renders the first child <Route> or <Redirect> that matches the location.
 import IndexSwitch from 'routers/IndexSwitch';
-import game from 'reducers/routers/game';
+import routers from 'reducers/routers/routers';
+
+console.log(routers);
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -28,7 +32,7 @@ const middleware = routerMiddleware(history);
 const store = createStore(
   combineReducers({
     routing: routerReducer,
-    game,
+    ...routers,
   }),
   composeWithDevTools(
     // other store enhancers if any
