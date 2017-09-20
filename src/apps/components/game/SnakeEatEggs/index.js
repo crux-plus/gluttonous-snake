@@ -1,8 +1,10 @@
+import { createStore, bindActionCreators, applyMiddleware } from 'redux';
+
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection } from 'middlewares/game/snakeEatEggs';
 
-import { createStore, bindActionCreators, applyMiddleware } from 'redux';
+import { snakeMove, createEgg } from 'actions/game/snakeEatEggs';
 
 import Rtl from './Rtl';
 
@@ -35,17 +37,31 @@ class SnakeEatEggs {
       snakeEatEggs,
       applyMiddleware(...middleware),
     );
+    return store;
   }
 
   getInstances() {
+    const store = SnakeEatEggs.getStore();
+    const {
+      dispatch,
+    } = store;
     const {
       context,
       outer,
     } = this;
-    const snake = new Snake({ context, outer });
-    const eggs = new Eggs({ context, outer });
+
+    let actions = bindActionCreators({
+      snakeMove,
+    }, dispatch);
+    const snake = new Snake({ context, outer, actions });
+
+    actions = bindActionCreators({
+      createEgg,
+    }, dispatch);
+    const eggs = new Eggs({ context, outer, actions });
 
     return  {
+      store,
       eggs,
       snake,
     };
