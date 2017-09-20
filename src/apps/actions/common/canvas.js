@@ -1,6 +1,6 @@
-function canvasSizeActionCreator({ width=0, height=0 }) {
+function transformCanvas({ width=0, height=0 }) {
   return {
-    type: 'CANVAS::RESIZE',
+    type: 'TRANSFORM_CANVAS',
     size: {
       width,
       height,
@@ -8,15 +8,15 @@ function canvasSizeActionCreator({ width=0, height=0 }) {
   };
 }
 
-function canvasIdActionCreator({ id=0, }) {
+function markCanvas({ id=0, }) {
   return {
-    type: 'CANVAS::REALLOCATE_ID',
+    type: 'MARK_CANVAS',
     id,
   };
 }
 
 
 export {
-  canvasIdActionCreator,
-  canvasSizeActionCreator,
+  transformCanvas,
+  markCanvas,
 };

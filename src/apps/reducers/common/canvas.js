@@ -1,4 +1,4 @@
-function resize(state, action) {
+function transformCanvas(state, action) {
   const {
     size: {
       width,
@@ -13,7 +13,7 @@ function resize(state, action) {
   };
 }
 
-function reallocateId(state, action) {
+function markCanvas(state, action) {
   const {
     id,
   } = action;
@@ -32,10 +32,10 @@ const initialState = {
 
 function canvasReducer(state = initialState, action) {
   switch (action.type) {
-    case 'CANVAS::RESIZE':
-      return resize(state, action);
-    case 'CANVAS::REALLOCATE_ID':
-      return reallocateId(state, action);
+    case 'TRANSFORM_CANVAS':
+      return transformCanvas(state, action);
+    case 'MARK_CANVAS':
+      return markCanvas(state, action);
     default:
       return state;
   }

@@ -20,11 +20,20 @@ class SnakeEatEggs {
     this.bindKeyboardEvent();
   }
 
+  /**
+   * @static
+   * @method
+   */
+  static getStore() {
+  }
+
+
   getInstances() {
     const {
       context,
       outer,
     } = this;
+
     const snake = new Snake({ context, outer });
     const eggs = new Eggs({ context, outer });
 
