@@ -7,7 +7,8 @@ class Eggs {
    */
   constructor(options = { size: 10, color: '#000' }) {
     const defaultOptitons = Eggs.getDefaultOptions();
-    Object.assign(this, defaultOptitons, options);
+    const instances = Eggs.getInstances();
+    Object.assign(this, defaultOptitons, options, instances);
 
     const {
       size,
@@ -23,10 +24,18 @@ class Eggs {
       size: 10,
       color: '#000',
       context: null,
-      multiple: null,
-      outer: {
-        width: 0,
-        height: 0,
+   };
+  }
+
+  /**
+   * @static
+   * @method
+   */
+  static getInstances() {
+    return {
+      location: {
+        x: 0,
+        y: 0,
       },
     };
   }
@@ -43,7 +52,9 @@ class Eggs {
         },
       },
     } = state;
+    this.clear();
     this.setLocation({ x, y });
+    this.draw();
   }
 
   /**
@@ -78,6 +89,20 @@ class Eggs {
     } = this;
     this.context.fillStyle = color;
     this.context.fillRect(x, y, size, size);
+  }
+
+  /**
+   * @method
+   */
+  clear() {
+    const {
+      size,
+      location: {
+        x,
+        y,
+      },
+    } = this;
+    this.context.clearRect(x, y, size, size);
   }
 }
 

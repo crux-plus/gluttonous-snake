@@ -92,6 +92,7 @@ class Snake {
         y,
       } = location;
       this.setHeadLocation({ x, y });
+      this.drawHead();
     } else {
       this.cancelMotionAnimation();
     }
