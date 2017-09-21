@@ -122,7 +122,7 @@ class SnakeEatEggs {
       eggs,
       snake,
     } = this;
-    snake.drawHead();
+    snake.draw();
     eggs.createEgg();
   }
 }

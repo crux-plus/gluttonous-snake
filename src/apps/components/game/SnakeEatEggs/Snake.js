@@ -91,9 +91,9 @@ class Snake {
         x,
         y,
       } = location;
-      this.clearHead();
+      this.clear();
       this.setHeadLocation({ x, y });
-      this.drawHead();
+      this.draw();
     } else {
       this.cancelMotionAnimation();
     }
@@ -166,7 +166,7 @@ class Snake {
   /**
    * @method
    */
-  clearHead() {
+  clear() {
     const {
       size,
       color,
@@ -183,7 +183,7 @@ class Snake {
   /**
    * @method
    */
-  drawHead() {
+  draw() {
     const {
       size,
       color,
@@ -194,7 +194,7 @@ class Snake {
         },
       },
     } = this;
-    this.context.fillStyle = color;
+    this.fillStyle = color;
     this.context.fillRect(x, y, size, size);
   }
 
@@ -203,9 +203,9 @@ class Snake {
    */
   moveStep() {
     if (this.motionOperate != null) {
-      this.clearHead();
+      this.clear();
       this.motionOperate();
-      this.drawHead();
+      this.draw();
     }
   }
 
