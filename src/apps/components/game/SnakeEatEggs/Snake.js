@@ -55,25 +55,42 @@ class Snake {
   /**
    * @method
    */
-  mapStateToProps(state) {
+  static boundaryDetection({ size, boundary, location }) {
     const {
-      boundary: {
-        width,
-        height,
-      },
-      snake: {
-        size,
-        location: {
-          x,
-          y,
-        },
-      },
-    } = state;
+      width,
+      height,
+    } = boundary;
+    const {
+      x,
+      y,
+    } = location;
     const top = 0;
     const right =  width - size;
     const bottom = height - size;
     const left = 0;
+    let flag = false;
     if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
+      flag = true
+    }
+    return flag;
+  }
+
+  /**
+   * @method
+   */
+  mapStateToProps(state) {
+    const {
+      boundary,
+      snake: {
+        size,
+        location,
+      },
+    } = state;
+    if (Snake.boundaryDetection({ boundary, size, location })) {
+      const {
+        x,
+        y,
+      } = location;
       this.setHeadLocation({ x, y });
     } else {
       this.cancelMotionAnimation();
