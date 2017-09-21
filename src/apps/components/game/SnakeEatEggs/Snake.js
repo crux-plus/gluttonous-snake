@@ -91,6 +91,7 @@ class Snake {
         x,
         y,
       } = location;
+      this.clearHead();
       this.setHeadLocation({ x, y });
       this.drawHead();
     } else {

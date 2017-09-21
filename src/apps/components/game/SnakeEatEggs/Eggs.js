@@ -44,6 +44,7 @@ class Eggs {
    * @method
    */
   mapStateToProps(state) {
+    this.clear();
     const {
       eggs: {
         location: {
@@ -52,7 +53,6 @@ class Eggs {
         },
       },
     } = state;
-    this.clear();
     this.setLocation({ x, y });
     this.draw();
   }
