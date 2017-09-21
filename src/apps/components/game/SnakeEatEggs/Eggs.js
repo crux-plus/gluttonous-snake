@@ -62,7 +62,6 @@ class Eggs {
    */
   createEgg() {
     this.actions.createEgg();
-    this.draw();
   }
 
   /**
