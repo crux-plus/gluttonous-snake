@@ -12,8 +12,6 @@ class Snake {
     const instances = Snake.getInstances();
 
     Object.assign(this, defaultOptitons, options, instances);
-    this.initBoundary();
-    this.saveHeadLocation();
 
     const {
       size,
@@ -32,10 +30,6 @@ class Snake {
       color: '#000',
       context: null,
       actions: null,
-      outer: {
-        width: 0,
-        height: 0,
-      },
     };
   }
 
@@ -53,7 +47,6 @@ class Snake {
           x: 0,
           y: 0,
         },
-        prevLocation: null,
         rtl: Rtl.None,
       },
     };
@@ -62,54 +55,76 @@ class Snake {
   /**
    * @method
    */
-  initBoundary() {
+  mapStateToProps(state) {
     const {
-      size,
-      outer: {
+      boundary: {
         width,
         height,
       },
-    } = this;
-    const boundary = {
-      top: 0,
-      right: width - size,
-      bottom: height - size,
-      left: 0,
-    };
-    this.boundary = boundary;
+      snake: {
+        size,
+        location: {
+          x,
+          y,
+        },
+      },
+    } = state;
+    const top = 0;
+    const right =  width - size;
+    const bottom = height - size;
+    const left = 0;
+    if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
+      this.setHeadLocation({ x, y });
+    } else {
+      this.cancelMotionAnimation();
+    }
+  }
+
+  /**
+   * @method
+   */
+  setHeadLocation(location) {
+    this.head.location = location;
   }
 
   /**
    * @method
    */
   getMotionOperate() {
-    const {
+    let {
       spread,
       head: {
         rtl,
-        location,
+        location: {
+          x,
+          y,
+        },
       },
     } = this;
     let motionOperate = null;
     switch (rtl) {
       case Rtl.Down:
         motionOperate = () => {
-          location.y += spread;
+          y += spread;
+          this.actions.moveSnake({ x, y });
         }
         break;
       case Rtl.Left:
         motionOperate = () => {
-          location.x -= spread;
+          x -= spread;
+          this.actions.moveSnake({ x, y });
         }
         break;
       case Rtl.Up:
         motionOperate = () => {
-          location.y -= spread;
+          y -= spread;
+          this.actions.moveSnake({ x, y });
         }
         break;
       case Rtl.Right:
         motionOperate = () => {
-          location.x += spread;
+          x += spread;
+          this.actions.moveSnake({ x, y });
         }
         break;
     }
@@ -132,27 +147,7 @@ class Snake {
   /**
    * @method
    */
-  saveHeadLocation() {
-    const {
-      location,
-    } = this.head;
-    this.head.prevLocation = { ...location };
-  }
-
-  /**
-   * @method
-   */
-  restoreHeadLocation() {
-    const {
-      prevLocation,
-    } = this.head;
-    this.head.location = { ...prevLocation };
-  }
-
-  /**
-   * @method
-   */
-  clearPrevHead() {
+  clearHead() {
     const {
       size,
       color,
@@ -187,44 +182,12 @@ class Snake {
   /**
    * @method
    */
-  boundaryDetection(boundary) {
-    const {
-      top,
-      right,
-      bottom,
-      left,
-    } = this.boundary;
-    const {
-      head: {
-        location: {
-          x,
-          y,
-        },
-      },
-    } = this;
-    let flag = false;
-    if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
-      flag = true;
-    }
-    return flag;
-  }
-
-  /**
-   * @method
-   */
   moveStep() {
     if (this.motionOperate != null) {
-      this.saveHeadLocation();
-      this.clearPrevHead();
+      this.clearHead();
       this.motionOperate();
+      this.drawHead();
     }
-
-    if (!this.boundaryDetection()) {
-      this.restoreHeadLocation();
-      this.cancelMotionAnimation();
-    }
-
-    this.drawHead();
   }
 
   /**

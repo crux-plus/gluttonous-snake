@@ -31,12 +31,37 @@ class Eggs {
     };
   }
 
-  createEgg({ x, y }) {
+  /**
+   * @method
+   */
+  mapStateToProps(state) {
+    const {
+      eggs: {
+        location: {
+          x,
+          y,
+        },
+      },
+    } = state;
+    this.setLocation({ x, y });
+  }
+
+  /**
+   * @method
+   */
+  createEgg() {
+    this.actions.createEgg();
+    this.draw();
+  }
+
+  /**
+   * @method
+   */
+  setLocation({ x, y }) {
     this.location = {
       x,
       y,
     };
-    this.draw();
   }
 
   /**

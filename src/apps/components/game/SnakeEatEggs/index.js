@@ -23,13 +23,20 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor(options = { context: null, boundary: null }) {
-    Object.assign(this, options);
+  constructor({ context=null, boundary=null }) {
+    this.context = context;
 
     this.initStore();
     this.initInstances();
 
+    this.bindSubscribe();
     this.bindKeyboardEvent();
+
+    this.resizeBoundary(boundary);
+  }
+
+  resizeBoundary(boundary) {
+    this.actions.resizeBoundary(boundary);
   }
 
   /**
@@ -50,34 +57,18 @@ class SnakeEatEggs {
     }, dispatch);
     this.actions = actions;
     this.store = store;
-
-    const {
-      boundary,
-    } = this;
-    this.bindSubscribe();
-    this.actions.resizeBoundary(boundary);
   }
 
   bindSubscribe() {
     const {
       store,
+      eggs,
+      snake,
     } = this;
     store.subscribe(() => {
       const state = store.getState();
-      const {
-        eggs: {
-          location: {
-            x,
-            y,
-          },
-        },
-      } = state;
-      const {
-        eggs,
-      } = this;
-      if (eggs) {
-        eggs.createEgg({ x, y });
-      }
+      eggs.mapStateToProps(state);
+      snake.mapStateToProps(state);
     });
   }
 
@@ -88,7 +79,6 @@ class SnakeEatEggs {
     const {
       store,
       context,
-      boundary: outer,
     } = this;
     const {
       dispatch,
@@ -98,7 +88,7 @@ class SnakeEatEggs {
       moveSnake,
       transformSnake,
     }, dispatch);
-    const snake = new Snake({ context, outer, actions });
+    const snake = new Snake({ context, actions });
     this.snake = snake;
 
     actions = bindActionCreators({
@@ -136,7 +126,7 @@ class SnakeEatEggs {
       snake,
     } = this;
     snake.drawHead();
-    eggs.actions.createEgg();
+    eggs.createEgg();
   }
 }
 
