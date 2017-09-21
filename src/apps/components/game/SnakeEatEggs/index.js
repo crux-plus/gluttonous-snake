@@ -47,7 +47,7 @@ class SnakeEatEggs {
     const middleware = [collisionDetection];
     const store = createStore(
       snakeEatEggs,
-      //applyMiddleware(...middleware),
+      applyMiddleware(...middleware),
     );
     const {
       dispatch,
@@ -77,26 +77,23 @@ class SnakeEatEggs {
    */
   initInstances() {
     const {
-      store,
+      store: {
+        dispatch,
+      },
       context,
     } = this;
-    const {
-      dispatch,
-    } = store;
 
     let actions = bindActionCreators({
       moveSnake,
       transformSnake,
     }, dispatch);
-    const snake = new Snake({ context, actions });
-    this.snake = snake;
+    this.snake = new Snake({ context, actions });
 
     actions = bindActionCreators({
       createEgg,
       transformEggs,
     }, dispatch);
-    const eggs = new Eggs({ context, actions });
-    this.eggs = eggs;
+    this.eggs = new Eggs({ context, actions });
   }
 
   /**

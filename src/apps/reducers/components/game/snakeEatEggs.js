@@ -52,7 +52,7 @@ function createEgg(state, action) {
 function transformSnake(state, action) {
   const {
     size,
-  } = state;
+  } = action;
   const snake = {
     ...state.snake,
     size,

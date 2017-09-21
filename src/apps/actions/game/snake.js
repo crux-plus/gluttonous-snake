@@ -10,7 +10,7 @@ function moveSnake({ x=0, y=0 }) {
 
 function transformSnake({ size=0 }) {
   return {
-    type: 'TRANSFORM_EGGS',
+    type: 'TRANSFORM_SNAKE',
     size,
   };
 }
