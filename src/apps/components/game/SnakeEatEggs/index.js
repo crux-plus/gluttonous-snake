@@ -8,7 +8,7 @@ import { moveSnake, transformSnake } from 'actions/game/snake';
 
 import { createEgg, transformEggs } from 'actions/game/eggs';
 
-import { resizeBoundary } from 'actions/game/snakeEatEggs';
+import { resizeBoundary } from 'actions/game/boundary';
 
 import Rtl from './Rtl';
 
