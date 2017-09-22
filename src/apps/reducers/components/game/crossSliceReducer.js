@@ -1,20 +1,29 @@
+function ramLoc({ size, boundary }) {
+  const {
+    width,
+    height,
+  } = boundary;
+
+  const multipleX = Math.floor((width - size) / size);
+  const multipleY = Math.floor((height - size) / size);
+
+  const x = Math.ceil(Math.random() * multipleX) * size;
+  const y = Math.ceil(Math.random() * multipleY) * size;
+
+  return {
+    x,
+    y,
+  };
+}
+
 function createEgg(state, action) {
   const {
-    boundary: {
-      width,
-      height,
-    },
+    boundary,
     eggs: {
       size,
     },
   } = state;
-  const multipleX = Math.floor((width - size) / size);
-  const multipleY = Math.floor((height - size) / size);
-  const location = {
-    x: Math.ceil(Math.random() * multipleX) * size,
-    y: Math.ceil(Math.random() * multipleY) * size,
-  };
-
+  const location = ramLoc({ size, boundary });
   const eggs = {
     ...state.eggs,
     location,
