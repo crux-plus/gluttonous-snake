@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import { fromJS } from 'immutable';
+
 import snake from './snake';
 
 import eggs from './eggs';

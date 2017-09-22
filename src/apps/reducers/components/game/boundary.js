@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 function resizeBoundary(state, action) {
   const {
     boundary: {
@@ -5,17 +7,16 @@ function resizeBoundary(state, action) {
       height,
     },
   } = action;
-  return {
-    ...state,
+  return state.mergeDeep({
     width,
     height,
-  };
+  });
 }
 
-const initialState = {
+const initialState = fromJS({
   width: 0,
   height: 0,
-};
+});
 
 export default function boundary(state = initialState, action) {
   switch (action.type) {

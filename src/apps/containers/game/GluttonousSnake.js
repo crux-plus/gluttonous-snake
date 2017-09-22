@@ -19,7 +19,7 @@ function mapStateToProps(state, ownProps = {}) {
     id,
     width,
     height,
-  } = canvas.getJS();
+  } = canvas.toJS();
   return {
     canvas: {
       id,

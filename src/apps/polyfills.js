@@ -5,6 +5,6 @@ import 'babel-polyfill';
 import 'isomorphic-fetch';
 
 // requestAnimationFrame polyfill library.
-import raf from 'raf';
+//import raf from 'raf';
 
-raf.polyfill();
+//raf.polyfill();

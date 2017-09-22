@@ -1,20 +1,21 @@
+import { fromJS } from 'immutable';
+
 function transformEggs(state, action) {
   const {
     size,
   } = action;
-  return {
-    ...state,
+  return state.mergeDeep({
     size,
-  };
+  });
 }
 
-const initialState = {
+const initialState = fromJS({
   size: 0,
   location: {
     x: 0,
     y: 0,
   },
-}
+});
 
 export default function eggs(state = initialState, action) {
   switch (action.type) {

@@ -88,13 +88,6 @@ class Canvas extends React.Component {
   /**
    * @method
    */
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
-  /**
-   * @method
-   */
   componentWillReceiveProps(nextProps) {
     this.setState((prevState, props) => {
       const {

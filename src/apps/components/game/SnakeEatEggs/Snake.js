@@ -95,12 +95,13 @@ class Snake {
   mapStateToProps(state) {
     const {
       boundary,
-      snake: {
-        size,
-        location,
-      },
+      snake,
     } = state;
-    if (Snake.boundaryDetection({ boundary, size, location })) {
+    const {
+      size,
+      location,
+    } = snake.toJS();
+    if (Snake.boundaryDetection({ boundary: boundary.toJS(), size, location })) {
       const {
         x,
         y,
@@ -237,6 +238,7 @@ class Snake {
    * @method
    */
   cancelMotionAnimation() {
+    console.log('ss');
     const {
       requestID,
     } = this;

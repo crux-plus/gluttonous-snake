@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 function ramLoc({ size, boundary }) {
   const {
     width,
@@ -17,17 +19,23 @@ function ramLoc({ size, boundary }) {
 }
 
 function createEgg(state, action) {
-  const {
+  let {
     boundary,
-    eggs: {
-      size,
-    },
+    eggs,
   } = state;
-  const location = ramLoc({ size, boundary });
-  const eggs = {
-    ...state.eggs,
-    location,
-  };
+  const {
+    size,
+  } = eggs.toJS();
+  const {
+    x,
+    y,
+  } = ramLoc({ size, boundary: boundary.toJS(), });
+  eggs = eggs.mergeDeep({
+    location: {
+      x,
+      y,
+    },
+  });
   return {
     ...state,
     eggs,
@@ -35,25 +43,25 @@ function createEgg(state, action) {
 }
 
 const initialState = {
-  boundary: {
+  boundary: fromJS({
     width: 0,
     height: 0,
-  },
-  eggs: {
+  }),
+  eggs: fromJS({
     size: 0,
     location: {
       x: 0,
       y: 0,
     },
-  },
-  snake: {
+  }),
+  snake: fromJS({
     size: 0,
     location: {
       x: 0,
       y: 0,
     },
-  },
-}
+  }),
+};
 
 export default function crossSliceReducer(state = initialState, action) {
   switch (action.type) {
