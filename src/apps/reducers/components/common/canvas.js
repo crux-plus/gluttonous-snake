@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 function transformCanvas(state, action) {
   const {
     size: {
@@ -5,30 +7,26 @@ function transformCanvas(state, action) {
       height,
     },
   } = action;
-
-  return {
-    ...state,
+  return state.mergeDeep({
     width,
     height,
-  };
+  });
 }
 
 function markCanvas(state, action) {
   const {
     id,
   } = action;
-
-  return {
-    ...state,
-    id,
-  };
+  return state.mergeDeep({
+    id
+  });
 }
 
-const initialState = {
+const initialState = fromJS({
   id: 0,
   width: 0,
   height: 0,
-};
+});
 
 function canvas(state = initialState, action) {
   switch (action.type) {

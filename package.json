@@ -8,8 +8,8 @@
     "test": "ava",
     "lint": "eslint src",
     "build": "webpack && babel src/ctrls -d dist",
-    "sync": "gio open http://localhost:3001 && browser-sync start",
     "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
+    "sync": "gio open http://localhost:3001 && browser-sync start",
     "serve": "gio open http://localhost:3000 && pm2 kill && pm2 start process.json",
     "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node"
   },
@@ -88,20 +88,17 @@
     "react-router-redux": "^4.0.8",
     "reduce-reducers": "^0.1.2",
     "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-batched-actions": "^0.1.6",
     "redux-devtools-extension": "^2.13.2",
-    "seamless-immutable": "^7.1.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.73.0",
     "socket.io": "^2.0.3",
     "sugarss": "^1.0.0"
   },
   "ava": {
-    "files": [
-      "spec/**/*.spec.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
+    "files": [ "spec/**/*.spec.js" ],
+    "require": [ "babel-register" ],
     "concurrency": 5,
     "failFast": true,
     "tap": false,

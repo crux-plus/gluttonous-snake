@@ -12,14 +12,14 @@ import {
 function mapStateToProps(state, ownProps = {}) {
   const {
     game: {
-      canvas: {
-        id,
-        width,
-        height,
-      },
+      canvas,
     },
   } = state;
-
+  const {
+    id,
+    width,
+    height,
+  } = canvas.getJS();
   return {
     canvas: {
       id,
