@@ -48,6 +48,7 @@ class Canvas extends React.Component {
   /**
    * @method
    */
+  // @FIXME
   setDefaultProps() {
     const {
       canvas: {
