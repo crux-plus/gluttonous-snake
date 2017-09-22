@@ -228,22 +228,20 @@ class Snake {
    * @method
    */
   requestMotionAnimation() {
-    this.requestID = window.requestAnimationFrame(() => {
+    const step = () => {
       this.moveStep();
-      this.requestMotionAnimation();
-    });
+      this.requestID = window.requestAnimationFrame(step);
+    };
+    this.requestID = window.requestAnimationFrame(step);
   }
 
   /**
    * @method
    */
   cancelMotionAnimation() {
-    console.log('ss');
     const {
       requestID,
     } = this;
-
-    // @FIXME
     if (requestID != -1) {
       window.cancelAnimationFrame(requestID);
     }
