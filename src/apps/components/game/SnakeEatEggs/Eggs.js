@@ -60,7 +60,7 @@ class Eggs {
   /**
    * @method
    */
-  createEgg() {
+  create() {
     this.actions.createEgg();
   }
 

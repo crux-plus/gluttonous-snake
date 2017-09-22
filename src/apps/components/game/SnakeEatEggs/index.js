@@ -122,8 +122,8 @@ class SnakeEatEggs {
       eggs,
       snake,
     } = this;
-    snake.draw();
-    eggs.createEgg();
+    snake.move();
+    eggs.create();
   }
 }
 

@@ -17,7 +17,6 @@ class Snake {
       size,
     } = this;
     this.actions.transformSnake({ size });
-    this.actions.moveSnake({ x: 0, y: 0 });
   }
 
   /**
@@ -73,6 +72,21 @@ class Snake {
       flag = true
     }
     return flag;
+  }
+
+  /**
+   * @method
+   */
+  move() {
+    const {
+      head: {
+        location: {
+          x,
+          y,
+        },
+      },
+    } = this;
+    this.actions.moveSnake({ x, y });
   }
 
   /**
