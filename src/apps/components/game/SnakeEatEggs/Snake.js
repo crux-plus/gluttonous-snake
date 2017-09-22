@@ -243,6 +243,7 @@ class Snake {
       requestID,
     } = this;
 
+    // @FIXME
     if (requestID != -1) {
       window.cancelAnimationFrame(requestID);
     }
