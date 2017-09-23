@@ -37,7 +37,6 @@ class Canvas extends React.Component {
     return `canvas${id}`;
   }
 
-
   /**
    * @method
    */
