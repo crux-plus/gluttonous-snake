@@ -24,7 +24,7 @@ class Canvas extends React.Component {
       canvas: {
         width,
         height,
-        id: Canvas.formateId(id),
+        id: Canvas.fmtId(id),
       },
     };
   }
@@ -33,57 +33,32 @@ class Canvas extends React.Component {
    * @public
    * @static
    */
-  static getUniqueId() {
-    return (new Date()).getTime();
+  static fmtId(id) {
+    return `canvas${id}`;
   }
 
   /**
    * @public
    * @static
    */
-  static formateId(id) {
-    return `canvas${id}`;
+  static ramId() {
+    const date = new Date();
+    return date.getTime();
   }
 
   /**
-   * @method
+   * @public
+   * @static
    */
-  // @FIXME
-  setDefaultProps() {
+  static innerBrd() {
     const {
-      canvas: {
-        id: defaultId,
-        width: defaultWidth,
-        height: defaultHeight,
-      },
-    } = Canvas.defaultProps;
-    const {
-      canvas: {
-        id,
-        width,
-        height,
-      },
-    } = this.props;
-
-    if (width === defaultWidth && height === defaultHeight) {
-      const {
-        innerWidth: width,
-        innerHeight: height,
-      } = window;
-      this.props.actions.transformCanvas({ width, height });
-    }
-
-    if (id === defaultId) {
-      const id = Canvas.getUniqueId();
-      this.props.actions.markCanvas({ id });
-    }
-  }
-
-  /**
-   * @method
-   */
-  componentWillMount() {
-    this.setDefaultProps();
+      innerWidth: width,
+      innerHeight: height,
+    } = window;
+    return  {
+      width,
+      height,
+    };
   }
 
   /**
@@ -98,12 +73,11 @@ class Canvas extends React.Component {
           height,
         },
       } = props;
-
       return {
         canvas: {
           width,
           height,
-          id: Canvas.formateId(id),
+          id: Canvas.fmtId(id),
         }
       };
     });

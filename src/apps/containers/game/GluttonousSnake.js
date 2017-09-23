@@ -7,6 +7,7 @@ import GluttonousSnake from 'components/game/GluttonousSnake';
 import {
   transformCanvas,
   markCanvas,
+  useDefaultCanvas,
 } from 'actions/common/canvas';
 
 function mapStateToProps(state, ownProps = {}) {
@@ -35,6 +36,7 @@ function mapDispatchToProps(dispatch) {
       {
         transformCanvas,
         markCanvas,
+        useDefaultCanvas,
       },
       dispatch,
     ),

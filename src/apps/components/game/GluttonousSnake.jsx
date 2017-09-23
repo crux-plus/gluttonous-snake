@@ -67,6 +67,13 @@ class GluttonousSnake extends Canvas {
   /**
    * @method
    */
+  componentWillMount() {
+    this.props.actions.useDefaultCanvas();
+  }
+
+  /**
+   * @method
+   */
   componentDidUpdate() {
     if (this.context != null) {
       this.init();

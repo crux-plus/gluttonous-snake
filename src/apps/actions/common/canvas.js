@@ -15,7 +15,15 @@ function markCanvas({ id=0, }) {
   };
 }
 
+function useDefaultCanvas() {
+  return {
+    type: 'USE_DEFAULT_CANVAS',
+  };
+}
+
+
 export {
   transformCanvas,
   markCanvas,
+  useDefaultCanvas,
 };
