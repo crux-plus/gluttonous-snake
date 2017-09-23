@@ -46,14 +46,13 @@ class Eggs {
   mapStateToProps(state) {
     this.clear();
     const {
-      eggs,
-    } = state;
-    const {
-      location: {
-        x,
-        y,
+      eggs: {
+        location: {
+          x,
+          y,
+        },
       },
-    } = eggs.toJS();
+    } = state.toJS();
     this.setLocation({ x, y });
     this.draw();
   }

@@ -91,14 +91,19 @@
     "redux-actions": "^2.2.1",
     "redux-batched-actions": "^0.1.6",
     "redux-devtools-extension": "^2.13.2",
+    "redux-immutable": "^4.0.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.73.0",
     "socket.io": "^2.0.3",
     "sugarss": "^1.0.0"
   },
   "ava": {
-    "files": [ "spec/**/*.spec.js" ],
-    "require": [ "babel-register" ],
+    "files": [
+      "spec/**/*.spec.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
     "concurrency": 5,
     "failFast": true,
     "tap": false,

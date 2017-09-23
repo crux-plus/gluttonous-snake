@@ -19,49 +19,46 @@ function ramLoc({ size, boundary }) {
 }
 
 function createEgg(state, action) {
-  let {
-    boundary,
-    eggs,
-  } = state;
   const {
-    size,
-  } = eggs.toJS();
+    boundary,
+    eggs: {
+      size,
+    },
+  } = state.toJS();
   const {
     x,
     y,
-  } = ramLoc({ size, boundary: boundary.toJS(), });
-  eggs = eggs.mergeDeep({
-    location: {
-      x,
-      y,
+  } = ramLoc({ size, boundary });
+  return state.mergeDeep({
+    eggs: {
+      location: {
+        x,
+        y,
+      },
     },
   });
-  return {
-    ...state,
-    eggs,
-  };
 }
 
-const initialState = {
-  boundary: fromJS({
+const initialState = fromJS({
+  boundary: {
     width: 0,
     height: 0,
-  }),
-  eggs: fromJS({
+  },
+  eggs: {
     size: 0,
     location: {
       x: 0,
       y: 0,
     },
-  }),
-  snake: fromJS({
+  },
+  snake: {
     size: 0,
     location: {
       x: 0,
       y: 0,
     },
-  }),
-};
+  },
+});
 
 export default function crossSliceReducer(state = initialState, action) {
   switch (action.type) {

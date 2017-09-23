@@ -5,23 +5,21 @@ function collisionDetection({ getState, dispatch }) {
     if (action.type === 'MOVE_SNAKE') {
       const state = getState();
       const {
-        eggs,
-        snake,
-      } = state;
-      const {
-        size: eggsSize,
-        location: {
-          x: eggsX,
-          y: eggsY,
+        eggs: {
+          size: eggsSize,
+          location: {
+            x: eggsX,
+            y: eggsY,
+          },
         },
-      } = snake.toJS();
-      const {
-        size: snakeSize,
-        location: {
-          x: snakeX,
-          y: snakeY,
+        snake: {
+          size: snakeSize,
+          location: {
+            x: snakeX,
+            y: snakeY,
+          },
         },
-      } = eggs.toJS();
+      } = state.toJS();
       if ((
           ((eggsY + eggsSize) > snakeY) &&
           ((snakeY + snakeSize) > eggsY)

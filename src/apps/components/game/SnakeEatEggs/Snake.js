@@ -95,13 +95,12 @@ class Snake {
   mapStateToProps(state) {
     const {
       boundary,
-      snake,
-    } = state;
-    const {
-      size,
-      location,
-    } = snake.toJS();
-    if (Snake.boundaryDetection({ boundary: boundary.toJS(), size, location })) {
+      snake: {
+        size,
+        location,
+      },
+    } = state.toJS();
+    if (Snake.boundaryDetection({ boundary, size, location })) {
       const {
         x,
         y,
