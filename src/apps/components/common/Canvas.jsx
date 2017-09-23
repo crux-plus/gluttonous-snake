@@ -37,29 +37,6 @@ class Canvas extends React.Component {
     return `canvas${id}`;
   }
 
-  /**
-   * @public
-   * @static
-   */
-  static ramId() {
-    const date = new Date();
-    return date.getTime();
-  }
-
-  /**
-   * @public
-   * @static
-   */
-  static innerBrd() {
-    const {
-      innerWidth: width,
-      innerHeight: height,
-    } = window;
-    return  {
-      width,
-      height,
-    };
-  }
 
   /**
    * @method
