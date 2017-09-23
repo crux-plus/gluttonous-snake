@@ -101,10 +101,9 @@ class Snake {
         rtl,
         length,
         size,
-        body,
+        location,
       },
     } = state.toJS();
-    this.setRtl(rtl);
 
     if (Snake.boundaryDetection({ boundary, size, location })) {
       const {
@@ -119,6 +118,8 @@ class Snake {
     } else {
       this.cancelMotionAnimation();
     }
+
+    this.setRtl(rtl);
   }
 
   /**
