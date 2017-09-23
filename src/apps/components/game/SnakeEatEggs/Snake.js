@@ -17,6 +17,8 @@ class Snake {
       size,
     } = this;
     this.actions.transformSnake({ size });
+
+    this.bindKeyboardEvent();
   }
 
   /**
@@ -41,13 +43,14 @@ class Snake {
       requestID: -1,
       boundary: null,
       motionOperate: null,
-      head: {
-        location: {
+      rtl: Rtl.None,
+      length: 1,
+      body: [
+        {
           x: 0,
           y: 0,
         },
-        rtl: Rtl.None,
-      },
+      ],
     };
   }
 
@@ -79,13 +82,12 @@ class Snake {
    */
   move() {
     const {
-      head: {
-        location: {
-          x,
-          y,
-        },
-      },
+      body: [location],
     } = this;
+    const {
+      x,
+      y,
+    } = location;
     this.actions.moveSnake({ x, y });
   }
 
@@ -96,17 +98,23 @@ class Snake {
     const {
       boundary,
       snake: {
+        rtl,
+        length,
         size,
-        location,
+        body,
       },
     } = state.toJS();
+    this.setRtl(rtl);
+
     if (Snake.boundaryDetection({ boundary, size, location })) {
       const {
         x,
         y,
       } = location;
+      this.unshiftLocation({ x, y });
+      this.setLength(length);
+
       this.clear();
-      this.setHeadLocation({ x, y });
       this.draw();
     } else {
       this.cancelMotionAnimation();
@@ -116,24 +124,32 @@ class Snake {
   /**
    * @method
    */
-  setHeadLocation(location) {
-    this.head.location = location;
+  unshiftLocation(location) {
+    this.body.unshift(location);
+  }
+
+  /**
+   * @method
+   */
+  setLength(length) {
+    if (this.length !== length) {
+      this.length = length;
+    }
   }
 
   /**
    * @method
    */
   getMotionOperate() {
-    let {
+    const {
       spread,
-      head: {
-        rtl,
-        location: {
-          x,
-          y,
-        },
-      },
+      rtl,
+      body: [location],
     } = this;
+    let {
+      x,
+      y,
+    } = location;
     let motionOperate = null;
     switch (rtl) {
       case Rtl.Down:
@@ -167,31 +183,62 @@ class Snake {
   /**
    * @method
    */
-  setHeadRtl(rtl) {
-    this.head.rtl = rtl;
-    this.motionOperate = this.getMotionOperate();
-
-    if (this.requestID !== -1) {
-      this.cancelMotionAnimation();
-    }
-    this.requestMotionAnimation();
+  translate(rtl) {
+    this.actions.translateSnake(rtl);
   }
+
+  /**
+   * @method
+   */
+  setRtl(rtl) {
+    if (this.rtl !== rtl) {
+      this.rtl = rtl;
+      this.motionOperate = this.getMotionOperate();
+
+      if (this.requestID !== -1) {
+        this.cancelMotionAnimation();
+      }
+      this.requestMotionAnimation();
+    }
+  }
+
+  /**
+   * @method
+   */
+  bindKeyboardEvent() {
+    window.addEventListener('keydown', (event) => {
+      const {
+        code,
+      } = event;
+      const rtl = Rtl.fromCode(code);
+      if (rtl !== Rtl.None) {
+        const {
+          snake,
+        } = this;
+        this.translate(rtl);
+      }
+    });
+  }
+
 
   /**
    * @method
    */
   clear() {
     const {
+      length,
       size,
       color,
-      head: {
-        location: {
-          x,
-          y,
-        },
-      },
+      body,
     } = this;
-    this.context.clearRect(x, y, size, size);
+    while (body.length > length) {
+      const location = body.pop();
+      const {
+        x,
+        y,
+      } = location;
+      this.context.clearRect(x, y, size, size);
+    }
   }
 
   /**
@@ -201,15 +248,16 @@ class Snake {
     const {
       size,
       color,
-      head: {
-        location: {
-          x,
-          y,
-        },
-      },
+      body,
     } = this;
-    this.fillStyle = color;
-    this.context.fillRect(x, y, size, size);
+    body.forEach((location) => {
+      const {
+        x,
+        y,
+      } = location;
+      this.fillStyle = color;
+      this.context.fillRect(x, y, size, size);
+    });
   }
 
   /**
@@ -217,9 +265,7 @@ class Snake {
    */
   moveStep() {
     if (this.motionOperate != null) {
-      this.clear();
       this.motionOperate();
-      this.draw();
     }
   }
 

@@ -15,7 +15,26 @@ function transformSnake({ size=0 }) {
   };
 }
 
+function increaseSnake({ x=0, y=0 }) {
+  return {
+    type: 'INCREASE_SNAKE',
+    location: {
+      x,
+      y,
+    },
+  };
+}
+
+function translateSnake(rtl) {
+  return {
+    type: 'TRANSLATE_SNAKE',
+    rtl,
+  };
+}
+
 export {
   moveSnake,
   transformSnake,
+  increaseSnake,
+  translateSnake,
 };

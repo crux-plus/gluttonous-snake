@@ -1,4 +1,5 @@
-import { createEgg, transformEggs } from 'actions/game/eggs';
+import { increaseSnake } from 'actions/game/snake';
+import { createEgg } from 'actions/game/eggs';
 
 function collisionDetection({ getState, dispatch }) {
   return next => action => {
@@ -29,6 +30,7 @@ function collisionDetection({ getState, dispatch }) {
           ((eggsX + eggsSize) > snakeX)
       )) {
         dispatch(createEgg());
+        dispatch(increaseSnake({ x: snakeX, y: snakeY }));
       }
     }
     return next(action);

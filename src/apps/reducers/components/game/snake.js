@@ -1,3 +1,5 @@
+import Rtl from 'components/game/SnakeEatEggs/Rtl';
+
 import { fromJS } from 'immutable';
 
 function transformSnake(state, action) {
@@ -24,7 +26,35 @@ function moveSnake(state, action) {
   });
 }
 
+function translateSnake(state, action) {
+  const {
+    rtl,
+  } = action;
+  return state.mergeDeep({
+    rtl,
+  });
+}
+
+function increaseSnake(state, action) {
+  const {
+    length,
+    location: {
+      x,
+      y,
+    },
+  } = state.toJS();
+  return state.mergeDeep({
+    length: length + 1,
+    location: {
+      x,
+      y,
+    },
+  });
+}
+
 const initialState = fromJS({
+  rtl: Rtl.None,
+  length: 1,
   size: 0,
   location: {
     x: 0,
@@ -38,6 +68,10 @@ export default function snake(state = initialState, action) {
       return transformSnake(state, action);
     case 'MOVE_SNAKE':
       return moveSnake(state, action);
+    case 'INCREASE_SNAKE':
+      return increaseSnake(state, action);
+    case 'TRANSLATE_SNAKE':
+      return translateSnake(state, action);
     default:
       return state;
   }

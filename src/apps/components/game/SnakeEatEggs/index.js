@@ -4,7 +4,7 @@ import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection } from 'middlewares/game/snakeEatEggs';
 
-import { moveSnake, transformSnake } from 'actions/game/snake';
+import { moveSnake, transformSnake, translateSnake } from 'actions/game/snake';
 
 import { createEgg, transformEggs } from 'actions/game/eggs';
 
@@ -30,7 +30,6 @@ class SnakeEatEggs {
     this.initInstances();
 
     this.bindSubscribe();
-    this.bindKeyboardEvent();
 
     this.resizeBoundary(boundary);
   }
@@ -86,6 +85,7 @@ class SnakeEatEggs {
     let actions = bindActionCreators({
       moveSnake,
       transformSnake,
+      translateSnake,
     }, dispatch);
     this.snake = new Snake({ context, actions });
 
@@ -99,31 +99,13 @@ class SnakeEatEggs {
   /**
    * @method
    */
-  bindKeyboardEvent() {
-    document.addEventListener('keydown', (event) => {
-      const {
-        code,
-      } = event;
-      const rtl = Rtl.fromCode(code);
-      if (rtl != Rtl.None) {
-        const {
-          snake,
-        } = this;
-        snake.setHeadRtl(rtl);
-      }
-    });
-  }
-
-  /**
-   * @method
-   */
   draw() {
     const {
       eggs,
       snake,
     } = this;
-    snake.move();
     eggs.create();
+    snake.move();
   }
 }
 
