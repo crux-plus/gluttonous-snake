@@ -180,7 +180,7 @@ class Snake {
    * @method
    */
   translate(rtl) {
-    this.actions.translateSnake(rtl);
+    this.actions.translateSnake({ rtl });
   }
 
   /**

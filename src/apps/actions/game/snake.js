@@ -25,7 +25,7 @@ function increaseSnake({ x=0, y=0 }) {
   };
 }
 
-function translateSnake(rtl) {
+function translateSnake({ rtl, }) {
   return {
     type: 'TRANSLATE_SNAKE',
     rtl,
