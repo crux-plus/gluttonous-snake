@@ -131,6 +131,20 @@ class Snake {
   /**
    * @method
    */
+  checkRev(rtl) {
+    const {
+      length,
+    } = this;
+    let flag = true;
+    if ((length > 1) && (rtl === Rtl.rev(this.rtl))) {
+      flag = false;
+    }
+    return flag;
+  }
+
+  /**
+   * @method
+   */
   setLength(length) {
     if (this.length !== length) {
       this.length = length;
@@ -223,7 +237,7 @@ class Snake {
         code,
       } = event;
       const rtl = Rtl.fromCode(code);
-      if ((rtl !== Rtl.None) && (rtl !== Rtl.rev(this.rtl))) {
+      if ((rtl !== Rtl.None) && !this.checkRev()) {
         const {
           snake,
         } = this;
