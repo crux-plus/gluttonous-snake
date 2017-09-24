@@ -46,12 +46,13 @@ function collisionDetection({ getState, dispatch }) {
         snake: {
           rtl,
           size: snakeSize,
-          location: {
-            x: snakeX,
-            y: snakeY,
-          },
+          body: [location],
         },
       } = state.toJS();
+      const {
+        x: snakeX,
+        y: snakeY,
+      } = location;
       if ((
           ((eggsY + eggsSize) > snakeY) &&
           ((snakeY + snakeSize) > eggsY)

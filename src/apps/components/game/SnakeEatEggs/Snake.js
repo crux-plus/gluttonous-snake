@@ -101,16 +101,20 @@ class Snake {
         rtl,
         length,
         size,
-        location,
+        body,
       },
     } = state.toJS();
+    const [location] = body;
     if (Snake.boundaryDetection({ boundary, size, location })) {
-      this.unshiftLocation(location);
-      this.setLength(length);
-
       this.clear();
+      this.setLength(length, body);
+      this.setBody(body);
       this.draw();
     } else {
+      const {
+        body,
+      } = this;
+      this.actions.restoreSnake({ body });
       this.cancelMotionAnimation();
     }
 
@@ -120,8 +124,8 @@ class Snake {
   /**
    * @method
    */
-  unshiftLocation(location) {
-    this.body.unshift(location);
+  setBody(body) {
+    this.body = body;
   }
 
   /**
@@ -150,26 +154,38 @@ class Snake {
     switch (rtl) {
       case Rtl.Down:
         motionOperate = () => {
-          y += spread;
-          this.actions.moveSnake({ x, y });
+          const delta = {
+            x: 0,
+            y: spread,
+          };
+          this.actions.moveSnake(delta);
         }
         break;
       case Rtl.Left:
         motionOperate = () => {
-          x -= spread;
-          this.actions.moveSnake({ x, y });
+          const delta ={
+            x: -spread,
+            y: 0,
+          };
+          this.actions.moveSnake(delta);
         }
         break;
       case Rtl.Up:
         motionOperate = () => {
-          y -= spread;
-          this.actions.moveSnake({ x, y });
+          const delta = {
+            x: 0,
+            y: -spread,
+          };
+          this.actions.moveSnake(delta);
         }
         break;
       case Rtl.Right:
         motionOperate = () => {
-          x += spread;
-          this.actions.moveSnake({ x, y });
+          const delta = {
+            x: spread,
+            y: 0,
+          };
+          this.actions.moveSnake(delta);
         }
         break;
     }
@@ -207,7 +223,7 @@ class Snake {
         code,
       } = event;
       const rtl = Rtl.fromCode(code);
-      if (rtl !== Rtl.None && rtl !== Rtl.rev(this.rtl)) {
+      if ((rtl !== Rtl.None) && (rtl !== Rtl.rev(this.rtl))) {
         const {
           snake,
         } = this;
@@ -227,14 +243,13 @@ class Snake {
       color,
       body,
     } = this;
-    while (body.length > length) {
-      const location = body.pop();
+    body.forEach((location) => {
       const {
         x,
         y,
       } = location;
       this.context.clearRect(x, y, size, size);
-    }
+    });
   }
 
   /**

@@ -18,4 +18,7 @@ export default createActions({
     x,
     y,
   }),
+  RESTORE_SNAKE: ({ body }) => ({
+    body,
+  }),
 });
