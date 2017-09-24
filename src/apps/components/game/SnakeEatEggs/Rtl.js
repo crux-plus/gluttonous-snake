@@ -5,7 +5,7 @@ class Rtl {
   /**
    * @static
    */
-  static getReverse(rtl) {
+  static rev(rtl) {
     let reverse = Rtl.None;
     switch (rtl) {
       case Rtl.Down:

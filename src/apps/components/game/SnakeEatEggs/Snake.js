@@ -207,7 +207,7 @@ class Snake {
         code,
       } = event;
       const rtl = Rtl.fromCode(code);
-      if (rtl !== Rtl.None) {
+      if (rtl !== Rtl.None && rtl !== Rtl.rev(this.rtl)) {
         const {
           snake,
         } = this;
