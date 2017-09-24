@@ -1,5 +1,33 @@
 import { increaseSnake } from 'actions/game/snake';
+
 import { createEgg } from 'actions/game/eggs';
+
+import Rtl from 'components/game/SnakeEatEggs/Rtl';
+
+function getIncLoc({ rtl, location, size }) {
+  let {
+    x,
+    y,
+  } = location;
+  switch (rtl) {
+    case Rtl.Down:
+      y += size;
+      break;
+    case Rtl.Left:
+      x -= size;
+      break;
+    case Rtl.Up:
+      y -= size;
+      break;
+    case Rtl.Right:
+      x += size;
+      break;
+  }
+  return {
+    x,
+    y,
+  };
+}
 
 function collisionDetection({ getState, dispatch }) {
   return next => action => {
@@ -14,6 +42,7 @@ function collisionDetection({ getState, dispatch }) {
           },
         },
         snake: {
+          rtl,
           size: snakeSize,
           location: {
             x: snakeX,
@@ -30,7 +59,13 @@ function collisionDetection({ getState, dispatch }) {
           ((eggsX + eggsSize) > snakeX)
       )) {
         dispatch(createEgg());
-        dispatch(increaseSnake({ x: snakeX, y: snakeY }));
+        let location = {
+          x: snakeX,
+          y: snakeY,
+        };
+        const size = snakeSize;
+        location = getIncLoc({ location, size, rtl });
+        dispatch(increaseSnake(location));
       }
     }
     return next(action);

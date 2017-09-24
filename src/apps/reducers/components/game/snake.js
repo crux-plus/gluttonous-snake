@@ -26,6 +26,26 @@ function moveSnake(state, action) {
   });
 }
 
+function increaseSnake(state, action) {
+  let {
+    length,
+  } = state.toJS();
+  length = length + 1;
+  const {
+    location: {
+      x,
+      y,
+    },
+  } = action;
+  return state.mergeDeep({
+    length,
+    location: {
+      x,
+      y,
+    },
+  });
+}
+
 function translateSnake(state, action) {
   const {
     rtl,
@@ -35,22 +55,6 @@ function translateSnake(state, action) {
   });
 }
 
-function increaseSnake(state, action) {
-  const {
-    length,
-    location: {
-      x,
-      y,
-    },
-  } = state.toJS();
-  return state.mergeDeep({
-    length: length + 1,
-    location: {
-      x,
-      y,
-    },
-  });
-}
 
 const initialState = fromJS({
   rtl: Rtl.None,

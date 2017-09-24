@@ -104,13 +104,8 @@ class Snake {
         location,
       },
     } = state.toJS();
-
     if (Snake.boundaryDetection({ boundary, size, location })) {
-      const {
-        x,
-        y,
-      } = location;
-      this.unshiftLocation({ x, y });
+      this.unshiftLocation(location);
       this.setLength(length);
 
       this.clear();
