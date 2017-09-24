@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 
 function resizeBoundary(state, action) {
   const {
-    boundary: {
+    payload: {
       width,
       height,
     },

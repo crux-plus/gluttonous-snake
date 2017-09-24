@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 
 import GluttonousSnake from 'components/game/GluttonousSnake';
 
-import {
-  transformCanvas,
-  markCanvas,
-  useDefaultCanvas,
-} from 'actions/common/canvas';
+import canvasActionCreators from 'actions/common/canvas';
 
 function mapStateToProps(state, ownProps = {}) {
   const {
@@ -33,11 +29,7 @@ function mapStateToProps(state, ownProps = {}) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
-      {
-        transformCanvas,
-        markCanvas,
-        useDefaultCanvas,
-      },
+      {...canvasActionCreators},
       dispatch,
     ),
   }

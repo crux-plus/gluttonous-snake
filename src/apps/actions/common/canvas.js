@@ -1,29 +1,13 @@
-function transformCanvas({ width=0, height=0 }) {
-  return {
-    type: 'TRANSFORM_CANVAS',
-    size: {
-      width,
-      height,
-    },
-  };
-}
+// Flux Standard Action utilities for Redux.
+import { createActions } from 'redux-actions';
 
-function markCanvas({ id=0, }) {
-  return {
-    type: 'MARK_CANVAS',
+export default createActions({
+  MARK_CANVAS: ({ id }) => ({
     id,
-  };
-}
-
-function useDefaultCanvas() {
-  return {
-    type: 'USE_DEFAULT_CANVAS',
-  };
-}
-
-
-export {
-  transformCanvas,
-  markCanvas,
-  useDefaultCanvas,
-};
+  }),
+  TRANSFORM_CANVAS: ({ width=0, height=0 }) => ({
+    width,
+    height,
+  }),
+  USE_DEFAULT_CANVAS: null,
+});

@@ -2,7 +2,9 @@ import { fromJS } from 'immutable';
 
 function transformEggs(state, action) {
   const {
-    size,
+    payload: {
+      size,
+    },
   } = action;
   return state.mergeDeep({
     size,

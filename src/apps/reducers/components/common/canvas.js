@@ -16,7 +16,7 @@ function useDefaultCanvas(state, action) {
 
 function transformCanvas(state, action) {
   const {
-    size: {
+    payload: {
       width,
       height,
     },
@@ -29,7 +29,9 @@ function transformCanvas(state, action) {
 
 function markCanvas(state, action) {
   const {
-    id,
+    playload: {
+      id,
+    },
   } = action;
   return state.mergeDeep({
     id

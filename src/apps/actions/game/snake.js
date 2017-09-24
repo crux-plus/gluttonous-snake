@@ -1,40 +1,21 @@
-function moveSnake({ x=0, y=0 }) {
-  return {
-    type: 'MOVE_SNAKE',
-    location: {
-      x,
-      y,
-    },
-  };
-}
+// Flux Standard Action utilities for Redux.
+import { createActions } from 'redux-actions';
 
-function transformSnake({ size=0 }) {
-  return {
-    type: 'TRANSFORM_SNAKE',
-    size,
-  };
-}
+import Rtl from 'components/game/SnakeEatEggs/Rtl';
 
-function increaseSnake({ x=0, y=0 }) {
-  return {
-    type: 'INCREASE_SNAKE',
-    location: {
-      x,
-      y,
-    },
-  };
-}
-
-function translateSnake({ rtl, }) {
-  return {
-    type: 'TRANSLATE_SNAKE',
+export default createActions({
+  TRANSLATE_SNAKE: ({ rtl=Rtl.None }) => ({
     rtl,
-  };
-}
-
-export {
-  moveSnake,
-  transformSnake,
-  increaseSnake,
-  translateSnake,
-};
+  }),
+  INCREASE_SNAKE: ({ x=0, y=0 }) => ({
+    x,
+    y,
+  }),
+  TRANSFORM_SNAKE: ({ size=0 }) => ({
+    size,
+  }),
+  MOVE_SNAKE: ({ x=0, y=0 }) => ({
+    x,
+    y,
+  }),
+});

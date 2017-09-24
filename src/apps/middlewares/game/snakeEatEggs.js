@@ -1,6 +1,8 @@
-import { increaseSnake } from 'actions/game/snake';
+import { bindActionCreators } from 'redux';
 
-import { createEgg } from 'actions/game/eggs';
+import snakeActionCreators from 'actions/game/snake';
+
+import eggsActionCreators from 'actions/game/eggs';
 
 import Rtl from 'components/game/SnakeEatEggs/Rtl';
 
@@ -58,14 +60,18 @@ function collisionDetection({ getState, dispatch }) {
           ((snakeX + snakeSize) > eggsX) &&
           ((eggsX + eggsSize) > snakeX)
       )) {
-        dispatch(createEgg());
+        const actions = bindActionCreators({
+          ...snakeActionCreators,
+          ...eggsActionCreators,
+        }, dispatch);
+        actions.createEgg();
         let location = {
           x: snakeX,
           y: snakeY,
         };
         const size = snakeSize;
         location = getIncLoc({ location, size, rtl });
-        dispatch(increaseSnake(location));
+        actions.increaseSnake(location);
       }
     }
     return next(action);

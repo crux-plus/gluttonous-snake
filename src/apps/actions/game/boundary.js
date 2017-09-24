@@ -1,13 +1,9 @@
-function resizeBoundary({ width=0, height=0 }) {
-  return {
-    type: 'RESIZE_BOUNDARY',
-    boundary: {
-      width,
-      height,
-    },
-  };
-}
+// Flux Standard Action utilities for Redux.
+import { createActions } from 'redux-actions';
 
-export {
-  resizeBoundary,
-};
+export default createActions({
+  RESIZE_BOUNDARY: ({ width=0, height=0 }) => ({
+    width,
+    height,
+  }),
+});

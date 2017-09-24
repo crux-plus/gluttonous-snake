@@ -4,7 +4,9 @@ import { fromJS } from 'immutable';
 
 function transformSnake(state, action) {
   const {
-    size,
+    payload: {
+      size,
+    },
   } = action;
   return state.mergeDeep({
     size,
@@ -13,7 +15,7 @@ function transformSnake(state, action) {
 
 function moveSnake(state, action) {
   const {
-    location: {
+    payload: {
       x,
       y,
     },
@@ -32,7 +34,7 @@ function increaseSnake(state, action) {
   } = state.toJS();
   length = length + 1;
   const {
-    location: {
+    payload: {
       x,
       y,
     },
@@ -48,7 +50,9 @@ function increaseSnake(state, action) {
 
 function translateSnake(state, action) {
   const {
-    rtl,
+    payload: {
+      rtl,
+    },
   } = action;
   return state.mergeDeep({
     rtl,

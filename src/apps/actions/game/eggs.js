@@ -1,17 +1,9 @@
-function createEgg() {
-  return {
-    type: 'CREATE_EGG',
-  };
-}
+// Flux Standard Action utilities for Redux.
+import { createActions } from 'redux-actions';
 
-function transformEggs({ size=0 }) {
-  return {
-    type: 'TRANSFORM_EGGS',
+export default createActions({
+  TRANSFORM_EGGS: ({ size=0 }) => ({
     size,
-  };
-}
-
-export {
-  createEgg,
-  transformEggs,
-};
+  }),
+  CREATE_EGG: null,
+});

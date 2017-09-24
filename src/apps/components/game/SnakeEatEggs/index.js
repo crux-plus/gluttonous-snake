@@ -4,11 +4,11 @@ import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection } from 'middlewares/game/snakeEatEggs';
 
-import { moveSnake, transformSnake, translateSnake } from 'actions/game/snake';
+import snakeActionCreators from 'actions/game/snake';
 
-import { createEgg, transformEggs } from 'actions/game/eggs';
+import eggsActionCreators from 'actions/game/eggs';
 
-import { resizeBoundary } from 'actions/game/boundary';
+import boundaryActionCreators from 'actions/game/boundary';
 
 import Rtl from './Rtl';
 
@@ -52,7 +52,7 @@ class SnakeEatEggs {
       dispatch,
     } = store;
     const actions = bindActionCreators({
-      resizeBoundary,
+      ...boundaryActionCreators,
     }, dispatch);
     this.actions = actions;
     this.store = store;
@@ -83,15 +83,12 @@ class SnakeEatEggs {
     } = this;
 
     let actions = bindActionCreators({
-      moveSnake,
-      transformSnake,
-      translateSnake,
+      ...snakeActionCreators,
     }, dispatch);
     this.snake = new Snake({ context, actions });
 
     actions = bindActionCreators({
-      createEgg,
-      transformEggs,
+      ...eggsActionCreators,
     }, dispatch);
     this.eggs = new Eggs({ context, actions });
   }
