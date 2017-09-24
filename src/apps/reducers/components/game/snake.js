@@ -38,21 +38,17 @@ function moveSnake(state, action) {
 function increaseSnake(state, action) {
   const {
     payload: {
-      x,
-      y,
+      locations,
     },
   } = action;
   let {
     length,
     body,
   } = state.toJS();
-  length = length + 1;
-  const location = {
-    x,
-    y,
-  };
-  body.unshift(location);
-  body = body.slice(0, length);
+  console.log(locations);
+  body.unshift(...locations);
+  console.log(body);
+  length = body.length;
   return state.mergeDeep({
     length,
     body,

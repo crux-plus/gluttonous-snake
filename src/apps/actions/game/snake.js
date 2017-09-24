@@ -7,9 +7,8 @@ export default createActions({
   TRANSLATE_SNAKE: ({ rtl=Rtl.None }) => ({
     rtl,
   }),
-  INCREASE_SNAKE: ({ x=0, y=0 }) => ({
-    x,
-    y,
+  INCREASE_SNAKE: ({ locations }) => ({
+    locations,
   }),
   TRANSFORM_SNAKE: ({ size=0 }) => ({
     size,

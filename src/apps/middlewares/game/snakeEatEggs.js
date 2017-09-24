@@ -6,29 +6,55 @@ import eggsActionCreators from 'actions/game/eggs';
 
 import Rtl from 'components/game/SnakeEatEggs/Rtl';
 
-function getIncLoc({ rtl, location, size }) {
-  let {
+function getIncLoc({ rtl, location, size, spreed=2 }) {
+  const count = Math.floor(size / spreed);
+  const {
     x,
     y,
   } = location;
+  const locations = new Array(count);
+  locations.fill(0);
   switch (rtl) {
     case Rtl.Down:
-      y += size;
+      locations.forEach((_, index) => {
+        const newY = y + spreed * index;
+        locations[index] = {
+          x,
+          y: newY,
+        };
+      })
       break;
     case Rtl.Left:
-      x -= size;
+      locations.forEach((_, index) => {
+        const newX = x + spreed * index;
+        locations[index] = {
+          x: newX,
+          y,
+        };
+      })
       break;
     case Rtl.Up:
-      y -= size;
+      locations.forEach((_, index) => {
+        const newY = y - spreed * index;
+        locations[index] = {
+          x,
+          y: newY,
+        };
+      })
       break;
     case Rtl.Right:
-      x += size;
+      locations.forEach((_, index) => {
+        const newX = x + spreed * index;
+        locations[index] = {
+          x: newX,
+          y,
+        };
+      })
       break;
   }
-  return {
-    x,
-    y,
-  };
+  locations.shift();
+  locations.reverse();
+  return locations;
 }
 
 function collisionDetection({ getState, dispatch }) {
@@ -71,8 +97,8 @@ function collisionDetection({ getState, dispatch }) {
           y: snakeY,
         };
         const size = snakeSize;
-        location = getIncLoc({ location, size, rtl });
-        actions.increaseSnake(location);
+        const locations = getIncLoc({ location, size, rtl });
+        actions.increaseSnake({ locations });
       }
     }
     return next(action);
