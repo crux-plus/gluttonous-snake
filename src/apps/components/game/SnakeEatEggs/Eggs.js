@@ -21,7 +21,7 @@ class Eggs {
    */
   static getDefaultOptions() {
     return {
-      size: 10,
+      size: 20,
       color: '#000',
       context: null,
    };

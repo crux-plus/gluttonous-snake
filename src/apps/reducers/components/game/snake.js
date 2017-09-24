@@ -45,9 +45,7 @@ function increaseSnake(state, action) {
     length,
     body,
   } = state.toJS();
-  console.log(locations);
   body.unshift(...locations);
-  console.log(body);
   length = body.length;
   return state.mergeDeep({
     length,

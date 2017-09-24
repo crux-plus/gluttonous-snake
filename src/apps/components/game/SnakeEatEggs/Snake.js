@@ -26,7 +26,7 @@ class Snake {
    */
   static getDefaultOptions() {
     return {
-      size: 10,
+      size: 20,
       spread: 2,
       color: '#000',
       context: null,
