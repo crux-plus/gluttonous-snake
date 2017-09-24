@@ -135,9 +135,9 @@ class Snake {
     const {
       length,
     } = this;
-    let flag = true;
+    let flag = false;
     if ((length > 1) && (rtl === Rtl.rev(this.rtl))) {
-      flag = false;
+      flag = true;
     }
     return flag;
   }
@@ -210,7 +210,9 @@ class Snake {
    * @method
    */
   translate(rtl) {
-    this.actions.translateSnake({ rtl });
+    if ((rtl !== Rtl.None) && (!this.checkRev(rtl))) {
+      this.actions.translateSnake({ rtl });
+    }
   }
 
   /**
@@ -237,12 +239,7 @@ class Snake {
         code,
       } = event;
       const rtl = Rtl.fromCode(code);
-      if ((rtl !== Rtl.None) && !this.checkRev()) {
-        const {
-          snake,
-        } = this;
-        this.translate(rtl);
-      }
+      this.translate(rtl);
     });
   }
 
