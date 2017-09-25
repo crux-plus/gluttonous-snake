@@ -21,11 +21,10 @@ class GluttonousSnakeCanvas extends Canvas {
        context,
        boundary,
     });
-    const data = {
+    this.data = {
       context,
       snakeEatEggs,
     };
-    this.data = data;
   }
 
   /**

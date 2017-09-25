@@ -1,5 +1,7 @@
 import { createStore, bindActionCreators, applyMiddleware } from 'redux';
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
@@ -46,7 +48,10 @@ class SnakeEatEggs {
     const middleware = [collisionDetection, selfEatingDetection];
     const store = createStore(
       snakeEatEggs,
-      applyMiddleware(...middleware),
+      composeWithDevTools(
+        // other store enhancers if any
+        applyMiddleware(...middleware),
+      ),
     );
     const {
       dispatch,

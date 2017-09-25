@@ -114,6 +114,7 @@ class Snake {
       } = this;
       this.actions.restoreSnake({ body });
       this.cancelMotionAnimation();
+      return
     }
 
     this.setRtl(rtl);
