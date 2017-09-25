@@ -1,12 +1,12 @@
 import React from 'react';
 
-import GluttonousSnakeCanvas from 'containers/game/GluttonousSnakeCanvas';
+import GluttonousSnake from 'containers/game/GluttonousSnake';
 
 class Game extends React.Component {
   render() {
     return (
       <div>
-        <GluttonousSnakeCanvas />
+        <GluttonousSnake />
       </div>
     );
   }

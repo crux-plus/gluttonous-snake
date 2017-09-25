@@ -2,9 +2,9 @@ import { bindActionCreators } from 'redux';
 
 import { chkTwoSqIn } from 'helpers/game/snakeEatEggs';
 
-import snakeActionCreators from 'actions/game/snake';
+import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/eggs';
+import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 
 import Rtl from 'components/game/SnakeEatEggs/Rtl';
 

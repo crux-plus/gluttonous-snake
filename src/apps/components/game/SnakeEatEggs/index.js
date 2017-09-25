@@ -6,11 +6,11 @@ import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
-import snakeActionCreators from 'actions/game/snake';
+import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/eggs';
+import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 
-import boundaryActionCreators from 'actions/game/boundary';
+import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
 import Rtl from './Rtl';
 

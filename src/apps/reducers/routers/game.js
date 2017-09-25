@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import canvas from 'reducers/components/common/canvas';
+import gluttonousSnake from 'reducers/components/game/gluttonousSnake';
 
 export default combineReducers({
-  canvas,
+  gluttonousSnake,
 });

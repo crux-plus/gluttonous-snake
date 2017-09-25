@@ -2,14 +2,16 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import GluttonousSnakeCanvas from 'components/game/GluttonousSnakeCanvas';
+import GluttonousSnake from 'components/game/GluttonousSnake';
 
 import canvasActionCreators from 'actions/common/canvas';
 
 function mapStateToProps(state, ownProps = {}) {
   const {
     game: {
-      canvas,
+      gluttonousSnake: {
+        canvas,
+      },
     },
   } = state;
   const {
@@ -35,4 +37,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GluttonousSnakeCanvas);
+export default connect(mapStateToProps, mapDispatchToProps)(GluttonousSnake);

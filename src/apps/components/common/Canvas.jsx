@@ -6,7 +6,7 @@ import React from 'react';
  * @public
  * @class
  */
-class Canvas extends React.Component {
+class Canvas extends React.PureComponent {
   /**
    * @constructor
    */
