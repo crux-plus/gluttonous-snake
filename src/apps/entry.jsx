@@ -14,6 +14,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // A collection of HTML element and attribute style-normalizations
 import 'normalize.css/normalize.css';
+import 'semantic-ui-css/semantic.css';
 import 'styles/entry.css';
 
 // Renders the first child <Route> or <Redirect> that matches the location.
