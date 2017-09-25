@@ -16,8 +16,6 @@ class Snake {
     const {
       size,
     } = this;
-    this.actions.transformSnake({ size });
-
     this.bindKeyboardEvent();
   }
 
@@ -26,7 +24,7 @@ class Snake {
    */
   static getDefaultOptions() {
     return {
-      size: 20,
+      size: 10,
       spread: 2,
       color: '#000',
       context: null,

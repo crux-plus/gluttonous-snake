@@ -78,7 +78,7 @@ function restoreSnake(state, action) {
 const initialState = fromJS({
   rtl: Rtl.None,
   length: 1,
-  size: 0,
+  size: 10,
   body: [
     {
       x: 0,

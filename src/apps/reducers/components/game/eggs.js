@@ -12,7 +12,7 @@ function transformEggs(state, action) {
 }
 
 const initialState = fromJS({
-  size: 0,
+  size: 10,
   location: {
     x: 0,
     y: 0,

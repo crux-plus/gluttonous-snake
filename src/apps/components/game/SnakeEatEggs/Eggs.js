@@ -13,7 +13,6 @@ class Eggs {
     const {
       size,
     } = this;
-    this.actions.transformEggs({ size });
   }
 
   /**
@@ -21,7 +20,7 @@ class Eggs {
    */
   static getDefaultOptions() {
     return {
-      size: 20,
+      size: 10,
       color: '#000',
       context: null,
    };
