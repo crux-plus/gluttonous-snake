@@ -1,19 +1,5 @@
 import { fromJS } from 'immutable';
 
-function useDefaultCanvas(state, action) {
-  const date = new Date();
-  const time = date.getTime();
-  const {
-    innerWidth: width,
-    innerHeight: height,
-  } = window;
-  return state.mergeDeep({
-    id: time,
-    width,
-    height,
-  });
-}
-
 function transformCanvas(state, action) {
   const {
     payload: {
@@ -38,11 +24,22 @@ function markCanvas(state, action) {
   });
 }
 
-const initialState = fromJS({
-  id: 0,
-  width: 0,
-  height: 0,
-});
+function getInitialState() {
+  const date = (new Date());
+  const id = date.getTime();
+  const {
+    innerWidth: width,
+    innerHeight: height,
+  } = window;
+  return {
+    id,
+    width,
+    height,
+  };
+}
+
+
+const initialState = fromJS(getInitialState());
 
 function canvas(state = initialState, action) {
   switch (action.type) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Dimmer, Loader } from 'semantic-ui-react';
 
-import GluttonousSnake from 'containers/game/GluttonousSnake';
+import GluttonousSnakeCanvas from 'containers/game/GluttonousSnakeCanvas';
 
 class Game extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class Game extends React.Component {
         <Dimmer active={true}>
           <Loader>Loading...</Loader>
         </Dimmer>
-        <GluttonousSnake />
+        <GluttonousSnakeCanvas />
       </div>
     );
   }

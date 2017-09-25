@@ -9,5 +9,4 @@ export default createActions({
     width,
     height,
   }),
-  USE_DEFAULT_CANVAS: null,
 });

@@ -8,7 +8,7 @@ import SnakeEatEggs from './SnakeEatEggs';
  * @public
  * @class
  */
-class GluttonousSnake extends Canvas {
+class GluttonousSnakeCanvas extends Canvas {
   /**
    * @method
    */
@@ -17,7 +17,10 @@ class GluttonousSnake extends Canvas {
     const {
       canvas: boundary,
     } = this.props;
-    const snakeEatEggs = new SnakeEatEggs({ context, boundary });
+    const snakeEatEggs = new SnakeEatEggs({
+       context,
+       boundary,
+     });
     const data = {
       context,
       snakeEatEggs,
@@ -30,12 +33,13 @@ class GluttonousSnake extends Canvas {
    */
   init() {
     this.initData();
+    this.draw();
   }
 
   /**
    * @method
    */
-  redraw() {
+  draw() {
     const {
       snakeEatEggs,
     } = this.data;
@@ -67,20 +71,9 @@ class GluttonousSnake extends Canvas {
   /**
    * @method
    */
-  componentWillMount() {
-    this.props.actions.useDefaultCanvas();
-  }
-
-  /**
-   * @method
-   */
-  componentDidUpdate() {
-    if (this.context != null) {
-      this.init();
-    }
-
-    this.redraw();
+  componentDidMount() {
+    this.init();
   }
 }
 
-export default GluttonousSnake;
+export default GluttonousSnakeCanvas;
