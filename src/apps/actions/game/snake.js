@@ -17,10 +17,10 @@ export default createActions({
     x,
     y,
   }),
-  RESTORE_SNAKE: ({ body }) => ({
+  RESTORE_SNAKE: ({ body=[] }) => ({
     body,
   }),
-  ADJUST_SNAKE: ({ spreed }) => ({
+  ADJUST_SNAKE: ({ spreed=0 }) => ({
     spreed,
   }),
 });
