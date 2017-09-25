@@ -20,7 +20,7 @@ class GluttonousSnakeCanvas extends Canvas {
     const snakeEatEggs = new SnakeEatEggs({
        context,
        boundary,
-     });
+    });
     const data = {
       context,
       snakeEatEggs,
