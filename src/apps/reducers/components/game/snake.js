@@ -13,6 +13,17 @@ function transformSnake(state, action) {
   });
 }
 
+function adjustSnake(state, action) {
+  const {
+    payload: {
+      spreed,
+    },
+  } = action;
+  return state.mergeDeep({
+    spreed,
+  });
+}
+
 function moveSnake(state, action) {
   const {
     payload: {
@@ -44,10 +55,13 @@ function increaseSnake(state, action) {
   let {
     length,
     body,
+    score,
   } = state.toJS();
   body.unshift(...locations);
   length = body.length;
+  score = score + 1;
   return state.mergeDeep({
+    score,
     length,
     body,
   });
@@ -77,7 +91,9 @@ function restoreSnake(state, action) {
 
 const initialState = fromJS({
   rtl: Rtl.None,
+  score: 1,
   length: 1,
+  spreed: 2,
   size: 10,
   body: [
     {

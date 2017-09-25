@@ -143,7 +143,7 @@ class Snake {
   /**
    * @method
    */
-  setLength(length) {
+  setLength(length, body) {
     if (this.length !== length) {
       this.length = length;
     }

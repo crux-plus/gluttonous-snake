@@ -6,98 +6,117 @@ import eggsActionCreators from 'actions/game/eggs';
 
 import Rtl from 'components/game/SnakeEatEggs/Rtl';
 
-function getIncLoc({ rtl, location, size, spreed=2 }) {
+import { chkTwoSqIn } from 'helpers/game/snakeEatEggs';
+
+/**
+ * @private
+ */
+function getIncLocs({ rtl, location, size, spreed=2 }) {
   const count = Math.floor(size / spreed);
-  const {
-    x,
-    y,
-  } = location;
-  const locations = new Array(count);
-  locations.fill(0);
+  const locations = new Array(count - 1);
+  locations.fill(location);
   switch (rtl) {
     case Rtl.Down:
-      locations.forEach((_, index) => {
-        const newY = y + spreed * index;
+      locations.forEach((location, index) => {
+        let {
+          x,
+          y,
+        } = location;
+        y += spreed * (index + 1);
         locations[index] = {
           x,
-          y: newY,
+          y,
         };
       })
       break;
     case Rtl.Left:
-      locations.forEach((_, index) => {
-        const newX = x + spreed * index;
+      locations.forEach((location, index) => {
+        let {
+          x,
+          y,
+        } = location;
+        x -= spreed * (index + 1);
         locations[index] = {
-          x: newX,
+          x,
           y,
         };
       })
       break;
     case Rtl.Up:
-      locations.forEach((_, index) => {
-        const newY = y - spreed * index;
+      locations.forEach((location, index) => {
+        let {
+          x,
+          y,
+        } = location;
+        y -= spreed * (index + 1);
         locations[index] = {
           x,
-          y: newY,
+          y,
         };
       })
       break;
     case Rtl.Right:
-      locations.forEach((_, index) => {
-        const newX = x + spreed * index;
+      locations.forEach((location, index) => {
+        let {
+          x,
+          y,
+        } = location;
+        x += spreed * (index + 1);
         locations[index] = {
-          x: newX,
+          x,
           y,
         };
       })
       break;
   }
-  locations.shift();
   locations.reverse();
   return locations;
 }
 
+/**
+ * @public
+ */
 function collisionDetection({ getState, dispatch }) {
   return next => action => {
     if (action.type === 'MOVE_SNAKE') {
       const state = getState();
       const {
         eggs: {
-          size: eggsSize,
+          size: size1,
           location: {
-            x: eggsX,
-            y: eggsY,
+            x: x1,
+            y: y1,
           },
         },
         snake: {
           rtl,
-          size: snakeSize,
+          size: size2,
           body: [location],
         },
       } = state.toJS();
       const {
-        x: snakeX,
-        y: snakeY,
+        x: x2,
+        y: y2,
       } = location;
-      if ((
-          ((eggsY + eggsSize) > snakeY) &&
-          ((snakeY + snakeSize) > eggsY)
-        ) &&
-        (
-          ((snakeX + snakeSize) > eggsX) &&
-          ((eggsX + eggsSize) > snakeX)
-      )) {
+      const square1 = {
+        x: x1,
+        y: y1,
+        size: size1
+      };
+      const square2 = {
+        x: x2,
+        y: y2,
+        size: size2,
+      };
+      if (chkTwoSqIn(square1, square2)) {
         const actions = bindActionCreators({
           ...snakeActionCreators,
           ...eggsActionCreators,
         }, dispatch);
         actions.createEgg();
-        let location = {
-          x: snakeX,
-          y: snakeY,
-        };
-        const size = snakeSize;
-        const locations = getIncLoc({ location, size, rtl });
+
+        const size = size2;
+        const locations = getIncLocs({ location, size, rtl });
         actions.increaseSnake({ locations });
       }
     }
@@ -105,6 +124,39 @@ function collisionDetection({ getState, dispatch }) {
   }
 }
 
+/**
+ * @public
+ */
+function selfEatingDetection({ getState, dispatch }) {
+  return next => action => {
+    if (action.type === 'MOVE_SNAKE') {
+      const state = getState();
+      const {
+        snake: {
+          spreed,
+          size,
+          body,
+        },
+      } = state.toJS();
+      const head = body.shift();
+      const square1 = {
+        x: head.x,
+        y: head.y,
+        size,
+      };
+      const step = size / spreed;
+      body.splice(0, step - 1);
+      body.some((location) => {
+        if (head.x === location.x && head.y === location.y) {
+          return !alert('eat');
+        }
+      });
+    }
+    return next(action);
+  }
+}
+
 export {
   collisionDetection,
+  selfEatingDetection,
 };

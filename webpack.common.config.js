@@ -94,6 +94,7 @@ export default {
     alias: {
       'containers': 'containers',
       'components': 'components',
+      'helpers': 'helpers',
       'actions': 'actions',
       'routers': 'routers',
       'styles': 'styles',
