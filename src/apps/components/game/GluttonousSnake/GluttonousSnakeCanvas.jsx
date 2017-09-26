@@ -19,8 +19,10 @@ class GluttonousSnakeCanvas extends Canvas {
     const {
       width,
       height,
+      actions,
     } = this.props;
     const snakeEatEggs = new SnakeEatEggs({
+      actions,
       context,
       boundary: {
         width,
@@ -69,7 +71,6 @@ class GluttonousSnakeCanvas extends Canvas {
    * @constructor
    */
   constructor(props) {
-    console.log(props);
     super(props);
   }
 

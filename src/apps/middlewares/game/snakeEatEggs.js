@@ -115,13 +115,8 @@ function collisionDetection({ getState, dispatch }) {
       if (chkTwoSqIn(square1, square2)) {
         const size = size2;
         const locations = getIncLocs({ location, size, rtl });
-
-        const actions = bindActionCreators({
-          ...snakeActionCreators,
-          ...eggsActionCreators,
-        }, dispatch);
-        actions.createEgg();
-        actions.increaseSnake({ locations });
+        this.actions.createEgg();
+        this.actions.increaseSnake({ locations });
       }
     }
     return next(action);
@@ -152,10 +147,7 @@ function selfEatingDetection({ getState, dispatch }) {
       body.splice(0, step - 1);
       body.some((location) => {
         if (head.x === location.x && head.y === location.y) {
-          const actions = bindActionCreators({
-            ...gameActionCreators,
-          }, dispatch);
-          actions.changeGameStatus({ status: Status.END });
+          this.actions.changeGameStatus({ status: Status.END });
         }
       });
     }

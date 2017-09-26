@@ -25,7 +25,8 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor({ context=null, boundary=null }) {
+  constructor({ context=null, boundary=null, actions=null }) {
+    this.actions = actions;
     this.context = context;
 
     this.initStore();
@@ -45,7 +46,7 @@ class SnakeEatEggs {
    * @method
    */
   initStore() {
-    const middleware = [collisionDetection, selfEatingDetection];
+    const middleware = [collisionDetection.bind(this), selfEatingDetection.bind(this)];
     const store = createStore(
       snakeEatEggs,
       composeWithDevTools(
@@ -56,10 +57,18 @@ class SnakeEatEggs {
     const {
       dispatch,
     } = store;
-    const actions = bindActionCreators({
+    const {
+      actions: outerActions,
+    } = this;
+    const innerActions = bindActionCreators({
+      ...eggsActionCreators,
+      ...snakeActionCreators,
       ...boundaryActionCreators,
     }, dispatch);
-    this.actions = actions;
+    this.actions = {
+      ...outerActions,
+      ...innerActions,
+    };
     this.store = store;
   }
 
