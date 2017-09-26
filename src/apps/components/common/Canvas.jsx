@@ -14,18 +14,14 @@ class Canvas extends React.PureComponent {
     super(props);
 
     const {
-      canvas: {
-        id,
-        width,
-        height,
-      },
+      id,
+      width,
+      height,
     } = props;
     this.state = {
-      canvas: {
-        width,
-        height,
-        id: Canvas.fmtId(id),
-      },
+      width,
+      height,
+      id: Canvas.fmtId(id),
     };
   }
 
@@ -43,18 +39,14 @@ class Canvas extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     this.setState((prevState, props) => {
       const {
-        canvas: {
-          id,
-          width,
-          height,
-        },
+        id,
+        width,
+        height,
       } = props;
       return {
-        canvas: {
-          width,
-          height,
-          id: Canvas.fmtId(id),
-        }
+        width,
+        height,
+        id: Canvas.fmtId(id),
       };
     });
   }
@@ -65,9 +57,9 @@ class Canvas extends React.PureComponent {
   render() {
     return (
       <canvas
-        id={this.state.canvas.id}
-        width={this.state.canvas.width}
-        height={this.state.canvas.height}
+        id={this.state.id}
+        width={this.state.width}
+        height={this.state.height}
       >
       </canvas>
     );
@@ -76,21 +68,16 @@ class Canvas extends React.PureComponent {
 
 // Specifies the verification rule for props:
 Canvas.propTypes = {
-  // An object taking on a particular shape
-  canvas: PropTypes.shape({
-    id: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
+  id: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 // Specifies the default values for props:
 Canvas.defaultProps = {
-  canvas: {
-    id: 0,
-    width: 0,
-    height: 0,
-  },
+  id: 0,
+  width: 0,
+  height: 0,
 };
 
 export default Canvas;

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import { Dimmer, Loader } from 'semantic-ui-react';
+import Loading from './Loading';
 
 import GluttonousSnakeCanvas from './GluttonousSnakeCanvas';
 
@@ -50,16 +50,18 @@ class GluttonousSnake extends React.PureComponent {
   render() {
     return (
       <div>
-        <Dimmer active={this.state.status.ready}>
-          <Loader>Loading...</Loader>
-        </Dimmer>
-        <GluttonousSnakeCanvas {...this.props} />
-        <div></div>
+        <Loading
+          {...this.props.status}
+          actions={this.props.actions}
+        />
+        <GluttonousSnakeCanvas
+          {...this.props.canvas}
+          actions={this.props.actions}
+        />
       </div>
     );
   }
 }
-
 
 // Specifies the verification rule for props:
 GluttonousSnake.propTypes = {

@@ -15,17 +15,20 @@ class GluttonousSnakeCanvas extends Canvas {
   initData() {
     const context = this.getContext();
     const {
-      canvas: boundary,
+      width,
+      height,
     } = this.props;
     const snakeEatEggs = new SnakeEatEggs({
-       context,
-       boundary,
+      context,
+      boundary: {
+        width,
+        height,
+      },
      });
-    const data = {
+    this.data = {
       context,
       snakeEatEggs,
     };
-    this.data = data;
   }
 
   /**
@@ -52,9 +55,7 @@ class GluttonousSnakeCanvas extends Canvas {
    */
   getContext() {
     const {
-      canvas: {
-        id,
-      },
+      id,
     } = this.state;
 
     const canvasEl = document.querySelector(`#${id}`);
