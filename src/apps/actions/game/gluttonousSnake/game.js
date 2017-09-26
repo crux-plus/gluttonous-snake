@@ -5,4 +5,5 @@ export default createActions({
   CHANGE_GAME_STATUS: ({ status }) => ({
     status,
   }),
+  RESET_GAME: null,
 });

@@ -46,8 +46,7 @@ class Confirm extends React.PureComponent {
    */
   render() {
     return (
-      //<Modal open={this.state.open} basic size='small'>
-      <Modal open={true} basic size='small'>
+      <Modal open={this.state.open} basic size='small'>
         <Header icon='frown' content='Sorry, Game over !!' />
         <Modal.Content>
           <p>You're biting yourself, would you want try again?</p>
@@ -68,6 +67,7 @@ class Confirm extends React.PureComponent {
    * @method
    */
   handleAgree(event) {
+    this.props.actions.resetGame();
   }
 
   /**

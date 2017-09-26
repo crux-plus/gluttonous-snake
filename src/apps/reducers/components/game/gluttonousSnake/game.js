@@ -21,6 +21,8 @@ export default function status(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_GAME_STATUS':
       return changeGameStatus(state, action);
+    case 'RESET_GAME':
+      return initialState;
     default:
       return state;
   }

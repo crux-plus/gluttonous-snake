@@ -80,6 +80,19 @@ class GluttonousSnakeCanvas extends Canvas {
   componentDidMount() {
     this.init();
   }
+
+  /**
+   * @method
+   */
+  componentWillUpdate(nextProps, nextState) {
+    const {
+      status,
+    } = nextProps;
+    console.log(nextProps);
+    if (status === Status.PENDING) {
+      this.init();
+    }
+  }
 }
 
 export default GluttonousSnakeCanvas;
