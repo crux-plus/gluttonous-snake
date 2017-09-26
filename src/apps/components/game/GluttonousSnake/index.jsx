@@ -4,6 +4,10 @@ import React from 'react';
 
 import Loading from './Loading';
 
+import Confirm from './Confirm';
+
+import Status from './Status';
+
 import GluttonousSnakeCanvas from './GluttonousSnakeCanvas';
 
 /**
@@ -24,6 +28,7 @@ class GluttonousSnake extends React.PureComponent {
   render() {
     return (
       <div>
+        <Confirm />
         <Loading
           {...this.props.game}
           actions={this.props.actions}
@@ -40,8 +45,8 @@ class GluttonousSnake extends React.PureComponent {
 // Specifies the verification rule for props:
 GluttonousSnake.propTypes = {
   // An object taking on a particular shape
-  status: PropTypes.shape({
-    ready: PropTypes.bool,
+  game: PropTypes.shape({
+    status: PropTypes.number,
   }),
   // An object taking on a particular shape
   canvas: PropTypes.shape({
@@ -53,8 +58,8 @@ GluttonousSnake.propTypes = {
 
 // Specifies the default values for props:
 GluttonousSnake.defaultProps = {
-  status: {
-    ready: false,
+  game: {
+    status: Status.PENDING,
   },
   canvas: {
     id: 0,

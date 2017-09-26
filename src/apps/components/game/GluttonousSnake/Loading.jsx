@@ -52,12 +52,12 @@ class Loading extends React.PureComponent {
 
 // Specifies the verification rule for props:
 Loading.propTypes = {
-  ready: PropTypes.bool,
+  status: PropTypes.bool,
 };
 
 // Specifies the default values for props:
 Loading.defaultProps = {
-  ready: false,
+  status: false,
 };
 
 export default Loading;
