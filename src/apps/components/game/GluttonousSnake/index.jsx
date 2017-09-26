@@ -28,7 +28,10 @@ class GluttonousSnake extends React.PureComponent {
   render() {
     return (
       <div>
-        <Confirm />
+        <Confirm
+          {...this.props.game}
+          actions={this.props.actions}
+        />
         <Loading
           {...this.props.game}
           actions={this.props.actions}

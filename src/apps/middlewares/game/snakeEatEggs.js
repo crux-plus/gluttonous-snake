@@ -6,7 +6,11 @@ import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
 import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 
+import gameActionCreators from 'actions/game/gluttonousSnake/game';
+
 import Rtl from 'components/game/SnakeEatEggs/Rtl';
+
+import Status from 'components/game/GluttonousSnake/Status';
 
 /**
  * @private
@@ -109,14 +113,14 @@ function collisionDetection({ getState, dispatch }) {
         size: size2,
       };
       if (chkTwoSqIn(square1, square2)) {
+        const size = size2;
+        const locations = getIncLocs({ location, size, rtl });
+
         const actions = bindActionCreators({
           ...snakeActionCreators,
           ...eggsActionCreators,
         }, dispatch);
         actions.createEgg();
-
-        const size = size2;
-        const locations = getIncLocs({ location, size, rtl });
         actions.increaseSnake({ locations });
       }
     }
@@ -148,7 +152,10 @@ function selfEatingDetection({ getState, dispatch }) {
       body.splice(0, step - 1);
       body.some((location) => {
         if (head.x === location.x && head.y === location.y) {
-          return !alert('eat');
+          const actions = bindActionCreators({
+            ...gameActionCreators,
+          }, dispatch);
+          actions.changeGameStatus({ status: Status.END });
         }
       });
     }

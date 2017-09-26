@@ -69,6 +69,7 @@ class GluttonousSnakeCanvas extends Canvas {
    * @constructor
    */
   constructor(props) {
+    console.log(props);
     super(props);
   }
 
