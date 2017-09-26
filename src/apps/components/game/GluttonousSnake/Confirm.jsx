@@ -22,6 +22,9 @@ class Confirm extends React.PureComponent {
     this.state = {
       open: (status === Status.END),
     };
+
+    this.handleAgree = this.handleAgree.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   /**
@@ -43,21 +46,34 @@ class Confirm extends React.PureComponent {
    */
   render() {
     return (
-      <Modal open={this.state.open} basic size='small'>
-        <Header icon='archive' content='Archive Old Messages' />
+      //<Modal open={this.state.open} basic size='small'>
+      <Modal open={true} basic size='small'>
+        <Header icon='frown' content='Sorry, Game over !!' />
         <Modal.Content>
-          <p>Your inbox is getting full, would you like us to enable automatic archiving of old messages?</p>
+          <p>You're biting yourself, would you want try again?</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button basic color='red' inverted>
-            <Icon name='remove' /> No
+          <Button onClick={this.handleAgree} color='green' inverted>
+            <Icon name='checkmark' /> Of Course Yes
           </Button>
-          <Button color='green' inverted>
-            <Icon name='checkmark' /> Yes
+          <Button onClick={this.handleCancel} color='red' inverted>
+            <Icon name='remove' /> No, Thanks
           </Button>
         </Modal.Actions>
       </Modal>
     );
+  }
+
+  /**
+   * @method
+   */
+  handleAgree(event) {
+  }
+
+  /**
+   * @method
+   */
+  handleCancel(event) {
   }
 }
 
