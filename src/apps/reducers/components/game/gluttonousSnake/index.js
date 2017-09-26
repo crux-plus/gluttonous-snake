@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 
 import canvas from 'reducers/components/common/canvas';
 
-import status from './status';
+import game from './game';
 
 export default combineReducers({
-  status,
+  game,
   canvas,
 });

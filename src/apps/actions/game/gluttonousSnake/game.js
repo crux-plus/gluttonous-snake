@@ -2,7 +2,7 @@
 import { createActions } from 'redux-actions';
 
 export default createActions({
-  CHANGE_READY_STATUS: ({ ready }) => ({
-    ready,
+  CHANGE_GAME_STATUS: ({ status }) => ({
+    status,
   }),
 });

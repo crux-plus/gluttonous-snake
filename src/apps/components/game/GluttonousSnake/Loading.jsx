@@ -4,6 +4,8 @@ import React from 'react';
 
 import { Dimmer, Loader, } from 'semantic-ui-react';
 
+import Status from './Status';
+
 /**
  * @public
  * @class
@@ -15,10 +17,10 @@ class Loading extends React.PureComponent {
   constructor(props) {
     super(props);
     const {
-      ready,
+      status,
     } = this.props;
     this.state = {
-      ready: !ready,
+      active: (status === Status.PEDING),
     };
   }
 
@@ -28,10 +30,10 @@ class Loading extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     this.setState((prevState, props) => {
       const {
-        ready,
+        status,
       } = props;
       return {
-        ready: !ready,
+        active: (status === Status.PEDING),
       };
     });
   }
@@ -41,7 +43,7 @@ class Loading extends React.PureComponent {
    */
   render() {
     return (
-      <Dimmer active={this.state.ready}>
+      <Dimmer active={this.state.active}>
         <Loader>Loading...</Loader>
       </Dimmer>
     );

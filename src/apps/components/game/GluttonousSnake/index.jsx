@@ -16,32 +16,6 @@ class GluttonousSnake extends React.PureComponent {
    */
   constructor(props) {
     super(props);
-    const {
-      ready,
-    } = this.props;
-    this.state = {
-      status: {
-        ready: !ready,
-      },
-    };
-  }
-
-  /**
-   * @method
-   */
-  componentWillReceiveProps(nextProps) {
-    this.setState((prevState, props) => {
-      const {
-        status: {
-          ready,
-        },
-      } = props;
-      return {
-        status: {
-          ready: !ready,
-        },
-      };
-    });
   }
 
   /**
@@ -51,7 +25,7 @@ class GluttonousSnake extends React.PureComponent {
     return (
       <div>
         <Loading
-          {...this.props.status}
+          {...this.props.game}
           actions={this.props.actions}
         />
         <GluttonousSnakeCanvas

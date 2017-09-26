@@ -2,7 +2,9 @@ import React from 'react';
 
 import Canvas from 'components/common/Canvas';
 
-import SnakeEatEggs from './SnakeEatEggs';
+import SnakeEatEggs from '../SnakeEatEggs';
+
+import Status from './Status';
 
 /**
  * @public
@@ -37,7 +39,7 @@ class GluttonousSnakeCanvas extends Canvas {
   init() {
     this.initData();
     this.draw();
-    this.props.actions.changeReadyStatus({ ready: true });
+    this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
   }
 
   /**

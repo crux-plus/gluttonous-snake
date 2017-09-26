@@ -6,30 +6,30 @@ import GluttonousSnake from 'components/game/GluttonousSnake';
 
 import canvasActionCreators from 'actions/common/canvas';
 
-import statusActionCreators from 'actions/game/gluttonousSnake/status';
+import gameActionCreators from 'actions/game/gluttonousSnake/game';
 
 function mapStateToProps(state, ownProps = {}) {
   const {
     routers: {
       game: {
         gluttonousSnake: {
-          status,
+          game,
           canvas,
         },
       },
     },
   } = state.toJS();
   const {
-    ready,
-  } = status.toJS();
+    status,
+  } = game.toJS();
   const {
     id,
     width,
     height,
   } = canvas.toJS();
   return {
-    status: {
-      ready,
+    game: {
+      status,
     },
     canvas: {
       id,
@@ -43,7 +43,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        ...statusActionCreators,
+        ...gameActionCreators,
         ...canvasActionCreators,
       },
       dispatch,
