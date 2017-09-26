@@ -29,7 +29,9 @@ class GluttonousSnakeCanvas extends Canvas {
         height,
       },
      });
+    const isFresh = true;
     this.data = {
+      isFresh,
       context,
       snakeEatEggs,
     };
@@ -40,8 +42,8 @@ class GluttonousSnakeCanvas extends Canvas {
    */
   init() {
     this.initData();
-    this.draw();
     this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
+    this.draw();
   }
 
   /**
@@ -52,6 +54,18 @@ class GluttonousSnakeCanvas extends Canvas {
       snakeEatEggs,
     } = this.data;
     snakeEatEggs.draw();
+    this.data.isFresh = false;
+  }
+
+  clear() {
+    const {
+      width,
+      height,
+    } = this.props;
+    const {
+      snakeEatEggs,
+    } = this.data;
+    snakeEatEggs.clear();
   }
 
   /**
@@ -84,12 +98,15 @@ class GluttonousSnakeCanvas extends Canvas {
   /**
    * @method
    */
-  componentWillUpdate(nextProps, nextState) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       status,
-    } = nextProps;
-    console.log(nextProps);
-    if (status === Status.PENDING) {
+    } = this.props;
+    const {
+      isFresh,
+    } = this.data;
+    if (status === Status.PENDING && !isFresh) {
+      this.clear();
       this.init();
     }
   }

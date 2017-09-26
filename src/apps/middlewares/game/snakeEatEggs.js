@@ -137,19 +137,22 @@ function selfEatingDetection({ getState, dispatch }) {
           body,
         },
       } = state.toJS();
-      const head = body.shift();
-      const square1 = {
-        x: head.x,
-        y: head.y,
-        size,
-      };
       const step = size / spreed;
-      body.splice(0, step - 1);
-      body.some((location) => {
-        if (head.x === location.x && head.y === location.y) {
-          this.actions.changeGameStatus({ status: Status.END });
-        }
-      });
+      if (body.length > step) {
+        let head = body.shift();
+        const square1 = {
+          x: head.x,
+          y: head.y,
+          size,
+        };
+        body.splice(0, step - 1);
+        body.some((location) => {
+          if (head.x === location.x && head.y === location.y) {
+            this.actions.changeGameStatus({ status: Status.END });
+            return true;
+          }
+        });
+      }
     }
     return next(action);
   }

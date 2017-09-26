@@ -38,6 +38,7 @@ class GluttonousSnake extends React.PureComponent {
         />
         <GluttonousSnakeCanvas
           {...this.props.canvas}
+          status={this.props.game.status}
           actions={this.props.actions}
         />
       </div>

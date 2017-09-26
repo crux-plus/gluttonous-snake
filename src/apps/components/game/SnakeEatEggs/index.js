@@ -12,6 +12,8 @@ import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 
 import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
+import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
+
 import Rtl from './Rtl';
 
 import Eggs from './Eggs';
@@ -64,6 +66,7 @@ class SnakeEatEggs {
       ...eggsActionCreators,
       ...snakeActionCreators,
       ...boundaryActionCreators,
+      ...snakeEatEggsActionCreators,
     }, dispatch);
     this.actions = {
       ...outerActions,
@@ -117,6 +120,16 @@ class SnakeEatEggs {
     } = this;
     eggs.create();
     snake.move();
+  }
+
+  clear() {
+    const {
+      eggs,
+      snake,
+    } = this;
+    eggs.clear();
+    snake.destroy();
+    this.actions.resetSnakeEatEggs();
   }
 }
 

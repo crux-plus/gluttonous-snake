@@ -53,10 +53,12 @@ const initialState = fromJS({
   },
   snake: {
     size: 0,
-    location: {
-      x: 0,
-      y: 0,
-    },
+    body:[
+      {
+        x: 0,
+        y: 0,
+      },
+    ],
   },
 });
 
@@ -64,6 +66,8 @@ export default function crossSliceReducer(state = initialState, action) {
   switch (action.type) {
     case 'CREATE_EGG':
       return createEgg(state, action);
+    case 'RESET_SNAKE_EAT_EGGS':
+      return initialState;
     default:
       return state;
   }

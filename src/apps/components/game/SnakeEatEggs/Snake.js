@@ -8,6 +8,9 @@ class Snake {
    * @constructor
    */
   constructor(options = { size: 10, spread: 2, color: '#000' }) {
+    this.step = this.step.bind(this);
+    this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
+
     const defaultOptitons = Snake.getDefaultOptions();
     const instances = Snake.getInstances();
 
@@ -103,6 +106,7 @@ class Snake {
       },
     } = state.toJS();
     const [location] = body;
+    this.setRtl(rtl);
     if (Snake.boundaryDetection({ boundary, size, location })) {
       this.clear();
       this.setLength(length, body);
@@ -114,10 +118,7 @@ class Snake {
       } = this;
       this.actions.restoreSnake({ body });
       this.cancelMotionAnimation();
-      return
     }
-
-    this.setRtl(rtl);
   }
 
   /**
@@ -222,9 +223,7 @@ class Snake {
       this.rtl = rtl;
       this.motionOperate = this.getMotionOperate();
 
-      if (this.requestID !== -1) {
-        this.cancelMotionAnimation();
-      }
+      this.cancelMotionAnimation();
       this.requestMotionAnimation();
     }
   }
@@ -232,16 +231,36 @@ class Snake {
   /**
    * @method
    */
-  bindKeyboardEvent() {
-    window.addEventListener('keydown', (event) => {
-      const {
-        code,
-      } = event;
-      const rtl = Rtl.fromCode(code);
-      this.translate(rtl);
-    });
+  removeKeyboardEvent() {
+    window.removeEventListener('keydown', this.handleKeyboardEvent);
   }
 
+  /**
+   * @method
+   */
+  bindKeyboardEvent() {
+    window.addEventListener('keydown', this.handleKeyboardEvent);
+  }
+
+  /**
+   * @method
+   */
+  handleKeyboardEvent(event) {
+    const {
+      code,
+    } = event;
+    const rtl = Rtl.fromCode(code);
+    this.translate(rtl);
+  }
+
+  /**
+   * @method
+   */
+  destroy() {
+    this.cancelMotionAnimation();
+    this.removeKeyboardEvent();
+    this.clear();
+  }
 
   /**
    * @method
@@ -293,12 +312,16 @@ class Snake {
   /**
    * @method
    */
+  step() {
+    this.moveStep();
+    this.requestID = window.requestAnimationFrame(this.step);
+  }
+
+  /**
+   * @method
+   */
   requestMotionAnimation() {
-    const step = () => {
-      this.moveStep();
-      this.requestID = window.requestAnimationFrame(step);
-    };
-    this.requestID = window.requestAnimationFrame(step);
+    this.requestID = requestAnimationFrame(this.step);
   }
 
   /**
@@ -309,7 +332,7 @@ class Snake {
       requestID,
     } = this;
     if (requestID != -1) {
-      window.cancelAnimationFrame(requestID);
+      cancelAnimationFrame(requestID);
     }
   }
 }
