@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 
 import gluttonousSnake from 'reducers/components/game/gluttonousSnake';
 

@@ -34,6 +34,7 @@ class GluttonousSnakeCanvas extends Canvas {
   init() {
     this.initData();
     this.draw();
+    this.props.actions.changeReadyStatus({ ready: true });
   }
 
   /**

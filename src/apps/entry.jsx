@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 // Predictable state container for JavaScript apps.
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -31,7 +32,7 @@ const middleware = routerMiddleware(history);
 const store = createStore(
   combineReducers({
     routing: routerReducer,
-    ...routers,
+    routers,
   }),
   composeWithDevTools(
     // other store enhancers if any
