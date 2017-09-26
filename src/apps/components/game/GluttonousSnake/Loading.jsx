@@ -20,7 +20,7 @@ class Loading extends React.PureComponent {
       status,
     } = this.props;
     this.state = {
-      active: (status === Status.PEDING),
+      active: (status === Status.PENDING),
     };
   }
 
@@ -33,7 +33,7 @@ class Loading extends React.PureComponent {
         status,
       } = props;
       return {
-        active: (status === Status.PEDING),
+        active: (status === Status.PENDING),
       };
     });
   }
