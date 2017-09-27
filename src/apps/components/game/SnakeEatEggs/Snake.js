@@ -96,7 +96,6 @@ class Snake {
       boundary,
       snake: {
         rtl,
-        length,
         size,
         body,
       },
@@ -104,7 +103,6 @@ class Snake {
     const [location] = body;
     this.setRtl(rtl);
     this.setSize(size);
-    this.setLength(length);
     if (Snake.boundaryDetection({ boundary, size, location })) {
       this.clear();
       this.setBody(body);
@@ -113,7 +111,6 @@ class Snake {
       const {
         body,
       } = this;
-      this.cancelMotionAnimation();
       this.actions.restoreSnake({ body });
     }
   }
@@ -137,18 +134,11 @@ class Snake {
   /**
    * @method
    */
-  setLength(length) {
-    if (this.length !== length) {
-      this.length = length;
-    }
-  }
-
-  /**
-   * @method
-   */
-  checkRev(rtl) {
+  isRev(rtl) {
     const {
-      length,
+      body: {
+        length,
+      },
     } = this;
     let flag = false;
     if ((length > 1) && (rtl === Rtl.rev(this.rtl))) {
@@ -216,7 +206,7 @@ class Snake {
    * @method
    */
   translate(rtl) {
-    if ((rtl !== Rtl.None) && (!this.checkRev(rtl))) {
+    if ((rtl !== Rtl.None) && (!this.isRev(rtl))) {
       this.actions.translateSnake({ rtl });
     }
   }
@@ -317,14 +307,14 @@ class Snake {
    */
   step() {
     this.moveStep();
-    this.requestID = window.requestAnimationFrame(this.step);
+    this.requestID = window.requestAnimationFrame(this.step.bind(this));
   }
 
   /**
    * @method
    */
   requestMotionAnimation() {
-    this.requestID = requestAnimationFrame(this.step);
+    this.requestID = window.requestAnimationFrame(this.step.bind(this));
   }
 
   /**
@@ -334,8 +324,8 @@ class Snake {
     const {
       requestID,
     } = this;
-    if (requestID != -1) {
-      cancelAnimationFrame(requestID);
+    if (requestID !== -1) {
+      window.cancelAnimationFrame(requestID);
     }
   }
 }

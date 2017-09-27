@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
+import { collisionDetection, selfEatingDetection, boundaryProcess } from 'middlewares/game/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
@@ -35,7 +35,7 @@ class SnakeEatEggs {
 
     this.resizeBoundary();
     this.bindSubscribe();
-    this.eggs.create();
+    this.eggs.lay();
   }
 
   resizeBoundary() {
@@ -50,7 +50,11 @@ class SnakeEatEggs {
    * @method
    */
   initStore() {
-    const middleware = [collisionDetection.bind(this), selfEatingDetection.bind(this)];
+    const middleware = [
+      collisionDetection.bind(this),
+      selfEatingDetection.bind(this),
+      boundaryProcess.bind(this),
+    ];
     const store = createStore(
       snakeEatEggs,
       composeWithDevTools(
@@ -120,7 +124,7 @@ class SnakeEatEggs {
     snake.reset();
     eggs.reset();
     this.actions.resetSnakeEatEggs();
-    eggs.create();
+    eggs.lay();
   }
 }
 

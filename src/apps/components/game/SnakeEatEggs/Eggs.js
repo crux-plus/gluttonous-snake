@@ -61,7 +61,7 @@ class Eggs {
   /**
    * @method
    */
-  create() {
+  lay() {
     this.actions.createEgg();
   }
 
@@ -89,7 +89,7 @@ class Eggs {
    */
   reset() {
     this.clear();
-    this.create();
+    this.lay();
   }
 
   /**
