@@ -116,6 +116,9 @@ class SnakeEatEggs {
     this.eggs = new Eggs({ context, actions });
   }
 
+  /**
+   * @method
+   */
   reset() {
     const {
       eggs,
@@ -125,6 +128,16 @@ class SnakeEatEggs {
     eggs.reset();
     this.actions.resetSnakeEatEggs();
     eggs.lay();
+  }
+
+  /**
+   * @method
+   */
+  pause() {
+    const {
+      snake,
+    } = this;
+    snake.pause();
   }
 }
 

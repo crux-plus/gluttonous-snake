@@ -8,7 +8,6 @@ class Snake {
    * @constructor
    */
   constructor(options = { size: 10, spread: 2, color: '#000' }) {
-    this.step = this.step.bind(this);
     this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
 
     const defaultOptitons = Snake.getDefaultOptions();
@@ -37,6 +36,7 @@ class Snake {
    */
   static getInstances() {
     return {
+      status: false,
       requestID: -1,
       boundary: null,
       motionOperate: null,
@@ -255,6 +255,7 @@ class Snake {
   reset() {
     this.cancelMotionAnimation();
     this.clear();
+    this.bindKeyboardEvent();
   }
 
   /**
@@ -272,6 +273,22 @@ class Snake {
       } = location;
       this.context.clearRect(x, y, size, size);
     });
+  }
+
+  /**
+   * @method
+   */
+  pause() {
+    this.removeKeyboardEvent();
+    this.cancelMotionAnimation();
+  }
+
+  /**
+   * @method
+   */
+  resume() {
+    this.requestMotionAnimation();
+    this.bindKeyboardEvent();
   }
 
   /**
@@ -305,16 +322,15 @@ class Snake {
   /**
    * @method
    */
-  step() {
-    this.moveStep();
-    this.requestID = window.requestAnimationFrame(this.step.bind(this));
-  }
-
-  /**
-   * @method
-   */
   requestMotionAnimation() {
-    this.requestID = window.requestAnimationFrame(this.step.bind(this));
+    const step = () => {
+      if (!this.status) {
+        this.moveStep();
+        this.requestID = requestAnimationFrame(step);
+      }
+    };
+    this.status = false;
+    this.requestID = requestAnimationFrame(step);
   }
 
   /**
@@ -325,8 +341,9 @@ class Snake {
       requestID,
     } = this;
     if (requestID !== -1) {
-      window.cancelAnimationFrame(requestID);
+      cancelAnimationFrame(requestID);
     }
+    this.status = true;
   }
 }
 

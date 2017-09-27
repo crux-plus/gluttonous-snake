@@ -45,16 +45,6 @@ class GluttonousSnakeCanvas extends Canvas {
   /**
    * @method
    */
-  reset() {
-    const {
-      snakeEatEggs,
-    } = this.data;
-    snakeEatEggs.reset();
-  }
-
-  /**
-   * @method
-   */
   getContext() {
     const {
       id,
@@ -85,11 +75,19 @@ class GluttonousSnakeCanvas extends Canvas {
    */
   componentDidUpdate(prevProps, prevState) {
     const {
+      snakeEatEggs,
+    } = this.data;
+    const {
+      actions,
       status,
     } = this.props;
-    if (status === Status.PENDING) {
-      this.reset();
-      this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
+    switch (status) {
+      case Status.PENDING:
+        snakeEatEggs.reset();
+        actions.changeGameStatus({ status: Status.UNDERWAY });
+        break;
+      case Status.END:
+        snakeEatEggs.pause();
     }
   }
 }
