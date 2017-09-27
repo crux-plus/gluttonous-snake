@@ -46,12 +46,14 @@ class Eggs {
     this.clear();
     const {
       eggs: {
+        size,
         location: {
           x,
           y,
         },
       },
     } = state.toJS();
+    this.setSize(size);
     this.setLocation({ x, y });
     this.draw();
   }
@@ -66,11 +68,28 @@ class Eggs {
   /**
    * @method
    */
+  setSize(size) {
+    if (this.size !== size) {
+      this.size = size;
+    }
+  }
+
+  /**
+   * @method
+   */
   setLocation({ x, y }) {
     this.location = {
       x,
       y,
     };
+  }
+
+  /**
+   * @method
+   */
+  reset() {
+    this.clear();
+    this.create();
   }
 
   /**

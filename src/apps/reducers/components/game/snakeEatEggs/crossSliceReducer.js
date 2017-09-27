@@ -39,20 +39,37 @@ function createEgg(state, action) {
   });
 }
 
+function resetSnakeEatEggs(state, action) {
+  const {
+    boundary: {
+      width,
+      height,
+    },
+  } = state.toJS();
+  return initialState.mergeDeep({
+    boundary: {
+      width,
+      height,
+    },
+  });
+}
+
 const initialState = fromJS({
   boundary: {
     width: 0,
     height: 0,
   },
   eggs: {
-    size: 0,
+    size: 10,
     location: {
       x: 0,
       y: 0,
     },
   },
   snake: {
-    size: 0,
+    length: 1,
+    spreed: 2,
+    size: 10,
     body:[
       {
         x: 0,
@@ -67,7 +84,7 @@ export default function crossSliceReducer(state = initialState, action) {
     case 'CREATE_EGG':
       return createEgg(state, action);
     case 'RESET_SNAKE_EAT_EGGS':
-      return initialState;
+      return resetSnakeEatEggs(state, action);
     default:
       return state;
   }

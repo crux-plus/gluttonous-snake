@@ -27,19 +27,21 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor({ context=null, boundary=null, actions=null }) {
-    this.actions = actions;
-    this.context = context;
+  constructor(options = { context:null, boundary:null, actions:null }) {
+    Object.assign(this, options);
 
     this.initStore();
     this.initInstances();
 
+    this.resizeBoundary();
     this.bindSubscribe();
-
-    this.resizeBoundary(boundary);
+    this.eggs.create();
   }
 
-  resizeBoundary(boundary) {
+  resizeBoundary() {
+    const {
+      boundary,
+    } = this;
     this.actions.resizeBoundary(boundary);
   }
 
@@ -110,26 +112,14 @@ class SnakeEatEggs {
     this.eggs = new Eggs({ context, actions });
   }
 
-  /**
-   * @method
-   */
-  draw() {
+  reset() {
     const {
       eggs,
       snake,
     } = this;
-    eggs.create();
-    snake.move();
-  }
-
-  clear() {
-    const {
-      eggs,
-      snake,
-    } = this;
-    eggs.clear();
-    snake.destroy();
     this.actions.resetSnakeEatEggs();
+    eggs.reset();
+    snake.reset();
   }
 }
 

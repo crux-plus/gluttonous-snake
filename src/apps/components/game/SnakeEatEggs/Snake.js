@@ -15,10 +15,6 @@ class Snake {
     const instances = Snake.getInstances();
 
     Object.assign(this, defaultOptitons, options, instances);
-
-    const {
-      size,
-    } = this;
     this.bindKeyboardEvent();
   }
 
@@ -107,17 +103,18 @@ class Snake {
     } = state.toJS();
     const [location] = body;
     this.setRtl(rtl);
+    this.setSize(size);
+    this.setLength(length);
     if (Snake.boundaryDetection({ boundary, size, location })) {
       this.clear();
-      this.setLength(length, body);
       this.setBody(body);
       this.draw();
     } else {
       const {
         body,
       } = this;
-      this.actions.restoreSnake({ body });
       this.cancelMotionAnimation();
+      this.actions.restoreSnake({ body });
     }
   }
 
@@ -126,6 +123,24 @@ class Snake {
    */
   setBody(body) {
     this.body = body;
+  }
+
+  /**
+   * @method
+   */
+  setSize(size) {
+    if (this.size !== size) {
+      this.size = size;
+    }
+  }
+
+  /**
+   * @method
+   */
+  setLength(length) {
+    if (this.length !== length) {
+      this.length = length;
+    }
   }
 
   /**
@@ -140,15 +155,6 @@ class Snake {
       flag = true;
     }
     return flag;
-  }
-
-  /**
-   * @method
-   */
-  setLength(length, body) {
-    if (this.length !== length) {
-      this.length = length;
-    }
   }
 
   /**
@@ -256,9 +262,8 @@ class Snake {
   /**
    * @method
    */
-  destroy() {
+  reset() {
     this.cancelMotionAnimation();
-    this.removeKeyboardEvent();
     this.clear();
   }
 
@@ -267,9 +272,7 @@ class Snake {
    */
   clear() {
     const {
-      length,
       size,
-      color,
       body,
     } = this;
     body.forEach((location) => {
