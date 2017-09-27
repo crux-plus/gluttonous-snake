@@ -117,9 +117,10 @@ class SnakeEatEggs {
       eggs,
       snake,
     } = this;
-    this.actions.resetSnakeEatEggs();
-    eggs.reset();
     snake.reset();
+    eggs.reset();
+    this.actions.resetSnakeEatEggs();
+    eggs.create();
   }
 }
 
