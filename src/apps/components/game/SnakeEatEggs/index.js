@@ -6,7 +6,7 @@ import deepEqual from 'deep-equal';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
+import { fixErrorClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
@@ -42,11 +42,11 @@ class SnakeEatEggs {
 
     this.boundary = boundary;
     this.initInstances(context);
+    this.status = Status.PENDING;
 
     this.bindSubscribe();
 
     this.eggs.lay();
-    this.snake.draw();
   }
 
   /**
@@ -55,6 +55,7 @@ class SnakeEatEggs {
    */
   initStore() {
     const middleware = [
+      fixErrorClean.bind(this),
       collisionDetection.bind(this),
       selfEatingDetection.bind(this),
     ];
@@ -109,26 +110,43 @@ class SnakeEatEggs {
     const {
       actions,
     } = this;
-    this.status = Status.PENDING;
     this.snake = new Snake({ context, actions });
     this.eggs = new Eggs({ context, actions });
   }
 
+  /**
+   * @method
+   */
+  processStatus(status) {
+    switch (status) {
+      case Status.PENDING:
+        if (this.status === Status.END) {
+          this.actions.changeGameStatus({ status: Status.UNDERWAY });
+        }
+        break;
+    }
+  }
+
+  /**
+   * @method
+   */
   set status(status) {
     if (!deepEqual(this.status, status)) {
-      switch (status) {
-        case Status.PENDING:
-          this.reset();
-          this.actions.changeGameStatus({ status: Status.UNDERWAY });
-          break;
-        case Status.END:
-          this.pause();
-          break;
-      }
+      const {
+        snake,
+        eggs,
+      } = this;
+      snake.status = status;
+      eggs.status = status;
+
+      this.processStatus(status);
       this[Sym.STATUS] = status;
     }
   }
 
+  /**
+   * @method
+   */
   get status() {
     return this[Sym.STATUS];
   }
@@ -148,45 +166,6 @@ class SnakeEatEggs {
    */
   get boundary() {
     return this[Sym.BOUNDARY];
-  }
-
-  /**
-   * @method
-   */
-  reset() {
-    const {
-      eggs,
-      snake,
-      actions: {
-        resetSnakeEatEggs,
-      },
-    } = this;
-    resetSnakeEatEggs();
-    snake.reset();
-    eggs.reset();
-    return this;
-  }
-
-  /**
-   * @method
-   */
-  pause() {
-    const {
-      snake,
-    } = this;
-    snake.pause();
-    return this;
-  }
-
-  /**
-   * @method
-   */
-  resume() {
-    const {
-      snake,
-    } = this;
-    snake.resume();
-    return this;
   }
 }
 

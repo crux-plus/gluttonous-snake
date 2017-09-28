@@ -2,10 +2,13 @@ import deepEqual from 'deep-equal';
 
 import Rtl from './Rtl';
 
+import Status from '../GluttonousSnake/Status';
+
 const Sym = Object.freeze({
   SIZE: Symbol('size'),
   RTL: Symbol('rtl'),
   BODY: Symbol('body'),
+  STATUS: Symbol('status'),
 });
 
 /**
@@ -55,6 +58,7 @@ class Snake {
       boundary: null,
       rtl: Rtl.None,
       length: 1,
+      status: Status.PENDING,
     };
   }
 
@@ -74,8 +78,8 @@ class Snake {
   set body(body) {
     if (!deepEqual(this.body, body)) {
       this.clear();
+      this.draw(body);
       this[Sym.BODY] = body;
-      this.draw();
     }
   }
 
@@ -180,6 +184,39 @@ class Snake {
   /**
    * @method
    */
+  processStatus(status) {
+    switch (status) {
+      case Status.END:
+        this.pause();
+        break;
+      case Status.PENDING:
+        if (this.status === Status.END) {
+          this.reset();
+        }
+        break;
+    }
+  }
+
+  /**
+   * @method
+   */
+  set status(status) {
+    if (!deepEqual(this.status, status)) {
+      this.processStatus(status);
+      this[Sym.STATUS] = status;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get status() {
+    return this[Sym.STATUS];
+  }
+
+  /**
+   * @method
+   */
   isRev(rtl) {
     const {
       body: {
@@ -246,13 +283,13 @@ class Snake {
       body,
     } = this;
     if (Array.isArray(body)) {
-      body.forEach((location) => {
-        const {
-          x,
-          y,
-        } = location;
-        this.context.clearRect(x, y, size, size);
-      });
+      const length = body.length;
+      const tail = body[length - 1];
+      const {
+        x,
+        y,
+      } = tail;
+      this.context.clearRect(x, y, size, size);
     }
     return this;
   }
@@ -278,11 +315,10 @@ class Snake {
   /**
    * @method
    */
-  draw() {
+  draw(body) {
     const {
       size,
       color,
-      body,
     } = this;
     body.forEach((location) => {
       const {
@@ -292,6 +328,25 @@ class Snake {
       this.fillStyle = color;
       this.context.fillRect(x, y, size, size);
     });
+    //if (Array.isArray(body)) {
+      //let prevLength = 0;
+      //if (Array.isArray(prevBody)) {
+        //prevLength = prevBody.length;
+      //}
+      //const {
+        //length,
+      //} = body;
+      //const diff = length - prevLength;
+      //const diffBody = body.slice(0, diff + 1);
+      //diffBody.forEach((location) => {
+        //const {
+          //x,
+          //y,
+        //} = location;
+        //this.fillStyle = color;
+        //this.context.fillRect(x, y, size, size);
+      //});
+    //}
     return this;
   }
 

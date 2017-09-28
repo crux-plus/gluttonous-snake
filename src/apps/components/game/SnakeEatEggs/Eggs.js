@@ -1,8 +1,11 @@
 import deepEqual from 'deep-equal';
 
+import Status from '../GluttonousSnake/Status';
+
 const Sym = Object.freeze({
   SIZE: Symbol('size'),
   LOCATION: Symbol('location'),
+  STATUS: Symbol('status'),
 });
 
 /**
@@ -43,6 +46,7 @@ class Eggs {
         x: 0,
         y: 0,
       },
+      status: Status.PENDING,
     };
   }
 
@@ -75,13 +79,47 @@ class Eggs {
   set location(location) {
     if (!deepEqual(this.location, location)) {
       this.clear();
+      console.log(location);
       this[Sym.LOCATION] = location;
       this.draw();
     }
   }
 
+  /**
+   * @method
+   */
   get location() {
     return this[Sym.LOCATION];
+  }
+
+  /**
+   * @method
+   */
+  processStatus(status) {
+    switch (status) {
+      case Status.PENDING:
+        if (this.status === Status.END) {
+          this.reset();
+        }
+        break;
+    }
+  }
+
+  /**
+   * @method
+   */
+  set status(status) {
+    if (!deepEqual(this.status, status)) {
+      this.processStatus(status);
+      this[Sym.STATUS] = status;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get status() {
+    return this[Sym.STATUS];
   }
 
   /**
@@ -114,7 +152,6 @@ class Eggs {
         y,
       },
     } = this;
-    console.log(x, y, size, color);
     this.context.fillStyle = color;
     this.context.fillRect(x, y, size, size);
     return this;

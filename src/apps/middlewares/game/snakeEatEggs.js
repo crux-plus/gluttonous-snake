@@ -158,7 +158,17 @@ function selfEatingDetection({ getState, dispatch }) {
   }
 }
 
+function fixErrorClean({ getState, dispatch }) {
+  return next => action => {
+    if (action.type === 'MOVE_SNAKE') {
+      this.eggs.draw();
+    }
+    return next(action);
+  }
+}
+
 export {
+  fixErrorClean,
   collisionDetection,
   selfEatingDetection,
 };
