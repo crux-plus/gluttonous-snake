@@ -17,9 +17,6 @@ export default createActions({
     x,
     y,
   }),
-  RESTORE_SNAKE: ({ body=[] }) => ({
-    body,
-  }),
   ADJUST_SNAKE: ({ spread=0 }) => ({
     spread,
   }),

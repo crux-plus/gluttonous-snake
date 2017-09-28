@@ -20,8 +20,8 @@ class Snake {
 
     const defaultOptitons = Snake.getDefaultOptions();
     const instances = Snake.getInstances();
-
     Object.assign(this, defaultOptitons, options, instances);
+
     this.bindKeyboardEvent();
   }
 
@@ -61,56 +61,11 @@ class Snake {
   /**
    * @method
    */
-  static boundaryDetection({ size, boundary, location }) {
-    const {
-      width,
-      height,
-    } = boundary;
-    const {
-      x,
-      y,
-    } = location;
-    const top = 0;
-    const right =  width - size;
-    const bottom = height - size;
-    const left = 0;
-    let flag = false;
-    if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
-      flag = true
-    }
-    return flag;
-  }
-
-  /**
-   * @method
-   */
   mapStateToProps(state) {
     const {
-      boundary,
-      snake: {
-        rtl,
-        size,
-        body,
-      },
+      snake,
     } = state;
-    this.rtl = rtl;
-    this.size = size;
-
-    const {
-      boundaryDetection,
-    } = Snake;
-    const [location] = body;
-    if (boundaryDetection({ boundary, size, location })) {
-      this.clear();
-      this.body = body;
-      this.draw();
-    } else {
-      const {
-        body,
-      } = this;
-      this.actions.restoreSnake({ body });
-      this.cancelMoveAnimation();
-    }
+    Object.assign(this, snake);
   }
 
   /**
@@ -118,7 +73,9 @@ class Snake {
    */
   set body(body) {
     if (!deepEqual(this.body, body)) {
+      this.clear();
       this[Sym.BODY] = body;
+      this.draw();
     }
   }
 
@@ -147,7 +104,7 @@ class Snake {
 
   /**
    * @method
- Operate  */
+   */
   set rtl(rtl) {
     if (!deepEqual(this.rtl, rtl)) {
       this[Sym.RTL] = rtl;
@@ -277,6 +234,7 @@ class Snake {
     this.cancelMoveAnimation();
     this.clear();
     this.bindKeyboardEvent();
+    return this;
   }
 
   /**
@@ -287,13 +245,16 @@ class Snake {
       size,
       body,
     } = this;
-    body.forEach((location) => {
-      const {
-        x,
-        y,
-      } = location;
-      this.context.clearRect(x, y, size, size);
-    });
+    if (Array.isArray(body)) {
+      body.forEach((location) => {
+        const {
+          x,
+          y,
+        } = location;
+        this.context.clearRect(x, y, size, size);
+      });
+    }
+    return this;
   }
 
   /**
@@ -302,6 +263,7 @@ class Snake {
   pause() {
     this.removeKeyboardEvent();
     this.cancelMoveAnimation();
+    return this;
   }
 
   /**
@@ -310,6 +272,7 @@ class Snake {
   resume() {
     this.requestMoveAnimation();
     this.bindKeyboardEvent();
+    return this;
   }
 
   /**
@@ -329,6 +292,7 @@ class Snake {
       this.fillStyle = color;
       this.context.fillRect(x, y, size, size);
     });
+    return this;
   }
 
   /**

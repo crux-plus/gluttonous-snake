@@ -43,7 +43,6 @@ class SnakeEatEggs {
     this.initInstances(context);
 
     this.bindSubscribe();
-    this.eggs.lay();
   }
 
   /**
@@ -107,7 +106,7 @@ class SnakeEatEggs {
       actions,
     } = this;
     this.snake = new Snake({ context, actions });
-    this.eggs = new Eggs({ context, actions });
+    this.eggs = new Eggs({ context, actions }).lay();
   }
 
   /**
@@ -141,6 +140,7 @@ class SnakeEatEggs {
     resetSnakeEatEggs();
     snake.reset();
     eggs.reset();
+    return this;
   }
 
   /**
@@ -151,6 +151,7 @@ class SnakeEatEggs {
       snake,
     } = this;
     snake.pause();
+    return this;
   }
 
   /**
@@ -161,6 +162,7 @@ class SnakeEatEggs {
       snake,
     } = this;
     snake.resume();
+    return this;
   }
 }
 

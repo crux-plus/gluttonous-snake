@@ -24,27 +24,6 @@ function adjustSnake(state, action) {
   });
 }
 
-function moveSnake(state, action) {
-  const {
-    payload: {
-      x: deltaX,
-      y: deltaY,
-    },
-  } = action;
-  let {
-    body,
-    length,
-  } = state.toJS();
-  const location = {
-    x: body[0].x + deltaX,
-    y: body[0].y + deltaY,
-  };
-  body.unshift(location);
-  body = body.slice(0, length);
-  return state.mergeDeep({
-    body,
-  });
-}
 
 function increaseSnake(state, action) {
   const {
@@ -76,7 +55,7 @@ function translateSnake(state, action) {
   return state.mergeDeep({
     rtl,
   });
-}
+};
 
 function restoreSnake(state, action) {
   const {
@@ -91,7 +70,6 @@ function restoreSnake(state, action) {
 
 const initialState = fromJS({
   rtl: Rtl.None,
-  score: 1,
   length: 1,
   spread: 2,
   size: 10,
@@ -107,8 +85,6 @@ export default function snake(state = initialState, action) {
   switch (action.type) {
     case 'TRANSFORM_SNAKE':
       return transformSnake(state, action);
-    case 'MOVE_SNAKE':
-      return moveSnake(state, action);
     case 'INCREASE_SNAKE':
       return increaseSnake(state, action);
     case 'TRANSLATE_SNAKE':

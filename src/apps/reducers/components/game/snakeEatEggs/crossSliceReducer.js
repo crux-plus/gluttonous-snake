@@ -1,5 +1,25 @@
 import { fromJS } from 'immutable';
 
+function boundaryDetection({ size, boundary, location }) {
+  const {
+    width,
+    height,
+  } = boundary;
+  const {
+    x,
+    y,
+  } = location;
+  const top = 0;
+  const right =  width - size;
+  const bottom = height - size;
+  const left = 0;
+  let flag = false;
+  if ((x <= right && x >= left) && (y <= bottom && y >= top)) {
+    flag = true
+  }
+  return flag;
+}
+
 function ramLoc({ size, boundary }) {
   const {
     width,
@@ -54,6 +74,37 @@ function resetSnakeEatEggs(state, action) {
   });
 }
 
+function moveSnake(state, action) {
+  const {
+    payload: {
+      x: deltaX,
+      y: deltaY,
+    },
+  } = action;
+  let {
+    boundary,
+    snake: {
+      size,
+      body,
+      length,
+    },
+  } = state.toJS();
+  const [head] = body;
+  const location = {
+    x: head.x + deltaX,
+    y: head.y + deltaY,
+  };
+  if (boundaryDetection({ size, boundary, location })) {
+    body.unshift(location);
+    body = body.slice(0, length);
+  }
+  return state.mergeDeep({
+    snake: {
+      body,
+    }
+  });
+}
+
 const initialState = fromJS({
   boundary: {
     width: 0,
@@ -85,6 +136,8 @@ export default function crossSliceReducer(state = initialState, action) {
       return createEgg(state, action);
     case 'RESET_SNAKE_EAT_EGGS':
       return resetSnakeEatEggs(state, action);
+    case 'MOVE_SNAKE':
+      return moveSnake(state, action);
     default:
       return state;
   }

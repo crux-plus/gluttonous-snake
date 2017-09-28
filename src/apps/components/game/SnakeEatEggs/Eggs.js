@@ -51,15 +51,9 @@ class Eggs {
    */
   mapStateToProps(state) {
     const {
-      eggs: {
-        size,
-        location,
-      },
+      eggs,
     } = state;
-    this.clear();
-    this.size = size;
-    this.location = location;
-    this.draw();
+    Object.assign(this, eggs);
   }
 
   /**
@@ -80,7 +74,9 @@ class Eggs {
    */
   set location(location) {
     if (!deepEqual(this.location, location)) {
+      this.clear();
       this[Sym.LOCATION] = location;
+      this.draw();
     }
   }
 
@@ -93,6 +89,7 @@ class Eggs {
    */
   lay() {
     this.actions.createEgg();
+    return this;
   }
 
 
@@ -102,6 +99,7 @@ class Eggs {
   reset() {
     this.clear();
     this.lay();
+    return this;
   }
 
   /**
@@ -118,6 +116,7 @@ class Eggs {
     } = this;
     this.context.fillStyle = color;
     this.context.fillRect(x, y, size, size);
+    return this;
   }
 
   /**
@@ -126,12 +125,16 @@ class Eggs {
   clear() {
     const {
       size,
-      location: {
+      location,
+    } = this;
+    if (location) {
+      const {
         x,
         y,
-      },
-    } = this;
-    this.context.clearRect(x, y, size, size);
+      } = location;
+      this.context.clearRect(x, y, size, size);
+    }
+    return this;
   }
 }
 
