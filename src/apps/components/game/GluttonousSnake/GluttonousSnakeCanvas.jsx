@@ -43,19 +43,6 @@ class GluttonousSnakeCanvas extends Canvas {
   }
 
   /**
-   * @method
-   */
-  getContext() {
-    const {
-      id,
-    } = this.state;
-
-    const canvasEl = document.querySelector(`#${id}`);
-    const context = canvasEl.getContext('2d');
-    return context;
-  }
-
-  /**
    * @constructor
    */
   constructor(props) {
