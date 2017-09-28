@@ -25,6 +25,7 @@ import Eggs from './Eggs';
 import Snake from './Snake';
 
 const Sym = Object.freeze({
+  STATUS: Symbol('status'),
   BOUNDARY: Symbol('boundary'),
 });
 
@@ -108,8 +109,28 @@ class SnakeEatEggs {
     const {
       actions,
     } = this;
+    this.status = Status.PENDING;
     this.snake = new Snake({ context, actions });
     this.eggs = new Eggs({ context, actions });
+  }
+
+  set status(status) {
+    if (!deepEqual(this.status, status)) {
+      switch (status) {
+        case Status.PENDING:
+          this.reset();
+          this.actions.changeGameStatus({ status: Status.UNDERWAY });
+          break;
+        case Status.END:
+          this.pause();
+          break;
+      }
+      this[Sym.STATUS] = status;
+    }
+  }
+
+  get status() {
+    return this[Sym.STATUS];
   }
 
   /**

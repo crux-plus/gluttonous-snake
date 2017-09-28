@@ -70,17 +70,9 @@ class GluttonousSnakeCanvas extends Canvas {
       snakeEatEggs,
     } = this.data;
     const {
-      actions,
       status,
     } = this.props;
-    switch (status) {
-      case Status.PENDING:
-        snakeEatEggs.reset();
-        actions.changeGameStatus({ status: Status.UNDERWAY });
-        break;
-      case Status.END:
-        snakeEatEggs.pause();
-    }
+    snakeEatEggs.status = status;
   }
 }
 
