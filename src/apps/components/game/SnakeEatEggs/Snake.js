@@ -319,8 +319,22 @@ class Snake {
     const {
       size,
       color,
+      body: prevBody,
     } = this;
-    body.forEach((location) => {
+    let prevLength = 0;
+    if (Array.isArray(prevBody)) {
+      prevLength = prevBody.length;
+    }
+    const diff = body.length - prevLength;
+
+    let diffBody;
+    console.log(diff);
+    if (diff === 0) {
+      diffBody = body.slice(0, diff + 1);
+    } else {
+      diffBody = prevBody;
+    }
+    diffBody.forEach((location) => {
       const {
         x,
         y,
@@ -328,25 +342,6 @@ class Snake {
       this.fillStyle = color;
       this.context.fillRect(x, y, size, size);
     });
-    //if (Array.isArray(body)) {
-      //let prevLength = 0;
-      //if (Array.isArray(prevBody)) {
-        //prevLength = prevBody.length;
-      //}
-      //const {
-        //length,
-      //} = body;
-      //const diff = length - prevLength;
-      //const diffBody = body.slice(0, diff + 1);
-      //diffBody.forEach((location) => {
-        //const {
-          //x,
-          //y,
-        //} = location;
-        //this.fillStyle = color;
-        //this.context.fillRect(x, y, size, size);
-      //});
-    //}
     return this;
   }
 

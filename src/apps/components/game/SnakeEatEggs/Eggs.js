@@ -79,7 +79,6 @@ class Eggs {
   set location(location) {
     if (!deepEqual(this.location, location)) {
       this.clear();
-      console.log(location);
       this[Sym.LOCATION] = location;
       this.draw();
     }
