@@ -43,6 +43,9 @@ class SnakeEatEggs {
     this.initInstances(context);
 
     this.bindSubscribe();
+
+    this.eggs.lay();
+    this.snake.draw();
   }
 
   /**
@@ -106,7 +109,7 @@ class SnakeEatEggs {
       actions,
     } = this;
     this.snake = new Snake({ context, actions });
-    this.eggs = new Eggs({ context, actions }).lay();
+    this.eggs = new Eggs({ context, actions });
   }
 
   /**

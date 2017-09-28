@@ -114,6 +114,7 @@ class Eggs {
         y,
       },
     } = this;
+    console.log(x, y, size, color);
     this.context.fillStyle = color;
     this.context.fillRect(x, y, size, size);
     return this;
