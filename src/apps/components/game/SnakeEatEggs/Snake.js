@@ -94,12 +94,12 @@ class Snake {
       },
     } = state;
     this.rtl = rtl;
-    this.size= size;
+    this.size = size;
 
-    const [location] = body;
     const {
       boundaryDetection,
     } = Snake;
+    const [location] = body;
     if (boundaryDetection({ boundary, size, location })) {
       this.clear();
       this.body = body;

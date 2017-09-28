@@ -2,6 +2,8 @@ import { createStore, bindActionCreators, applyMiddleware } from 'redux';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import deepEqual from 'deep-equal';
+
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
 import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
@@ -22,6 +24,10 @@ import Eggs from './Eggs';
 
 import Snake from './Snake';
 
+const Sym = Object.freeze({
+  BOUNDARY: Symbol('boundary'),
+});
+
 /**
  * @class
  */
@@ -29,23 +35,15 @@ class SnakeEatEggs {
   /**
    * @constructor
    */
-  constructor(options = { context:null, boundary:null, actions:null }) {
-    Object.assign(this, options);
-
+  constructor({ context=null, boundary=null, actions=null }) {
     this.initStore();
-    this.initActions();
-    this.initInstances();
+    this.initActions(actions);
 
-    this.resizeBoundary();
+    this.boundary = boundary;
+    this.initInstances(context);
+
     this.bindSubscribe();
     this.eggs.lay();
-  }
-
-  resizeBoundary() {
-    const {
-      boundary,
-    } = this;
-    this.actions.resizeBoundary(boundary);
   }
 
   /**
@@ -67,12 +65,11 @@ class SnakeEatEggs {
     this.store = store;
   }
 
-  initActions() {
+  initActions(actions={}) {
     const {
       store: {
         dispatch,
       },
-      actions,
     } = this;
     const innerActions = bindActionCreators({
       ...eggsActionCreators,
@@ -85,7 +82,6 @@ class SnakeEatEggs {
       ...innerActions,
     };
   }
-
 
   /**
    * @method
@@ -101,18 +97,34 @@ class SnakeEatEggs {
       eggs.mapStateToProps(state);
       snake.mapStateToProps(state);
     });
-  }a
+  }
 
   /**
    * @method
    */
-  initInstances() {
+  initInstances(context={}) {
     const {
       actions,
-      context,
     } = this;
     this.snake = new Snake({ context, actions });
     this.eggs = new Eggs({ context, actions });
+  }
+
+  /**
+   * @method
+   */
+  set boundary(boundary) {
+    if (!deepEqual(this.boundary, boundary)) {
+      this[Sym.BOUNDARY] = boundary;
+      this.actions.resizeBoundary(boundary);
+    }
+  }
+
+  /**
+   * @method
+   */
+  get boundary() {
+    return this[Sym.BOUNDARY];
   }
 
   /**

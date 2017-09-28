@@ -16,11 +16,11 @@ function transformSnake(state, action) {
 function adjustSnake(state, action) {
   const {
     payload: {
-      spreed,
+      spread,
     },
   } = action;
   return state.mergeDeep({
-    spreed,
+    spread,
   });
 }
 
@@ -93,7 +93,7 @@ const initialState = fromJS({
   rtl: Rtl.None,
   score: 1,
   length: 1,
-  spreed: 2,
+  spread: 2,
   size: 10,
   body: [
     {

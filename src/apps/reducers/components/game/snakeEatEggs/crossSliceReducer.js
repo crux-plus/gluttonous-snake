@@ -68,7 +68,7 @@ const initialState = fromJS({
   },
   snake: {
     length: 1,
-    spreed: 2,
+    spread: 2,
     size: 10,
     body:[
       {
