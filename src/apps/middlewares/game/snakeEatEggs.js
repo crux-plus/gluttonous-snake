@@ -15,8 +15,8 @@ import Status from 'components/game/GluttonousSnake/Status';
 /**
  * @private
  */
-function getIncLocs({ rtl, location, size, spreed=2 }) {
-  const count = Math.floor(size / spreed);
+function getIncLocs({ rtl, location, size, spread=2 }) {
+  const count = Math.floor(size / spread);
   const locations = new Array(count - 1);
   locations.fill(location);
   switch (rtl) {
@@ -26,7 +26,7 @@ function getIncLocs({ rtl, location, size, spreed=2 }) {
           x,
           y,
         } = location;
-        y += spreed * (index + 1);
+        y += spread * (index + 1);
         locations[index] = {
           x,
           y,
@@ -39,7 +39,7 @@ function getIncLocs({ rtl, location, size, spreed=2 }) {
           x,
           y,
         } = location;
-        x -= spreed * (index + 1);
+        x -= spread * (index + 1);
         locations[index] = {
           x,
           y,
@@ -52,7 +52,7 @@ function getIncLocs({ rtl, location, size, spreed=2 }) {
           x,
           y,
         } = location;
-        y -= spreed * (index + 1);
+        y -= spread * (index + 1);
         locations[index] = {
           x,
           y,
@@ -65,7 +65,7 @@ function getIncLocs({ rtl, location, size, spreed=2 }) {
           x,
           y,
         } = location;
-        x += spreed * (index + 1);
+        x += spread * (index + 1);
         locations[index] = {
           x,
           y,
@@ -132,12 +132,12 @@ function selfEatingDetection({ getState, dispatch }) {
       const state = getState();
       const {
         snake: {
-          spreed,
+          spread,
           size,
           body,
         },
       } = state.toJS();
-      const step = size / spreed;
+      const step = size / spread;
       if (body.length > step) {
         let head = body.shift();
         const square1 = {

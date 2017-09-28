@@ -232,8 +232,8 @@ class Snake {
    */
   reset() {
     this.cancelMoveAnimation();
-    this.clear();
     this.bindKeyboardEvent();
+    this.clear();
     return this;
   }
 
