@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import { collisionDetection, selfEatingDetection, boundaryProcess } from 'middlewares/game/snakeEatEggs';
+import { collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
@@ -31,6 +31,7 @@ class SnakeEatEggs {
     Object.assign(this, options);
 
     this.initStore();
+    this.initActions();
     this.initInstances();
 
     this.resizeBoundary();
@@ -53,7 +54,6 @@ class SnakeEatEggs {
     const middleware = [
       collisionDetection.bind(this),
       selfEatingDetection.bind(this),
-      boundaryProcess.bind(this),
     ];
     const store = createStore(
       snakeEatEggs,
@@ -62,11 +62,15 @@ class SnakeEatEggs {
         applyMiddleware(...middleware),
       ),
     );
+    this.store = store;
+  }
+
+  initActions() {
     const {
-      dispatch,
-    } = store;
-    const {
-      actions: outerActions,
+      store: {
+        dispatch,
+      },
+      actions,
     } = this;
     const innerActions = bindActionCreators({
       ...eggsActionCreators,
@@ -75,12 +79,15 @@ class SnakeEatEggs {
       ...snakeEatEggsActionCreators,
     }, dispatch);
     this.actions = {
-      ...outerActions,
+      ...actions,
       ...innerActions,
     };
-    this.store = store;
   }
 
+
+  /**
+   * @method
+   */
   bindSubscribe() {
     const {
       store,
@@ -99,20 +106,10 @@ class SnakeEatEggs {
    */
   initInstances() {
     const {
-      store: {
-        dispatch,
-      },
+      actions,
       context,
     } = this;
-
-    let actions = bindActionCreators({
-      ...snakeActionCreators,
-    }, dispatch);
     this.snake = new Snake({ context, actions });
-
-    actions = bindActionCreators({
-      ...eggsActionCreators,
-    }, dispatch);
     this.eggs = new Eggs({ context, actions });
   }
 
@@ -123,11 +120,13 @@ class SnakeEatEggs {
     const {
       eggs,
       snake,
+      actions: {
+        resetSnakeEatEggs,
+      },
     } = this;
+    resetSnakeEatEggs();
     snake.reset();
     eggs.reset();
-    this.actions.resetSnakeEatEggs();
-    eggs.lay();
   }
 
   /**

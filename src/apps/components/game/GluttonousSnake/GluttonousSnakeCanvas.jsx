@@ -28,7 +28,7 @@ class GluttonousSnakeCanvas extends Canvas {
         width,
         height,
       },
-     });
+    });
     this.data = {
       context,
       snakeEatEggs,

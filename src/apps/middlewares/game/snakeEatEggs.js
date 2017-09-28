@@ -158,20 +158,7 @@ function selfEatingDetection({ getState, dispatch }) {
   }
 }
 
-/**
- * @function
- */
-function boundaryProcess() {
-  return next => action => {
-    if (action.type === 'RESTORE_SNAKE') {
-      this.snake.cancelMotionAnimation();
-    }
-    return next(action);
-  }
-}
-
 export {
-  boundaryProcess,
   collisionDetection,
   selfEatingDetection,
 };

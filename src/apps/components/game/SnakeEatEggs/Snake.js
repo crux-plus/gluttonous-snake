@@ -112,6 +112,7 @@ class Snake {
         body,
       } = this;
       this.actions.restoreSnake({ body });
+      this.cancelMotionAnimation();
     }
   }
 
