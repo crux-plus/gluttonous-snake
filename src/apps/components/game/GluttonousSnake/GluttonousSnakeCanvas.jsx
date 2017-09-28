@@ -53,8 +53,13 @@ class GluttonousSnakeCanvas extends Canvas {
    * @method
    */
   componentDidMount() {
+    const {
+      actions: {
+        changeGameStatus,
+      },
+    } = this.props;
     this.init();
-    this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
+    changeGameStatus({ status: Status.UNDERWAY });
   }
 
   /**

@@ -69,6 +69,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "deep-equal": "^1.0.1",
     "express": "^4.15.4",
     "express-graphql": "^0.6.11",
     "express-react-views": "^0.10.2",

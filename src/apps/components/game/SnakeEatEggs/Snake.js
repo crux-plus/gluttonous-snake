@@ -1,4 +1,12 @@
+import deepEqual from 'deep-equal';
+
 import Rtl from './Rtl';
+
+const Sym = Object.freeze({
+  SIZE: Symbol('size'),
+  RTL: Symbol('rtl'),
+  BODY: Symbol('body'),
+});
 
 /**
  * @class
@@ -36,18 +44,17 @@ class Snake {
    */
   static getInstances() {
     return {
-      status: false,
-      requestID: -1,
-      boundary: null,
-      motionOperate: null,
-      rtl: Rtl.None,
-      length: 1,
       body: [
         {
           x: 0,
           y: 0,
         },
       ],
+      status: false,
+      requestID: -1,
+      boundary: null,
+      rtl: Rtl.None,
+      length: 1,
     };
   }
 
@@ -77,20 +84,6 @@ class Snake {
   /**
    * @method
    */
-  move() {
-    const {
-      body: [location],
-    } = this;
-    const {
-      x,
-      y,
-    } = location;
-    this.actions.moveSnake({ x, y });
-  }
-
-  /**
-   * @method
-   */
   mapStateToProps(state) {
     const {
       boundary,
@@ -99,37 +92,132 @@ class Snake {
         size,
         body,
       },
-    } = state.toJS();
+    } = state;
+    this.rtl = rtl;
+    this.size= size;
+
     const [location] = body;
-    this.setRtl(rtl);
-    this.setSize(size);
-    if (Snake.boundaryDetection({ boundary, size, location })) {
+    const {
+      boundaryDetection,
+    } = Snake;
+    if (boundaryDetection({ boundary, size, location })) {
       this.clear();
-      this.setBody(body);
+      this.body = body;
       this.draw();
     } else {
       const {
         body,
       } = this;
       this.actions.restoreSnake({ body });
-      this.cancelMotionAnimation();
+      this.cancelMoveAnimation();
     }
   }
 
   /**
    * @method
    */
-  setBody(body) {
-    this.body = body;
+  set body(body) {
+    if (!deepEqual(this.body, body)) {
+      this[Sym.BODY] = body;
+    }
   }
 
   /**
    * @method
    */
-  setSize(size) {
-    if (this.size !== size) {
-      this.size = size;
+  get body() {
+    return this[Sym.BODY];
+  }
+
+  /**
+   * @method
+   */
+  set size(size) {
+    if (!deepEqual(this.size, size)) {
+      this[Sym.SIZE] = size;
     }
+  }
+
+  /**
+   * @method
+   */
+  get size() {
+    return this[Sym.SIZE];
+  }
+
+  /**
+   * @method
+ Operate  */
+  set rtl(rtl) {
+    if (!deepEqual(this.rtl, rtl)) {
+      this[Sym.RTL] = rtl;
+      this.cancelMoveAnimation();
+      this.requestMoveAnimation();
+    }
+  }
+
+  /**
+   * @method
+   */
+  get rtl() {
+    return this[Sym.RTL];
+  }
+
+  /**
+   * @method
+   */
+  get move() {
+    const {
+      spread,
+      rtl,
+      body: [location],
+    } = this;
+    let {
+      x,
+      y,
+    } = location;
+    let move;
+    switch (rtl) {
+      case Rtl.Down:
+        move = () => {
+          const delta = {
+            x: 0,
+            y: spread,
+          };
+          this.actions.moveSnake(delta);
+        }
+        break;
+      case Rtl.Left:
+        move = () => {
+          const delta ={
+            x: -spread,
+            y: 0,
+          };
+          this.actions.moveSnake(delta);
+        }
+        break;
+      case Rtl.Up:
+        move = () => {
+          const delta = {
+            x: 0,
+            y: -spread,
+          };
+          this.actions.moveSnake(delta);
+        }
+        break;
+      case Rtl.Right:
+        move = () => {
+          const delta = {
+            x: spread,
+            y: 0,
+          };
+          this.actions.moveSnake(delta);
+        }
+        break;
+      default:
+        move = new Function();
+    }
+    return move;
   }
 
   /**
@@ -151,77 +239,9 @@ class Snake {
   /**
    * @method
    */
-  getMotionOperate() {
-    const {
-      spread,
-      rtl,
-      body: [location],
-    } = this;
-    let {
-      x,
-      y,
-    } = location;
-    let motionOperate = null;
-    switch (rtl) {
-      case Rtl.Down:
-        motionOperate = () => {
-          const delta = {
-            x: 0,
-            y: spread,
-          };
-          this.actions.moveSnake(delta);
-        }
-        break;
-      case Rtl.Left:
-        motionOperate = () => {
-          const delta ={
-            x: -spread,
-            y: 0,
-          };
-          this.actions.moveSnake(delta);
-        }
-        break;
-      case Rtl.Up:
-        motionOperate = () => {
-          const delta = {
-            x: 0,
-            y: -spread,
-          };
-          this.actions.moveSnake(delta);
-        }
-        break;
-      case Rtl.Right:
-        motionOperate = () => {
-          const delta = {
-            x: spread,
-            y: 0,
-          };
-          this.actions.moveSnake(delta);
-        }
-        break;
-    }
-    return motionOperate;
-  }
-
-  /**
-   * @method
-   */
   translate(rtl) {
     if ((rtl !== Rtl.None) && (!this.isRev(rtl))) {
       this.actions.translateSnake({ rtl });
-    }
-  }
-
-  /**
-   * @method
-   */
-  setRtl(rtl) {
-    if (this.rtl !== rtl) {
-      this.rtl = rtl;
-      this.motionOperate = this.getMotionOperate();
-
-      this.cancelMotionAnimation();
-      this.requestMotionAnimation();
     }
   }
 
@@ -254,7 +274,7 @@ class Snake {
    * @method
    */
   reset() {
-    this.cancelMotionAnimation();
+    this.cancelMoveAnimation();
     this.clear();
     this.bindKeyboardEvent();
   }
@@ -281,14 +301,14 @@ class Snake {
    */
   pause() {
     this.removeKeyboardEvent();
-    this.cancelMotionAnimation();
+    this.cancelMoveAnimation();
   }
 
   /**
    * @method
    */
   resume() {
-    this.requestMotionAnimation();
+    this.requestMoveAnimation();
     this.bindKeyboardEvent();
   }
 
@@ -314,19 +334,10 @@ class Snake {
   /**
    * @method
    */
-  moveStep() {
-    if (this.motionOperate != null) {
-      this.motionOperate();
-    }
-  }
-
-  /**
-   * @method
-   */
-  requestMotionAnimation() {
+  requestMoveAnimation() {
     const step = () => {
       if (!this.status) {
-        this.moveStep();
+        this.move();
         this.requestID = requestAnimationFrame(step);
       }
     };
@@ -337,7 +348,7 @@ class Snake {
   /**
    * @method
    */
-  cancelMotionAnimation() {
+  cancelMoveAnimation() {
     const {
       requestID,
     } = this;

@@ -14,6 +14,8 @@ import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
 import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
 
+import Status from '../GluttonousSnake/Status';
+
 import Rtl from './Rtl';
 
 import Eggs from './Eggs';
@@ -95,11 +97,11 @@ class SnakeEatEggs {
       snake,
     } = this;
     store.subscribe(() => {
-      const state = store.getState();
+      const state = store.getState().toJS();
       eggs.mapStateToProps(state);
       snake.mapStateToProps(state);
     });
-  }
+  }a
 
   /**
    * @method
@@ -137,6 +139,16 @@ class SnakeEatEggs {
       snake,
     } = this;
     snake.pause();
+  }
+
+  /**
+   * @method
+   */
+  resume() {
+    const {
+      snake,
+    } = this;
+    snake.resume();
   }
 }
 

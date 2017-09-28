@@ -1,3 +1,10 @@
+import deepEqual from 'deep-equal';
+
+const Sym = Object.freeze({
+  SIZE: Symbol('size'),
+  LOCATION: Symbol('location'),
+});
+
 /**
  * @class
  */
@@ -43,19 +50,42 @@ class Eggs {
    * @method
    */
   mapStateToProps(state) {
-    this.clear();
     const {
       eggs: {
         size,
-        location: {
-          x,
-          y,
-        },
+        location,
       },
-    } = state.toJS();
-    this.setSize(size);
-    this.setLocation({ x, y });
+    } = state;
+    this.clear();
+    this.size = size;
+    this.location = location;
     this.draw();
+  }
+
+  /**
+   * @method
+   */
+  set size(size) {
+    if (!deepEqual(this.size, size)) {
+      this[Sym.SIZE] = size;
+    }
+  }
+
+  get size() {
+    return this[Sym.SIZE];
+  }
+
+  /**
+   * @method
+   */
+  set location(location) {
+    if (!deepEqual(this.location, location)) {
+      this[Sym.LOCATION] = location;
+    }
+  }
+
+  get location() {
+    return this[Sym.LOCATION];
   }
 
   /**
@@ -65,24 +95,6 @@ class Eggs {
     this.actions.createEgg();
   }
 
-  /**
-   * @method
-   */
-  setSize(size) {
-    if (this.size !== size) {
-      this.size = size;
-    }
-  }
-
-  /**
-   * @method
-   */
-  setLocation({ x, y }) {
-    this.location = {
-      x,
-      y,
-    };
-  }
 
   /**
    * @method
