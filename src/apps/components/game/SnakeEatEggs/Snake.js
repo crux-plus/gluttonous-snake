@@ -195,6 +195,16 @@ class Snake {
           this.reset();
         }
         break;
+      case Status.PAUSE:
+        if (this.status === Status.UNDERWAY) {
+          this.pause();
+        }
+        break;
+      case Status.UNDERWAY:
+        if (this.status === Status.PAUSE) {
+          this.resume();
+        }
+        break;
     }
   }
 
