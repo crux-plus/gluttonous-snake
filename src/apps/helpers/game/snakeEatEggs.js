@@ -1,4 +1,4 @@
-function chkTwoRecIn(
+function checkTwoRectangleIntersection(
   { top: top1=0, right: right1=0, left: left1=0, bottom: bottom1=0 },
   { top: top2=0, right: right2=0, left: left2=0, bottom: bottom2=0 }) {
 
@@ -10,7 +10,7 @@ function chkTwoRecIn(
   return flag;
 }
 
-function chkTwoSqIn(
+function checkTwoSquareIntersection(
   { x: x1=0, y: y1=0, size: size1=0 },
   { x: x2=0, y: y2=0, size: size2=0 }) {
 
@@ -26,10 +26,10 @@ function chkTwoSqIn(
     bottom: x2 + size2,
     right: y2 + size2,
   };
-  return chkTwoRecIn(rec1, rec2);
+  return checkTwoRectangleIntersection(rec1, rec2);
 }
 
 export {
-  chkTwoSqIn,
-  chkTwoRecIn,
+  checkTwoRectangleIntersection,
+  checkTwoSquareIntersection,
 };

@@ -78,8 +78,8 @@ class Snake {
   set body(body) {
     if (!deepEqual(this.body, body)) {
       this.clear();
-      this.draw(body);
       this[Sym.BODY] = body;
+      this.draw();
     }
   }
 
@@ -270,7 +270,28 @@ class Snake {
   reset() {
     this.cancelMoveAnimation();
     this.bindKeyboardEvent();
-    this.clear();
+    this.clearAll();
+    return this;
+  }
+
+  /**
+   * @method
+   */
+  clearAll() {
+    const {
+      size,
+      body,
+    } = this;
+    if (Array.isArray(body)) {
+      body.forEach((location) => {
+        const {
+          x,
+          y,
+        } = location;
+        console.log(x, y, size);
+        this.context.clearRect(x, y, size, size);
+      });
+    }
     return this;
   }
 
@@ -315,26 +336,13 @@ class Snake {
   /**
    * @method
    */
-  draw(body) {
+  draw() {
     const {
       size,
       color,
-      body: prevBody,
+      body ,
     } = this;
-    let prevLength = 0;
-    if (Array.isArray(prevBody)) {
-      prevLength = prevBody.length;
-    }
-    const diff = body.length - prevLength;
-
-    let diffBody;
-    console.log(diff);
-    if (diff === 0) {
-      diffBody = body.slice(0, diff + 1);
-    } else {
-      diffBody = prevBody;
-    }
-    diffBody.forEach((location) => {
+    body.forEach((location) => {
       const {
         x,
         y,
@@ -357,6 +365,7 @@ class Snake {
     };
     this.status = false;
     this.requestID = requestAnimationFrame(step);
+    return this;
   }
 
   /**
@@ -370,6 +379,7 @@ class Snake {
       cancelAnimationFrame(requestID);
     }
     this.status = true;
+    return this;
   }
 }
 

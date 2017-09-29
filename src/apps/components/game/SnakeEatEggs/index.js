@@ -6,7 +6,7 @@ import deepEqual from 'deep-equal';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import { fixErrorClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
+import { correctionClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
@@ -55,7 +55,7 @@ class SnakeEatEggs {
    */
   initStore() {
     const middleware = [
-      fixErrorClean.bind(this),
+      correctionClean.bind(this),
       collisionDetection.bind(this),
       selfEatingDetection.bind(this),
     ];
@@ -121,6 +121,7 @@ class SnakeEatEggs {
     switch (status) {
       case Status.PENDING:
         if (this.status === Status.END) {
+          this.actions.resetSnakeEatEggs();
           this.actions.changeGameStatus({ status: Status.UNDERWAY });
         }
         break;

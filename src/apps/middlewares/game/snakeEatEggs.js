@@ -1,6 +1,8 @@
 import { bindActionCreators } from 'redux';
 
-import { chkTwoSqIn } from 'helpers/game/snakeEatEggs';
+import deepEqual from 'deep-equal';
+
+import { checkTwoSquareIntersection } from 'helpers/game/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
@@ -112,7 +114,7 @@ function collisionDetection({ getState, dispatch }) {
         y: y2,
         size: size2,
       };
-      if (chkTwoSqIn(square1, square2)) {
+      if (checkTwoSquareIntersection(square1, square2)) {
         const size = size2;
         const locations = getIncLocs({ location, size, rtl });
         this.actions.createEgg();
@@ -147,7 +149,7 @@ function selfEatingDetection({ getState, dispatch }) {
         };
         body.splice(0, step - 1);
         body.some((location) => {
-          if (head.x === location.x && head.y === location.y) {
+          if (deepEqual(head, location)) {
             this.actions.changeGameStatus({ status: Status.END });
             return true;
           }
@@ -158,17 +160,22 @@ function selfEatingDetection({ getState, dispatch }) {
   }
 }
 
-function fixErrorClean({ getState, dispatch }) {
+function correctionClean({ getState, dispatch }) {
   return next => action => {
-    if (action.type === 'MOVE_SNAKE') {
-      this.eggs.draw();
+    next(action);
+    switch (action.type) {
+      case 'MOVE_SNAKE':
+        this.eggs.draw();
+        break;
+      case 'CREATE_EGG':
+        this.snake.draw();
+        break;
     }
-    return next(action);
   }
 }
 
 export {
-  fixErrorClean,
+  correctionClean,
   collisionDetection,
   selfEatingDetection,
 };
