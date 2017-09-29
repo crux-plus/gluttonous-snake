@@ -20,6 +20,7 @@ class Snake {
    */
   constructor(options = { size: 10, spread: 2, color: '#000' }) {
     this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
+    this.handleBlurEvent = this.handleBlurEvent.bind(this);
 
     const defaultOptitons = Snake.getDefaultOptions();
     const instances = Snake.getInstances();
@@ -251,6 +252,7 @@ class Snake {
    */
   bindKeyboardEvent() {
     window.addEventListener('keydown', this.handleKeyboardEvent);
+    window.addEventListener('blur', this.handleBlurEvent);
   }
 
   /**
@@ -262,6 +264,13 @@ class Snake {
     } = event;
     const rtl = Rtl.fromCode(code);
     this.translate(rtl);
+  }
+
+  /**
+   * @method
+   */
+  handleBlurEvent(event) {
+    this.actions.changeGameStatus({ status: Status.PAUSE });
   }
 
   /**
@@ -362,7 +371,6 @@ class Snake {
         this.requestID = requestAnimationFrame(step);
       }
     };
-    this.status = Status.UNDERWAY;
     this.requestID = requestAnimationFrame(step);
     return this;
   }
@@ -376,7 +384,6 @@ class Snake {
     } = this;
     if (requestID !== -1) {
       cancelAnimationFrame(requestID);
-      this.status = Status.PAUSE;
       this.requestID = -1;
     }
     return this;

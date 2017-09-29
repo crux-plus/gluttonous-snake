@@ -36,6 +36,17 @@ class Canvas extends React.PureComponent {
   /**
    * @method
    */
+  getContext(contextType='2d', contextAttributes={}) {
+    const {
+      id,
+    } = this.state;
+    const el = document.getElementById(id);
+    return el.getContext(contextType, contextAttributes);
+  }
+
+  /**
+   * @method
+   */
   componentWillReceiveProps(nextProps) {
     this.setState((prevState, props) => {
       const {
@@ -63,17 +74,6 @@ class Canvas extends React.PureComponent {
       >
       </canvas>
     );
-  }
-
-  /**
-   * @method
-   */
-  getContext(contextType='2d', contextAttributes={}) {
-    const {
-      id,
-    } = this.state;
-    const el = document.getElementById(id);
-    return el.getContext(contextType, contextAttributes);
   }
 }
 

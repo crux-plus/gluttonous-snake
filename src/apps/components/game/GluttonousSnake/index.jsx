@@ -4,7 +4,7 @@ import React from 'react';
 
 import Loading from './Loading';
 
-import Confirm from './Confirm';
+import Dialog from './Dialog';
 
 import Status from './Status';
 
@@ -28,7 +28,7 @@ class GluttonousSnake extends React.PureComponent {
   render() {
     return (
       <div>
-        <Confirm
+        <Dialog
           {...this.props.game}
           actions={this.props.actions}
         />

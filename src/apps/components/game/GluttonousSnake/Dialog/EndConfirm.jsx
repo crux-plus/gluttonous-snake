@@ -4,13 +4,13 @@ import React from 'react';
 
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
-import Status from './Status';
+import Status from '../Status';
 
 /**
  * @public
  * @class
  */
-class Confirm extends React.PureComponent {
+class EndConfirm extends React.PureComponent {
   /**
    * @constructor
    */
@@ -78,13 +78,13 @@ class Confirm extends React.PureComponent {
 }
 
 // Specifies the verification rule for props:
-Confirm.propTypes = {
+EndConfirm.propTypes = {
   status: PropTypes.number,
 };
 
 // Specifies the default values for props:
-Confirm.defaultProps = {
+EndConfirm.defaultProps = {
   status: Status.PENDING,
 };
 
-export default Confirm;
+export default EndConfirm;

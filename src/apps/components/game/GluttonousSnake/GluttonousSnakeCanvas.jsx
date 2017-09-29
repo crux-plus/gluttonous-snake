@@ -47,6 +47,7 @@ class GluttonousSnakeCanvas extends Canvas {
    */
   constructor(props) {
     super(props);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   /**
@@ -65,6 +66,20 @@ class GluttonousSnakeCanvas extends Canvas {
   /**
    * @method
    */
+  render() {
+    return (
+      <canvas
+        id={this.state.id}
+        width={this.state.width}
+        height={this.state.height}
+      >
+      </canvas>
+    );
+  }
+
+  /**
+   * @method
+   */
   componentDidUpdate(prevProps, prevState) {
     const {
       snakeEatEggs,
@@ -73,6 +88,13 @@ class GluttonousSnakeCanvas extends Canvas {
       status,
     } = this.props;
     snakeEatEggs.status = status;
+  }
+
+  /**
+   * @method
+   */
+  handleBlur(event) {
+    this.props.actions.changeGameStatus({ status: Status.PAUSE });
   }
 }
 
