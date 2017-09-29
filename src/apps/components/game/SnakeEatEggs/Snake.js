@@ -376,6 +376,7 @@ class Snake {
    */
   requestMoveAnimation() {
     const step = () => {
+      // @FIXME
       if (this.status === Status.UNDERWAY) {
         this.move();
         this.requestID = requestAnimationFrame(step);
