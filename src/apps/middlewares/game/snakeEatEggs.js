@@ -168,7 +168,17 @@ function correctionClean({ getState, dispatch }) {
         this.eggs.draw();
         break;
       case 'CREATE_EGG':
-        this.snake.draw();
+        const state = getState();
+        const {
+          snake: {
+            body: {
+              length,
+            },
+          },
+        } = state.toJS();
+        if (length <= 1) {
+          this.snake.draw();
+        }
         break;
     }
   }

@@ -288,7 +288,6 @@ class Snake {
           x,
           y,
         } = location;
-        console.log(x, y, size);
         this.context.clearRect(x, y, size, size);
       });
     }
