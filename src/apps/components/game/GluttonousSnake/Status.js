@@ -13,8 +13,12 @@ Object.defineProperties(Status, {
     value: 0,
     writable: false,
   },
-  'END': {
+  'PAUSE': {
     value: 1,
+    writable: false,
+  },
+  'END': {
+    value: 2,
     writable: false,
   },
 });

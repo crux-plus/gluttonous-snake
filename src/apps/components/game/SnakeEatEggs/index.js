@@ -6,8 +6,6 @@ import deepEqual from 'deep-equal';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import { correctionClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
-
 import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
 
 import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
@@ -15,6 +13,8 @@ import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
 import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
+
+import { correctionClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
 import Status from '../GluttonousSnake/Status';
 

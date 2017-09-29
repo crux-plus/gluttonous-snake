@@ -357,12 +357,12 @@ class Snake {
    */
   requestMoveAnimation() {
     const step = () => {
-      if (!this.status) {
+      if (this.status === Status.UNDERWAY) {
         this.move();
         this.requestID = requestAnimationFrame(step);
       }
     };
-    this.status = false;
+    this.status = Status.UNDERWAY;
     this.requestID = requestAnimationFrame(step);
     return this;
   }
@@ -376,8 +376,9 @@ class Snake {
     } = this;
     if (requestID !== -1) {
       cancelAnimationFrame(requestID);
+      this.status = Status.PAUSE;
+      this.requestID = -1;
     }
-    this.status = true;
     return this;
   }
 }
