@@ -1,3 +1,5 @@
+import Hammer from 'hammerjs';
+
 import deepEqual from 'deep-equal';
 
 import Rtl from './Rtl';
@@ -20,6 +22,7 @@ class Snake {
    */
   constructor(options = { size: 10, spread: 2, color: '#000' }) {
     this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
+    this.handleSwipeEvent = this.handleSwipeEvent.bind(this);
     this.handleBlurEvent = this.handleBlurEvent.bind(this);
 
     const defaultOptitons = Snake.getDefaultOptions();
@@ -263,6 +266,10 @@ class Snake {
   bindKeyboardEvent() {
     window.addEventListener('keydown', this.handleKeyboardEvent);
     window.addEventListener('blur', this.handleBlurEvent);
+
+    const hammer = new Hammer(document);
+    hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    hammer.on('swipe', this.handleSwipeEvent);
   }
 
   /**
@@ -281,6 +288,34 @@ class Snake {
    */
   handleBlurEvent(event) {
     this.actions.changeGameStatus({ status: Status.PAUSE });
+  }
+
+  /**
+   * @method
+   */
+  handleSwipeEvent(event) {
+    const {
+      direction,
+    } = event;
+    let rtl;
+    switch (direction) {
+      case 1:
+        rtl = Rtl.None;
+        break;
+      case 2:
+        rtl = Rtl.Left;
+        break;
+      case 4:
+        rtl = Rtl.Right;
+        break;
+      case 8:
+        rtl = Rtl.Up;
+        break;
+      case 16:
+        rtl = Rtl.Down;
+        break;
+    }
+    this.translate(rtl);
   }
 
   /**
