@@ -122,6 +122,7 @@ class SnakeEatEggs {
       case Status.PENDING:
         if (this.status === Status.END) {
           this.actions.resetSnakeEatEggs();
+          this.eggs.lay();
           this.actions.changeGameStatus({ status: Status.UNDERWAY });
         }
         break;

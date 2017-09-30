@@ -135,7 +135,6 @@ class Eggs {
    */
   reset() {
     this.clear();
-    this.lay();
     return this;
   }
 
