@@ -106,9 +106,6 @@ function moveSnake(state, action) {
 }
 
 const initialState = fromJS({
-  info: {
-    score: 0,
-  },
   boundary: {
     width: 0,
     height: 0,

@@ -287,7 +287,9 @@ class Snake {
    * @method
    */
   handleBlurEvent(event) {
-    this.actions.changeGameStatus({ status: Status.PAUSE });
+    if (this.status === Status.UNDERWAY) {
+      this.actions.changeGameStatus({ status: Status.PAUSE });
+    }
   }
 
   /**

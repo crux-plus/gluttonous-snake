@@ -4,11 +4,9 @@ import React from 'react';
 
 import Status from '../Status';
 
-import EndConfirm from './EndConfirm';
+import EndDialog from './EndDialog';
 
 import PauseAlert from './PauseAlert';
-
-import GradeAlert from './GradeAlert';
 
 /**
  * @public
@@ -28,9 +26,8 @@ class Dialog extends React.PureComponent {
   render() {
     return (
       <div>
-        <EndConfirm {...this.props} />
+        <EndDialog {...this.props} />
         <PauseAlert {...this.props} />
-        <GradeAlert {...this.props} />
       </div>
     );
   }
