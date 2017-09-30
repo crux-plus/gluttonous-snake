@@ -118,6 +118,7 @@ function collisionDetection({ getState, dispatch }) {
         const size = size2;
         const locations = getIncLocs({ location, size, rtl });
         this.actions.createEgg();
+        this.actions.increaseScore();
         this.actions.increaseSnake({ locations });
       }
     }
