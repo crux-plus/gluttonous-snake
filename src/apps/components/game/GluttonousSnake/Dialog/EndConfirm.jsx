@@ -24,7 +24,7 @@ class EndConfirm extends React.PureComponent {
     };
 
     this.handleTryAgain = this.handleTryAgain.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
+    this.handleViewGrade = this.handleViewGrade.bind(this);
   }
 
   /**
@@ -55,7 +55,7 @@ class EndConfirm extends React.PureComponent {
           <Button onClick={this.handleTryAgain} color='green' inverted>
             <Icon name='checkmark' /> Of Course Yes
           </Button>
-          <Button onClick={this.handleCancel} color='red' inverted>
+          <Button onClick={this.handleViewGrade} color='red' inverted>
             <Icon name='remove' /> No, Thanks
           </Button>
         </Modal.Actions>
@@ -73,7 +73,8 @@ class EndConfirm extends React.PureComponent {
   /**
    * @method
    */
-  handleCancel(event) {
+  handleViewGrade(event) {
+    this.props.actions.changeGameStatus({ status: Status.GRADE });
   }
 }
 

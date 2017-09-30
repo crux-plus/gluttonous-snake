@@ -21,6 +21,10 @@ Object.defineProperties(Status, {
     value: 2,
     writable: false,
   },
+  'GRADE': {
+    value: 3,
+    writable: false,
+  },
 });
 
 Object.freeze(Status);

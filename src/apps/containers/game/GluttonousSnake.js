@@ -20,6 +20,7 @@ function mapStateToProps(state, ownProps = {}) {
     },
   } = state.toJS();
   const {
+    score,
     status,
   } = game.toJS();
   const {
@@ -29,6 +30,7 @@ function mapStateToProps(state, ownProps = {}) {
   } = canvas.toJS();
   return {
     game: {
+      score,
       status,
     },
     canvas: {

@@ -8,6 +8,8 @@ import EndConfirm from './EndConfirm';
 
 import PauseAlert from './PauseAlert';
 
+import GradeAlert from './GradeAlert';
+
 /**
  * @public
  * @class
@@ -28,6 +30,7 @@ class Dialog extends React.PureComponent {
       <div>
         <EndConfirm {...this.props} />
         <PauseAlert {...this.props} />
+        <GradeAlert {...this.props} />
       </div>
     );
   }

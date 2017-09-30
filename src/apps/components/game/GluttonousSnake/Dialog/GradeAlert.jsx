@@ -10,7 +10,7 @@ import Status from '../Status';
  * @public
  * @class
  */
-class PauseAlert extends React.PureComponent {
+class GradeAlert extends React.PureComponent {
   /**
    * @constructor
    */
@@ -20,9 +20,9 @@ class PauseAlert extends React.PureComponent {
       status,
     } = this.props;
     this.state = {
-      open: (status === Status.PAUSE),
+      open: (status === Status.GRADE),
     };
-    this.handleResume = this.handleResume.bind(this);
+    this.handleGoBack = this.handleGoBack.bind(this);
   }
 
   /**
@@ -34,7 +34,7 @@ class PauseAlert extends React.PureComponent {
         status,
       } = props;
       return {
-        open: (status === Status.PAUSE),
+        open: (status === Status.GRADE),
       };
     });
   }
@@ -45,13 +45,13 @@ class PauseAlert extends React.PureComponent {
   render() {
     return (
       <Modal open={this.state.open} basic size='small'>
-        <Header icon='pause circle' content='Sorry, Game is paused!!' />
+        <Header icon='trophy' content='Congratulations!!' />
         <Modal.Content>
-          <p>The game was forced to stop, would you want resume?</p>
+          <p>Your have eaten {this.props.score} eggs.</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleResume} color='green' inverted>
-            <Icon name='play' /> Resume
+          <Button onClick={this.handleGoBack} color='green' inverted>
+            <Icon name='arrow circle right' /> Go Back
           </Button>
         </Modal.Actions>
       </Modal>
@@ -61,19 +61,21 @@ class PauseAlert extends React.PureComponent {
   /**
    * @method
    */
-  handleResume(event) {
-    this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
+  handleGoBack(event) {
+    this.props.actions.changeGameStatus({ status: Status.END });
   }
 }
 
 // Specifies the verification rule for props:
-PauseAlert.propTypes = {
+GradeAlert.propTypes = {
+  score: PropTypes.number,
   status: PropTypes.number,
 };
 
 // Specifies the default values for props:
-PauseAlert.defaultProps = {
+GradeAlert.defaultProps = {
+  score: 0,
   status: Status.PENDING,
 };
 
-export default PauseAlert;
+export default GradeAlert;
