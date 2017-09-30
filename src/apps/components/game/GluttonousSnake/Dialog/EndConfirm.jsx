@@ -23,7 +23,7 @@ class EndConfirm extends React.PureComponent {
       open: (status === Status.END),
     };
 
-    this.handleAgree = this.handleAgree.bind(this);
+    this.handleTryAgain = this.handleTryAgain.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
 
@@ -52,7 +52,7 @@ class EndConfirm extends React.PureComponent {
           <p>You're biting yourself, would you want try again?</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleAgree} color='green' inverted>
+          <Button onClick={this.handleTryAgain} color='green' inverted>
             <Icon name='checkmark' /> Of Course Yes
           </Button>
           <Button onClick={this.handleCancel} color='red' inverted>
@@ -66,7 +66,7 @@ class EndConfirm extends React.PureComponent {
   /**
    * @method
    */
-  handleAgree(event) {
+  handleTryAgain(event) {
     this.props.actions.resetGame();
   }
 

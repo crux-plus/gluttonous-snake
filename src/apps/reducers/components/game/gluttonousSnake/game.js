@@ -2,6 +2,16 @@ import { fromJS } from 'immutable';
 
 import Status from 'components/game/GluttonousSnake/Status';
 
+function increaseScore(state, action) {
+  let {
+    score,
+  } = state.toJS();
+  score += 1;
+  return state.mergeDeep({
+    score,
+  });
+}
+
 function changeGameStatus(state, action) {
   const {
     payload: {
@@ -14,11 +24,14 @@ function changeGameStatus(state, action) {
 }
 
 const initialState = fromJS({
+  score: 0,
   status: Status.PENDING,
 });
 
 export default function status(state = initialState, action) {
   switch (action.type) {
+    case 'INCREASE_SCORE':
+      return increaseScore(state, action);
     case 'CHANGE_GAME_STATUS':
       return changeGameStatus(state, action);
     case 'RESET_GAME':

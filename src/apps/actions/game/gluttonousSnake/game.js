@@ -6,4 +6,5 @@ export default createActions({
     status,
   }),
   RESET_GAME: null,
+  INCREASE_SCORE: null,
 });

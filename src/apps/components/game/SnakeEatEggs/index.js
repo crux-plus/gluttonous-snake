@@ -14,8 +14,6 @@ import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
 import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
 
-import infoActionCreators from 'actions/game/snakeEatEggs/info';
-
 import { correctionClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
 
 import Status from '../GluttonousSnake/Status';
@@ -81,7 +79,6 @@ class SnakeEatEggs {
       ...eggsActionCreators,
       ...snakeActionCreators,
       ...boundaryActionCreators,
-      ...infoActionCreators,
       ...snakeEatEggsActionCreators,
     }, dispatch);
     this.actions = {
