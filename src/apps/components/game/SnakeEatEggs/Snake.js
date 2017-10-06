@@ -397,15 +397,16 @@ class Snake {
       color,
       body ,
     } = this;
-    body.forEach((location) => {
-      const {
-        x,
-        y,
-      } = location;
-      console.log(color, x, y, size);
-      this.fillStyle = color;
-      this.context.fillRect(x, y, size, size);
-    });
+    if (Array.isArray(body)) {
+      body.forEach((location) => {
+        const {
+          x,
+          y,
+        } = location;
+        this.fillStyle = color;
+        this.context.fillRect(x, y, size, size);
+      });
+    }
     return this;
   }
 
