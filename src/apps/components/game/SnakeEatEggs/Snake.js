@@ -7,6 +7,7 @@ import Rtl from './Rtl';
 import Status from '../GluttonousSnake/Status';
 
 const Sym = Object.freeze({
+  MOVE: Symbol('move'),
   SIZE: Symbol('size'),
   RTL: Symbol('rtl'),
   BODY: Symbol('body'),
@@ -58,7 +59,7 @@ class Snake {
         },
       ],
       requestID: -1,
-      isCancel: true,
+      move: false,
       boundary: null,
       rtl: Rtl.None,
       length: 1,
@@ -115,10 +116,10 @@ class Snake {
    */
   set rtl(rtl) {
     if (!deepEqual(this.rtl, rtl)) {
-      console.log('ss');
       this[Sym.RTL] = rtl;
-      this.cancelMoveAnimation();
-      this.requestMoveAnimation();
+      if (rtl !== Rtl.None) {
+        this.move = true;
+      }
     }
   }
 
@@ -132,7 +133,7 @@ class Snake {
   /**
    * @method
    */
-  get move() {
+  get moveStep() {
     const {
       spread,
       rtl,
@@ -142,10 +143,10 @@ class Snake {
       x,
       y,
     } = location;
-    let move;
+    let moveStep;
     switch (rtl) {
       case Rtl.Down:
-        move = () => {
+        moveStep = () => {
           const delta = {
             x: 0,
             y: spread,
@@ -154,7 +155,7 @@ class Snake {
         }
         break;
       case Rtl.Left:
-        move = () => {
+        moveStep = () => {
           const delta ={
             x: -spread,
             y: 0,
@@ -163,7 +164,7 @@ class Snake {
         }
         break;
       case Rtl.Up:
-        move = () => {
+        moveStep = () => {
           const delta = {
             x: 0,
             y: -spread,
@@ -172,7 +173,7 @@ class Snake {
         }
         break;
       case Rtl.Right:
-        move = () => {
+        moveStep = () => {
           const delta = {
             x: spread,
             y: 0,
@@ -181,9 +182,9 @@ class Snake {
         }
         break;
       default:
-        move = new Function();
+        moveStep = new Function();
     }
-    return move;
+    return moveStep;
   }
 
   /**
@@ -227,6 +228,31 @@ class Snake {
    */
   get status() {
     return this[Sym.STATUS];
+  }
+
+  /**
+   * @method
+   */
+  set move(move) {
+    if (!deepEqual(this.move, move)) {
+      this[Sym.MOVE] = move;
+      if (move === true) {
+        this.cancelMoveAnimation();
+        this.requestMoveAnimation();
+      } else if (move === false) {
+        this.cancelMoveAnimation();
+      }
+    } else if (move === true) {
+      this.cancelMoveAnimation();
+      this.requestMoveAnimation();
+    }
+  }
+
+  /**
+   * @method
+   */
+  get move() {
+    return this[Sym.MOVE];
   }
 
   /**
@@ -325,7 +351,7 @@ class Snake {
    * @method
    */
   reset() {
-    this.cancelMoveAnimation();
+    this.move = false;
     this.bindKeyboardEvent();
     this.clearAll();
     return this;
@@ -374,8 +400,8 @@ class Snake {
    * @method
    */
   pause() {
+    this.move = false;
     this.removeKeyboardEvent();
-    this.cancelMoveAnimation();
     return this;
   }
 
@@ -383,7 +409,7 @@ class Snake {
    * @method
    */
   resume() {
-    if (this.isCancel === false) {
+    if (this.move === true) {
       this.requestMoveAnimation();
     }
     this.bindKeyboardEvent();
@@ -417,12 +443,11 @@ class Snake {
    */
   requestMoveAnimation() {
     const step = () => {
-      if (this.status === Status.UNDERWAY && this.isCancel === false) {
-        this.move();
+      if (this.status === Status.UNDERWAY && this.move === true) {
+        this.moveStep();
         this.requestID = requestAnimationFrame(step);
       }
     };
-    this.isCancel = false;
     this.requestID = requestAnimationFrame(step);
     return this;
   }
@@ -434,7 +459,6 @@ class Snake {
     const {
       requestID,
     } = this;
-    this.isCancel = true;
     if (requestID !== -1) {
       cancelAnimationFrame(requestID);
     }

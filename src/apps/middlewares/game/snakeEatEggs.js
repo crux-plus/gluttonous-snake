@@ -209,7 +209,7 @@ function boundaryDetection({ getState, dispatch }) {
         },
       } = getState().toJS();
       if (deepEqual(head, prevHead)) {
-        this.snake.cancelMoveAnimation();
+        this.snake.move = false;
       }
     } else {
       next(action);
