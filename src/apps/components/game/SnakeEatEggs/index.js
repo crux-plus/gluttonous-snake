@@ -102,11 +102,13 @@ class SnakeEatEggs {
       store,
       eggs,
       snake,
+      background,
     } = this;
     store.subscribe(() => {
       const state = store.getState().toJS();
       eggs.mapStateToProps(state);
       snake.mapStateToProps(state);
+      background.mapStateToProps(state);
     });
   }
 

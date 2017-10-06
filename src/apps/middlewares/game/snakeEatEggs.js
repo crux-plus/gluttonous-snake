@@ -163,12 +163,14 @@ function selfEatingDetection({ getState, dispatch }) {
 
 function correctionClean({ getState, dispatch }) {
   return next => action => {
-    next(action);
     switch (action.type) {
       case 'MOVE_SNAKE':
+        this.background.draw();
         this.eggs.draw();
+        next(action);
         break;
       case 'TRANSLATE_EGGS':
+        next(action);
         const state = getState();
         const {
           snake: {
@@ -181,6 +183,8 @@ function correctionClean({ getState, dispatch }) {
           this.snake.draw();
         }
         break;
+      default:
+        next(action);
     }
   }
 }
