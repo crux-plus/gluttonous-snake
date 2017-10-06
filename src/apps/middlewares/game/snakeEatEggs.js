@@ -168,7 +168,7 @@ function correctionClean({ getState, dispatch }) {
       case 'MOVE_SNAKE':
         this.eggs.draw();
         break;
-      case 'CREATE_EGG':
+      case 'TRANSLATE_EGGS':
         const state = getState();
         const {
           snake: {

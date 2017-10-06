@@ -46,9 +46,9 @@ class SnakeEatEggs {
     this.initActions(actions);
 
     this.initInstances(context);
-    this.boundary = boundary;
-
     this.bindSubscribe();
+
+    this.boundary = boundary;
   }
 
   /**

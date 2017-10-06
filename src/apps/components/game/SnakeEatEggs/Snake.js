@@ -402,6 +402,7 @@ class Snake {
         x,
         y,
       } = location;
+      console.log(color, x, y, size);
       this.fillStyle = color;
       this.context.fillRect(x, y, size, size);
     });
