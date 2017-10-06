@@ -210,7 +210,6 @@ function boundaryDetection({ getState, dispatch }) {
       } = getState().toJS();
       if (deepEqual(head, prevHead)) {
         this.snake.cancelMoveAnimation();
-        console.log(this.snake.isCancel);
       }
     } else {
       next(action);
