@@ -65,20 +65,6 @@ class GluttonousSnakeCanvas extends Canvas {
   /**
    * @method
    */
-  render() {
-    return (
-      <canvas
-        id={this.state.id}
-        width={this.state.width}
-        height={this.state.height}
-      >
-      </canvas>
-    );
-  }
-
-  /**
-   * @method
-   */
   componentDidUpdate(prevProps, prevState) {
     const {
       snakeEatEggs,
