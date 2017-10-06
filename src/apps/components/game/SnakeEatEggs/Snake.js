@@ -409,9 +409,7 @@ class Snake {
    * @method
    */
   resume() {
-    if (this.move === true) {
-      this.requestMoveAnimation();
-    }
+    this.move = true;
     this.bindKeyboardEvent();
     return this;
   }
