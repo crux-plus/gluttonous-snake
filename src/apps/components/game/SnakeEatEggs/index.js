@@ -30,6 +30,8 @@ import Eggs from './Eggs';
 
 import Snake from './Snake';
 
+import Background from './Background';
+
 const Sym = Object.freeze({
   STATUS: Symbol('status'),
   BOUNDARY: Symbol('boundary'),
@@ -117,6 +119,7 @@ class SnakeEatEggs {
     } = this;
     this.snake = new Snake({ context, actions });
     this.eggs = new Eggs({ context, actions });
+    this.background = new Background({ context, actions });
     this.status = Status.PENDING;
   }
 
