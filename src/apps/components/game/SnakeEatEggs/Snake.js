@@ -58,7 +58,7 @@ class Snake {
         },
       ],
       requestID: -1,
-      isCancel: false,
+      isCancel: true,
       boundary: null,
       rtl: Rtl.None,
       length: 1,
@@ -115,6 +115,7 @@ class Snake {
    */
   set rtl(rtl) {
     if (!deepEqual(this.rtl, rtl)) {
+      console.log('ss');
       this[Sym.RTL] = rtl;
       this.cancelMoveAnimation();
       this.requestMoveAnimation();
@@ -359,8 +360,7 @@ class Snake {
       body,
     } = this;
     if (Array.isArray(body)) {
-      const length = body.length;
-      const tail = body[length - 1];
+      const tail = body[body.length - 1];
       const {
         x,
         y,
@@ -383,7 +383,7 @@ class Snake {
    * @method
    */
   resume() {
-    if (this.isCancel === true) {
+    if (this.isCancel === false) {
       this.requestMoveAnimation();
     }
     this.bindKeyboardEvent();
