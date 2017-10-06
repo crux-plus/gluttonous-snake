@@ -117,7 +117,7 @@ function collisionDetection({ getState, dispatch }) {
       if (checkTwoSquareIntersection(square1, square2)) {
         const size = size2;
         const locations = getIncLocs({ location, size, rtl });
-        this.actions.createEgg();
+        this.actions.translateEggs();
         this.actions.increaseScore();
         this.actions.increaseSnake({ locations });
       }
@@ -185,7 +185,17 @@ function correctionClean({ getState, dispatch }) {
   }
 }
 
+function translateEggs({ getState, dispatch }) {
+  return next => action => {
+    next(action);
+    if (action.type === 'RESIZE_BOUNDARY') {
+      this.eggs.translate();
+    }
+  }
+}
+
 export {
+  translateEggs,
   correctionClean,
   collisionDetection,
   selfEatingDetection,

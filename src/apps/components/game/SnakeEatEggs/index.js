@@ -14,7 +14,12 @@ import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
 
 import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
 
-import { correctionClean, collisionDetection, selfEatingDetection } from 'middlewares/game/snakeEatEggs';
+import {
+  translateEggs,
+  correctionClean,
+  collisionDetection,
+  selfEatingDetection,
+} from 'middlewares/game/snakeEatEggs';
 
 import Status from '../GluttonousSnake/Status';
 
@@ -40,13 +45,10 @@ class SnakeEatEggs {
     this.initStore();
     this.initActions(actions);
 
-    this.boundary = boundary;
     this.initInstances(context);
-    this.status = Status.PENDING;
+    this.boundary = boundary;
 
     this.bindSubscribe();
-
-    this.eggs.lay();
   }
 
   /**
@@ -55,6 +57,7 @@ class SnakeEatEggs {
    */
   initStore() {
     const middleware = [
+      translateEggs.bind(this),
       correctionClean.bind(this),
       collisionDetection.bind(this),
       selfEatingDetection.bind(this),
@@ -112,6 +115,7 @@ class SnakeEatEggs {
     } = this;
     this.snake = new Snake({ context, actions });
     this.eggs = new Eggs({ context, actions });
+    this.status = Status.PENDING;
   }
 
   /**
@@ -122,7 +126,7 @@ class SnakeEatEggs {
       case Status.PENDING:
         if (this.status === Status.END) {
           this.actions.resetSnakeEatEggs();
-          this.eggs.lay();
+          this.eggs.translate();
           this.actions.changeGameStatus({ status: Status.UNDERWAY });
         }
         break;

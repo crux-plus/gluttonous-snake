@@ -38,7 +38,7 @@ function ramLoc({ size, boundary }) {
   };
 }
 
-function createEgg(state, action) {
+function translateEggs(state, action) {
   const {
     boundary,
     eggs: {
@@ -132,8 +132,8 @@ const initialState = fromJS({
 
 export default function crossSliceReducer(state = initialState, action) {
   switch (action.type) {
-    case 'CREATE_EGG':
-      return createEgg(state, action);
+    case 'TRANSLATE_EGGS':
+      return translateEggs(state, action);
     case 'RESET_SNAKE_EAT_EGGS':
       return resetSnakeEatEggs(state, action);
     case 'MOVE_SNAKE':

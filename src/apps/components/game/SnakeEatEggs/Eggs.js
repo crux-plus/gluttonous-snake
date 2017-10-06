@@ -124,8 +124,8 @@ class Eggs {
   /**
    * @method
    */
-  lay() {
-    this.actions.createEgg();
+  translate() {
+    this.actions.translateEggs();
     return this;
   }
 
