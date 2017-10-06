@@ -57,8 +57,8 @@ class Snake {
           y: 0,
         },
       ],
-      status: false,
       requestID: -1,
+      isCancel: false,
       boundary: null,
       rtl: Rtl.None,
       length: 1,
@@ -267,7 +267,7 @@ class Snake {
     window.addEventListener('keydown', this.handleKeyboardEvent);
     window.addEventListener('blur', this.handleBlurEvent);
 
-    const hammer = new Hammer(document);
+    const hammer = new Hammer(window);
     hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     hammer.on('swipe', this.handleSwipeEvent);
   }
@@ -383,7 +383,9 @@ class Snake {
    * @method
    */
   resume() {
-    this.requestMoveAnimation();
+    if (this.isCancel === true) {
+      this.requestMoveAnimation();
+    }
     this.bindKeyboardEvent();
     return this;
   }
@@ -415,12 +417,12 @@ class Snake {
    */
   requestMoveAnimation() {
     const step = () => {
-      // @FIXME
-      if (this.status === Status.UNDERWAY) {
+      if (this.status === Status.UNDERWAY && this.isCancel === false) {
         this.move();
         this.requestID = requestAnimationFrame(step);
       }
     };
+    this.isCancel = false;
     this.requestID = requestAnimationFrame(step);
     return this;
   }
@@ -432,9 +434,9 @@ class Snake {
     const {
       requestID,
     } = this;
+    this.isCancel = true;
     if (requestID !== -1) {
       cancelAnimationFrame(requestID);
-      this.requestID = -1;
     }
     return this;
   }

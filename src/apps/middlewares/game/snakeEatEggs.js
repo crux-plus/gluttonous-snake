@@ -194,9 +194,34 @@ function translateEggs({ getState, dispatch }) {
   }
 }
 
+function boundaryDetection({ getState, dispatch }) {
+  return next => action => {
+    if (action.type === 'MOVE_SNAKE') {
+      const {
+        snake: {
+          body: [prevHead],
+        },
+      } = getState().toJS();
+      next(action);
+      const {
+        snake: {
+          body: [head],
+        },
+      } = getState().toJS();
+      if (deepEqual(head, prevHead)) {
+        this.snake.cancelMoveAnimation();
+        console.log(this.snake.isCancel);
+      }
+    } else {
+      next(action);
+    }
+  }
+}
+
 export {
   translateEggs,
   correctionClean,
+  boundaryDetection,
   collisionDetection,
   selfEatingDetection,
 };

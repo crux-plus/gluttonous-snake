@@ -17,6 +17,7 @@ import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.j
 import {
   translateEggs,
   correctionClean,
+  boundaryDetection,
   collisionDetection,
   selfEatingDetection,
 } from 'middlewares/game/snakeEatEggs';
@@ -59,6 +60,7 @@ class SnakeEatEggs {
     const middleware = [
       translateEggs.bind(this),
       correctionClean.bind(this),
+      boundaryDetection.bind(this),
       collisionDetection.bind(this),
       selfEatingDetection.bind(this),
     ];
