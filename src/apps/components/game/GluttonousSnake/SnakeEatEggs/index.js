@@ -20,7 +20,7 @@ import {
   boundaryDetection,
   collisionDetection,
   selfEatingDetection,
-} from 'middlewares/game/snakeEatEggs';
+} from 'middlewares/game/gluttonousSnake/snakeEatEggs';
 
 import Status from '../Status';
 

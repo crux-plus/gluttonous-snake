@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 
 import deepEqual from 'deep-equal';
 
-import { checkTwoSquareIntersection } from 'helpers/game/snakeEatEggs';
+import { checkTwoSquareIntersection } from 'helpers/game/gluttonousSnake/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
 
