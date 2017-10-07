@@ -4,9 +4,9 @@ import deepEqual from 'deep-equal';
 
 import { checkTwoSquareIntersection } from 'helpers/game/snakeEatEggs';
 
-import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
+import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
+import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
 
 import gameActionCreators from 'actions/game/gluttonousSnake/game';
 

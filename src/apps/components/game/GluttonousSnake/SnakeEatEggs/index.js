@@ -6,13 +6,13 @@ import deepEqual from 'deep-equal';
 
 import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
 
-import snakeActionCreators from 'actions/game/snakeEatEggs/snake';
+import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
+import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
 
-import boundaryActionCreators from 'actions/game/snakeEatEggs/boundary';
+import boundaryActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/boundary';
 
-import snakeEatEggsActionCreators from 'actions/game/snakeEatEggs/snakeEatEggs.js';
+import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
 
 import {
   translateEggs,
