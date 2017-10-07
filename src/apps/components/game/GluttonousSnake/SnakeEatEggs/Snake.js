@@ -2,9 +2,9 @@ import Hammer from 'hammerjs';
 
 import deepEqual from 'deep-equal';
 
-import Rtl from './Rtl';
+import Rtl from '../Rtl';
 
-import Status from '../GluttonousSnake/Status';
+import Status from '../Status';
 
 const Sym = Object.freeze({
   MOVE: Symbol('move'),

@@ -22,9 +22,9 @@ import {
   selfEatingDetection,
 } from 'middlewares/game/snakeEatEggs';
 
-import Status from '../GluttonousSnake/Status';
+import Status from '../Status';
 
-import Rtl from './Rtl';
+import Rtl from '../Rtl';
 
 import Eggs from './Eggs';
 

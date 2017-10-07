@@ -1,4 +1,4 @@
-import Rtl from 'components/game/SnakeEatEggs/Rtl';
+import Rtl from 'components/game/GluttonousSnake/Rtl';
 
 import { fromJS } from 'immutable';
 

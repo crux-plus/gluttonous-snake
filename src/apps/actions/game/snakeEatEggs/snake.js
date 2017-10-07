@@ -1,7 +1,7 @@
 // Flux Standard Action utilities for Redux.
 import { createActions } from 'redux-actions';
 
-import Rtl from 'components/game/SnakeEatEggs/Rtl';
+import Rtl from 'components/game/GluttonousSnake/Rtl';
 
 export default createActions({
   TRANSLATE_SNAKE: ({ rtl=Rtl.None }) => ({

@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal';
 
-import Status from '../GluttonousSnake/Status';
+import Status from '../Status';
 
 const Sym = Object.freeze({
   SIZE: Symbol('size'),

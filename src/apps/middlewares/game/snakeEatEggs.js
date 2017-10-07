@@ -10,7 +10,7 @@ import eggsActionCreators from 'actions/game/snakeEatEggs/eggs';
 
 import gameActionCreators from 'actions/game/gluttonousSnake/game';
 
-import Rtl from 'components/game/SnakeEatEggs/Rtl';
+import Rtl from 'components/game/GluttonousSnake/Rtl';
 
 import Status from 'components/game/GluttonousSnake/Status';
 

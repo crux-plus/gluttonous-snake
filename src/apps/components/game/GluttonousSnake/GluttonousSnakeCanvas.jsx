@@ -2,7 +2,7 @@ import React from 'react';
 
 import Canvas from 'components/common/Canvas';
 
-import SnakeEatEggs from '../SnakeEatEggs';
+import SnakeEatEggs from './SnakeEatEggs';
 
 import Status from './Status';
 
