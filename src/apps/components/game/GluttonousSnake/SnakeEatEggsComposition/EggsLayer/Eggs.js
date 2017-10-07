@@ -6,6 +6,7 @@ const Sym = Object.freeze({
   SIZE: Symbol('size'),
   LOCATION: Symbol('location'),
   STATUS: Symbol('status'),
+  CONTEXT: Symbol('context'),
 });
 
 /**
@@ -59,6 +60,24 @@ class Eggs {
     } = state;
     Object.assign(this, eggs);
   }
+
+  /**
+   * @method
+   */
+  set context(context) {
+    if (!deepEqual(this.context, context)) {
+      this.clear();
+      this[Sym.CONTEXT] = context;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get context() {
+    return this[Sym.CONTEXT] = context;
+  }
+
 
   /**
    * @method

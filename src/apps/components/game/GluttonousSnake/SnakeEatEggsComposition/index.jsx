@@ -1,36 +1,19 @@
-import { createStore, bindActionCreators, applyMiddleware } from 'redux';
-
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 import deepEqual from 'deep-equal';
 
-import snakeEatEggs from 'reducers/components/game/snakeEatEggs';
-
-import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
-
-import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
-
-import boundaryActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/boundary';
-
-import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
-
-import {
-  translateEggs,
-  correctionClean,
-  boundaryDetection,
-  collisionDetection,
-  selfEatingDetection,
-} from 'middlewares/game/gluttonousSnake/snakeEatEggs';
 
 import Status from '../Status';
 
 import Rtl from '../Rtl';
 
-import Eggs from './Eggs';
+import EggsLayer from './EggsLayer';
 
-import Snake from './Snake';
+import SnakeLayer from './SnakeLayer';
 
-import Background from './Background';
+import BackgroundLayer from './BackgroundLayer';
+
+import { Provider } from 'react-redux';
+
+import React from 'react';
 
 const Sym = Object.freeze({
   STATUS: Symbol('status'),
@@ -40,6 +23,30 @@ const Sym = Object.freeze({
 /**
  * @class
  */
+class SnakeEatEggsComposition extends React.PureComponent {
+  /**
+   * @method
+   */
+  constructor(props) {
+    super(props);
+  }
+
+  /**
+   * @method
+   */
+  render() {
+    return (
+      <Provider store={store}>
+        <div class="composition">
+          <SnakeLayer />
+          <EggsLayer />
+          <BackgroundLayer />
+        </div>
+      </Provider>
+    );
+  }
+}
+
 class SnakeEatEggs {
   /**
    * @constructor

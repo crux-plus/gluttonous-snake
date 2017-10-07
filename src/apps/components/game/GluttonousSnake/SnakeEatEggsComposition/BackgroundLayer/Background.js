@@ -2,6 +2,7 @@ import deepEqual from 'deep-equal';
 
 const Sym = Object.freeze({
   BOUNDARY: Symbol('boundary'),
+  CONTEXT: Symbol('context'),
 });
 
 /**
@@ -49,6 +50,23 @@ class Background {
       boundary,
     } = state;
     this.boundary = boundary;
+  }
+
+  /**
+   * @method
+   */
+  set context(context) {
+    if (!deepEqual(this.context, context)) {
+      this.clear();
+      this[Sym.CONTEXT] = context;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get context() {
+    return this[Sym.CONTEXT] = context;
   }
 
   /**

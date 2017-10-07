@@ -12,6 +12,7 @@ const Sym = Object.freeze({
   RTL: Symbol('rtl'),
   BODY: Symbol('body'),
   STATUS: Symbol('status'),
+  CONTEXT: Symbol('context'),
 });
 
 /**
@@ -75,6 +76,23 @@ class Snake {
       snake,
     } = state;
     Object.assign(this, snake);
+  }
+
+  /**
+   * @method
+   */
+  set context(context) {
+    if (!deepEqual(this.context, context)) {
+      this.clearAll();
+      this[Sym.CONTEXT] = context;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get context() {
+    return this[Sym.CONTEXT] = context;
   }
 
   /**
