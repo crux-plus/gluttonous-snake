@@ -47,12 +47,12 @@ function mapStateToProps(state, ownProps = {}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-        ...gameActionCreators,
-        ...canvasActionCreators,
-      },
-      dispatch,
+    actions: bindActionCreators({
+        ...snakeActionCreators,
+        ...eggsActionCreators,
+        ...boundaryActionCreators,
+        ...snakeEatEggsActionCreators,
+      }, dispatch,
     ),
   }
 }
