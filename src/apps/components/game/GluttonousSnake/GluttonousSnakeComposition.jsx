@@ -10,7 +10,7 @@ import Status from './Status';
  * @public
  * @class
  */
-class GluttonousSnakeCanvas extends Canvas {
+class GluttonousSnakeComposition extends Canvas {
   /**
    * @method
    */
@@ -76,4 +76,4 @@ class GluttonousSnakeCanvas extends Canvas {
   }
 }
 
-export default GluttonousSnakeCanvas;
+export default GluttonousSnakeComposition;

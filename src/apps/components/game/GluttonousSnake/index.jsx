@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 
 import Status from './Status';
 
-import GluttonousSnakeCanvas from './GluttonousSnakeCanvas';
+import GluttonousSnakeComposition from './GluttonousSnakeComposition';
 
 /**
  * @public
@@ -36,7 +36,7 @@ class GluttonousSnake extends React.PureComponent {
           {...this.props.game}
           actions={this.props.actions}
         />
-        <GluttonousSnakeCanvas
+        <GluttonousSnakeComposition
           {...this.props.canvas}
           status={this.props.game.status}
           actions={this.props.actions}
