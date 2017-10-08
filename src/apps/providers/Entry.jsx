@@ -38,7 +38,7 @@ class Entry extends React.PureComponent {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Route component={IndexSwitch} />
+          <IndexSwitch />
         </Router>
       </Provider>
     );

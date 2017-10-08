@@ -1,7 +1,10 @@
+// Redux DevTools extension.
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+// Ruthlessly simple bindings to keep react-router and redux in sync.
 import { routerMiddleware } from 'react-router-redux';
 
+// Predictable state container for JavaScript apps.
 import { createStore, applyMiddleware } from 'redux';
 
 import entry from 'reducers/entry';
