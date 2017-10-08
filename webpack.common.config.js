@@ -94,10 +94,12 @@ export default {
     alias: {
       'containers': 'containers',
       'components': 'components',
+      'providers': 'providers',
       'helpers': 'helpers',
       'actions': 'actions',
       'routers': 'routers',
       'styles': 'styles',
+      'stores': 'stores',
     },
     /* alternative alias syntax (click to show) */
 

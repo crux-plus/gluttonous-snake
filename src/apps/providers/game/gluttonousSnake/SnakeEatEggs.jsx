@@ -2,9 +2,9 @@ import { Provider } from 'react-redux';
 
 import React from 'react';
 
-import store from 'stores/game/SnakeEatEggs';
+import store from 'stores/game/gluttonousSnake/snakeEatEggs';
 
-import SnakeEatEggsCompContainer from 'containers/game/SnakeEatEggs';
+import SnakeEatEggsContainer from 'containers/game/GluttonousSnake/SnakeEatEggs';
 
 /**
  * @public
@@ -24,8 +24,8 @@ class SnakeEatEggs extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <SnakeEatEggsCompContainer />
-      </Provider>,
+        <SnakeEatEggsContainer />
+      </Provider>
     );
   }
 }

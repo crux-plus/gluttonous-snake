@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 
 import Status from './Status';
 
-import SnakeEatEggs from './SnakeEatEggs';
+import SnakeEatEggs from 'providers/game/gluttonousSnake/SnakeEatEggs';
 
 /**
  * @public

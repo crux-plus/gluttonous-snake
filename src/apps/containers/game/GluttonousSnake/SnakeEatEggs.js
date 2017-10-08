@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import SnakeEatEggsComp from 'components/game/SnakeEatEggsComp';
+import SnakeEatEggs from 'components/game/GluttonousSnake/SnakeEatEggs';
 
 import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
 
@@ -14,34 +14,12 @@ import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEgg
 
 function mapStateToProps(state, ownProps = {}) {
   const {
-    routers: {
-      game: {
-        gluttonousSnake: {
-          game,
-          canvas,
-        },
-      },
-    },
+    eggs,
+    snake,
   } = state.toJS();
-  const {
-    score,
-    status,
-  } = game.toJS();
-  const {
-    id,
-    width,
-    height,
-  } = canvas.toJS();
   return {
-    game: {
-      score,
-      status,
-    },
-    canvas: {
-      id,
-      width,
-      height,
-    },
+    eggs,
+    snake,
   };
 }
 
@@ -57,4 +35,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SnakeEatEggsComp);
+export default connect(mapStateToProps, mapDispatchToProps)(SnakeEatEggs);
