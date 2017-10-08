@@ -18,6 +18,9 @@ export default {
     // must be an absolute path (use the Node.js path module)
     path: path.resolve(__dirname, 'dist'), // string
 
+    // This option determines the name of non-entry chunk files.
+    chunkFilename: '[name].bundle.js',
+
     // the filename template for entry chunks
     filename: '[name]@[hash].js', // for multiple entry points
   },
