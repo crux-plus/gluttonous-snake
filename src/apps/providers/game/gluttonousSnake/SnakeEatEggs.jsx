@@ -24,7 +24,9 @@ class SnakeEatEggs extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <SnakeEatEggsContainer />
+        <SnakeEatEggsContainer
+          {...this.props}
+        />
       </Provider>
     );
   }

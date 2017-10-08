@@ -28,11 +28,11 @@ class GluttonousSnake extends React.PureComponent {
   render() {
     return (
       <div>
-        <Dialog
+        <Loading
           {...this.props.game}
           actions={this.props.actions}
         />
-        <Loading
+        <Dialog
           {...this.props.game}
           actions={this.props.actions}
         />
