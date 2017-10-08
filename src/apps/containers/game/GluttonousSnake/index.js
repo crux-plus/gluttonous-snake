@@ -14,7 +14,6 @@ function mapStateToProps(state, ownProps = {}) {
       game: {
         gluttonousSnake: {
           game,
-          canvas,
         },
       },
     },
@@ -23,20 +22,10 @@ function mapStateToProps(state, ownProps = {}) {
     score,
     status,
   } = game.toJS();
-  const {
-    id,
-    width,
-    height,
-  } = canvas.toJS();
   return {
     game: {
       score,
       status,
-    },
-    canvas: {
-      id,
-      width,
-      height,
     },
   };
 }
