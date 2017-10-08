@@ -49,7 +49,7 @@ class SnakeEatEggs extends React.PureComponent {
    * @method
    */
   componentDidMount() {
-    this.props.changeGameStatus({ status: Status.UNDERWAY });
+    this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
   }
 }
 

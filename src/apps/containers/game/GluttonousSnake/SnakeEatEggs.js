@@ -24,16 +24,15 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
+  const actions = bindActionCreators({
+    ...snakeActionCreators,
+    ...eggsActionCreators,
+    ...boundaryActionCreators,
+    ...snakeEatEggsActionCreators,
+  }, dispatch);
   return {
-    ...ownProps.actions,
-    actions: bindActionCreators({
-        ...snakeActionCreators,
-        ...eggsActionCreators,
-        ...boundaryActionCreators,
-        ...snakeEatEggsActionCreators,
-      }, dispatch,
-    ),
-  }
+    actions: Object.assign({}, ownProps.actions, actions),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SnakeEatEggs);
