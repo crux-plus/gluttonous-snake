@@ -13,7 +13,7 @@ import 'styles/game/gluttonousSnake/snakeEatEggs.css';
 /**
  * @class
  */
-class SnakeEatEggsComp extends React.PureComponent {
+class SnakeEatEggs extends React.PureComponent {
   /**
    * @method
    */
@@ -36,7 +36,6 @@ class SnakeEatEggsComp extends React.PureComponent {
    * @method
    */
   render() {
-    console.log(this.props);
     return (
       <div className="comb">
         <SnakeLayer {...this.props} />
@@ -54,4 +53,4 @@ class SnakeEatEggsComp extends React.PureComponent {
   }
 }
 
-export default SnakeEatEggsComp;
+export default SnakeEatEggs;
