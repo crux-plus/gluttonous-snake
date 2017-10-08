@@ -38,10 +38,9 @@ function getInitialState() {
   };
 }
 
-
 const initialState = fromJS(getInitialState());
 
-function canvas(state = initialState, action) {
+export default (state = initialState, action) =>  {
   switch (action.type) {
     case 'USE_DEFAULT_CANVAS':
       return useDefaultCanvas(state, action);
@@ -52,6 +51,4 @@ function canvas(state = initialState, action) {
     default:
       return state;
   }
-}
-
-export default canvas;
+};

@@ -28,7 +28,7 @@ const initialState = fromJS({
   status: Status.PENDING,
 });
 
-export default function status(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'INCREASE_SCORE':
       return increaseScore(state, action);
