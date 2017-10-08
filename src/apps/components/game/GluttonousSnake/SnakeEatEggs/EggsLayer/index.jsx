@@ -20,8 +20,12 @@ class EggsLayer extends Canvas {
    * @method
    */
   componentDidMount() {
+    const {
+      actions,
+    } = this.props;
     const context = this.getContext();
-    const eggs = new Eggs({ context });
+    const eggs = new Eggs({ context, actions });
+    eggs.translate();
     this.eggs = eggs;
   }
 

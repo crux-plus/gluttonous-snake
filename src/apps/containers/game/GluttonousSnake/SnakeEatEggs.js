@@ -12,7 +12,7 @@ import boundaryActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/bo
 
 import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   const {
     eggs,
     snake,
@@ -23,8 +23,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
+    ...ownProps.actions,
     actions: bindActionCreators({
         ...snakeActionCreators,
         ...eggsActionCreators,

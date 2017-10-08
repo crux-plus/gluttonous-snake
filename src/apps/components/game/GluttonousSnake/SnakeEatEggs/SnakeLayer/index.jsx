@@ -20,8 +20,11 @@ class SnakeLayer extends Canvas {
    * @method
    */
   componentDidMount() {
+    const {
+      actions,
+    } = this.props;
     const context = this.getContext();
-    const snake = new Snake({ context });
+    const snake = new Snake({ context, actions });
     this.snake = snake;
   }
 
@@ -30,7 +33,7 @@ class SnakeLayer extends Canvas {
    */
   componentWillUpdate(nextProps, nextState) {
     const context = this.getContext();
-    this.snake.context = snake;
+    this.snake.context = context;
   }
 }
 

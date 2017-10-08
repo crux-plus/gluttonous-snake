@@ -20,8 +20,11 @@ class BackgroundLayer extends Canvas {
    * @method
    */
   componentDidMount() {
+    const {
+      actions,
+    } = this.props;
     const context = this.getContext();
-    const background = new Background({ context });
+    const background = new Background({ context, actions });
     this.background = background;
   }
 

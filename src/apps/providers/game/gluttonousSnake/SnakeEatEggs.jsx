@@ -1,3 +1,5 @@
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import { Provider } from 'react-redux';
 
 import React from 'react';
@@ -24,9 +26,7 @@ class SnakeEatEggs extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <SnakeEatEggsContainer
-          {...this.props}
-        />
+        <SnakeEatEggsContainer {...this.props} />
       </Provider>
     );
   }

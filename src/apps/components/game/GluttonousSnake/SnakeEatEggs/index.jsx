@@ -8,6 +8,8 @@ import SnakeLayer from './SnakeLayer';
 
 import BackgroundLayer from './BackgroundLayer';
 
+import 'styles/game/gluttonousSnake/snakeEatEggs.css';
+
 /**
  * @class
  */
@@ -22,14 +24,33 @@ class SnakeEatEggsComp extends React.PureComponent {
   /**
    * @method
    */
+  componentWillMount() {
+    const {
+      width,
+      height,
+    } = this.props;
+    this.props.actions.resizeBoundary({ width, height });
+  }
+
+  /**
+   * @method
+   */
   render() {
+    console.log(this.props);
     return (
-      <div>
-        <SnakeLayer />
-        <EggsLayer />
-        <BackgroundLayer />
+      <div className="comb">
+        <SnakeLayer {...this.props} />
+        <EggsLayer {...this.props} />
+        <BackgroundLayer {...this.props} />
       </div>
     );
+  }
+
+  /**
+   * @method
+   */
+  componentDidMount() {
+    this.props.changeGameStatus({ status: Status.UNDERWAY });
   }
 }
 
