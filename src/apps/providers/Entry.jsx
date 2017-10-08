@@ -13,7 +13,7 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 // Renders the first child <Route> or <Redirect> that matches the location.
-import IndexSwitch from 'routers/IndexSwitch';
+import EntrySwitch from 'switchs/Entry';
 import store from 'stores/entry';
 
 // Create a history of your choosing (we're using a browser history in this case)
@@ -38,7 +38,7 @@ class Entry extends React.PureComponent {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <IndexSwitch />
+          <EntrySwitch />
         </Router>
       </Provider>
     );

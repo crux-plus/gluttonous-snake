@@ -95,6 +95,7 @@ export default {
       'containers': 'containers',
       'components': 'components',
       'providers': 'providers',
+      'switchs': 'switchs',
       'helpers': 'helpers',
       'actions': 'actions',
       'routers': 'routers',

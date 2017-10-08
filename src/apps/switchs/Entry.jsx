@@ -2,9 +2,19 @@ import React from 'react';
 
 import { Route, Switch } from 'react-router';
 
-import Game from 'routers/Game';
+import Game from 'routes/Game';
 
-class IndexSwitch extends React.Component {
+class Entry extends React.Component {
+  /**
+   * @method
+   */
+  constructor(props) {
+    super(props);
+  }
+
+  /**
+   * @method
+   */
   render() {
     return (
       <Switch>
@@ -14,4 +24,4 @@ class IndexSwitch extends React.Component {
   }
 }
 
-export default IndexSwitch;
+export default Entry;
