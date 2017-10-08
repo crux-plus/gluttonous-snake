@@ -66,7 +66,7 @@ class Background {
    * @method
    */
   get context() {
-    return this[Sym.CONTEXT] = context;
+    return this[Sym.CONTEXT];
   }
 
   /**

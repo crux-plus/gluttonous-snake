@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal';
 
-import Status from '../Status';
+import Status from '../../Status';
 
 const Sym = Object.freeze({
   SIZE: Symbol('size'),
@@ -75,7 +75,7 @@ class Eggs {
    * @method
    */
   get context() {
-    return this[Sym.CONTEXT] = context;
+    return this[Sym.CONTEXT];
   }
 
 

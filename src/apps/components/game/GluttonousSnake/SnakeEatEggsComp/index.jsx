@@ -11,7 +11,7 @@ import BackgroundLayer from './BackgroundLayer';
 /**
  * @class
  */
-class SnakeEatEggsComposition extends React.PureComponent {
+class SnakeEatEggsComp extends React.PureComponent {
   /**
    * @method
    */
@@ -24,7 +24,7 @@ class SnakeEatEggsComposition extends React.PureComponent {
    */
   render() {
     return (
-      <div class="composition">
+      <div>
         <SnakeLayer />
         <EggsLayer />
         <BackgroundLayer />
@@ -33,4 +33,4 @@ class SnakeEatEggsComposition extends React.PureComponent {
   }
 }
 
-export default SnakeEatEggsComposition;
+export default SnakeEatEggsComp;

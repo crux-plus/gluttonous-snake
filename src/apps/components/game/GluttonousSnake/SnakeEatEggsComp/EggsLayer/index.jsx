@@ -8,7 +8,7 @@ import Eggs from './Eggs';
  * @public
  * @class
  */
-class BackgroundLayer extends Canvas {
+class EggsLayer extends Canvas {
   /**
    * @constructor
    */
@@ -21,8 +21,8 @@ class BackgroundLayer extends Canvas {
    */
   componentDidMount() {
     const context = this.getContext();
-    const background = new Background({ context });
-    this.background = background;
+    const eggs = new Eggs({ context });
+    this.eggs = eggs;
   }
 
   /**
