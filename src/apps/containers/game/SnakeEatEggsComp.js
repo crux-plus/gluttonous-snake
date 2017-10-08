@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import SnakeEatEggsComposition from 'components/game/SnakeEatEggsComposition';
+import SnakeEatEggsComp from 'components/game/SnakeEatEggsComp';
 
 import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
 
@@ -57,4 +57,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SnakeEatEggsComposition);
+export default connect(mapStateToProps, mapDispatchToProps)(SnakeEatEggsComp);
