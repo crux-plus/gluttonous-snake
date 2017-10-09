@@ -1,4 +1,4 @@
-import deepEqual from 'deep-equal';
+import { fromJS } from 'immutable';
 
 const Sym = Object.freeze({
   BOUNDARY: Symbol('boundary'),
@@ -45,18 +45,8 @@ class Background {
   /**
    * @method
    */
-  mapStateToProps(state) {
-    const {
-      boundary,
-    } = state;
-    this.boundary = boundary;
-  }
-
-  /**
-   * @method
-   */
   set context(context) {
-    if (!deepEqual(this.context, context)) {
+    if (this.context !== context) {
       this.clear();
       this[Sym.CONTEXT] = context;
     }
@@ -72,12 +62,33 @@ class Background {
   /**
    * @method
    */
-  set boundary(boundary) {
-    if (!deepEqual(this.boundary, boundary)) {
-      this.clear();
-      this[Sym.BOUNDARY] = boundary;
-      this.draw();
+  set immutable(immutable) {
+    if (!this.immutable.equals(immutable)) {
+      this.boundary = immutable.toJS();
+      this[Sym.IMMUTABLE] = immutable;
     }
+  }
+
+  /**
+   * @method
+   */
+  get immutable() {
+    let immutable;
+    if (this[Sym.IMMUTABLE]) {
+      immutable = this[Sym.IMMUTABLE];
+    } else {
+      immutable = fromJS(Object.assign({}, this));
+    }
+    return immutable;
+  }
+
+  /**
+   * @method
+   */
+  set boundary(boundary) {
+    this.clear();
+    this[Sym.BOUNDARY] = boundary;
+    this.draw();
   }
 
   /**

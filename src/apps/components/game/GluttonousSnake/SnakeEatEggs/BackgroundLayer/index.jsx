@@ -27,6 +27,16 @@ class BackgroundLayer extends Canvas {
     const background = new Background({ context, actions });
     this.background = background;
   }
+
+  /**
+   * @method
+   */
+  componentWillUpdate(nextProps, nextState) {
+    const {
+      immutable,
+    } = nextProps;
+    this.background.immutable = immutable;
+  }
 }
 
 export default BackgroundLayer;
