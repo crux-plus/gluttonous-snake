@@ -40,16 +40,19 @@ class SnakeEatEggs extends React.PureComponent {
           width={this.state.width}
           height={this.state.height}
           actions={this.props.actions}
+          immutable={this.props.immutable.snake}
         />
         <EggsLayer
           width={this.state.width}
           height={this.state.height}
           actions={this.props.actions}
+          immutable={this.props.immutable.eggs}
        />
         <BackgroundLayer
           width={this.state.width}
           height={this.state.height}
           actions={this.props.actions}
+          immutable={this.props.immutable.background}
         />
       </div>
     );
@@ -59,17 +62,24 @@ class SnakeEatEggs extends React.PureComponent {
    * @method
    */
   componentWillReceiveProps(nextProps) {
-    this.setState((prevState, props) => {
-      const {
-        immutable: {
-          boundary,
-        },
-      } = nextProps;
-      return {
-        width: boundary.get('width'),
-        height: boundary.get('height'),
-      };
-    });
+    const {
+      immutable: {
+        boundary,
+      },
+    } = nextProps;
+    if (this.props.immutable.boundary.equals(boundary)) {
+      this.setState((prevState, props) => {
+        const {
+          immutable: {
+            boundary,
+          },
+        } = nextProps;
+        return {
+          width: boundary.get('width'),
+          height: boundary.get('height'),
+        };
+      });
+    }
   }
 
   /**
