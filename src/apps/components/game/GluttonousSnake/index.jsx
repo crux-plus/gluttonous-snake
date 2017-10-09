@@ -37,6 +37,7 @@ class GluttonousSnake extends React.PureComponent {
           actions={this.props.actions}
         />
         <SnakeEatEggs
+          status={this.props.game.status}
           actions={this.props.actions}
         />
       </div>

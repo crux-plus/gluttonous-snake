@@ -33,11 +33,14 @@ class SnakeLayer extends Canvas {
    */
   componentWillUpdate(nextProps, nextState) {
     const {
+      status,
       immutable,
     } = nextProps;
     if (!this.props.immutable.equals(immutable)) {
-      const snake = immutable.toJS()
-      Object.assign(this.snake, snake);
+      this.snake.immutable = immutable;
+    }
+    if (this.props.status !== status) {
+      this.snake.status = status;
     }
   }
 }

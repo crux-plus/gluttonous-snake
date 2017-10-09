@@ -37,21 +37,24 @@ class SnakeEatEggs extends React.PureComponent {
     return (
       <div className="comb">
         <SnakeLayer
+          {...this.props}
+          id={this.props.immutable.snake.get('id')}
           width={this.state.width}
           height={this.state.height}
-          actions={this.props.actions}
           immutable={this.props.immutable.snake}
         />
         <EggsLayer
+          {...this.props}
+          id={this.props.immutable.eggs.get('id')}
           width={this.state.width}
           height={this.state.height}
-          actions={this.props.actions}
           immutable={this.props.immutable.eggs}
        />
         <BackgroundLayer
+          {...this.props}
+          id={this.props.immutable.background.get('id')}
           width={this.state.width}
           height={this.state.height}
-          actions={this.props.actions}
           immutable={this.props.immutable.background}
         />
       </div>

@@ -1,4 +1,4 @@
-import deepEqual from 'deep-equal';
+import { fromJS } from 'immutable';
 
 import Status from '../../Status';
 
@@ -7,6 +7,7 @@ const Sym = Object.freeze({
   LOCATION: Symbol('location'),
   STATUS: Symbol('status'),
   CONTEXT: Symbol('context'),
+  IMMUTABLE: Symbol('immutable'),
 });
 
 /**
@@ -54,18 +55,8 @@ class Eggs {
   /**
    * @method
    */
-  mapStateToProps(state) {
-    const {
-      eggs,
-    } = state;
-    Object.assign(this, eggs);
-  }
-
-  /**
-   * @method
-   */
   set context(context) {
-    if (!deepEqual(this.context, context)) {
+    if (this.context !== context) {
       this.clear();
       this[Sym.CONTEXT] = context;
     }
@@ -78,14 +69,41 @@ class Eggs {
     return this[Sym.CONTEXT];
   }
 
+  /**
+   * @method
+   */
+  set immutable(immutable) {
+    if (!this.immutable.equals(immutable)) {
+      if (this.immutable.get('location') !== immutable.get('location')) {
+        this.location = immutable.get('location').toJS();
+      }
+
+      if (this.immutable.get('size') !== immutable.get('size')) {
+        this.size = immutable.get('size');
+      }
+
+      this[Sym.IMMUTABLE] = immutable;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get immutable() {
+    let immutable;
+    if (this[Sym.IMMUTABLE]) {
+      immutable = this[Sym.IMMUTABLE];
+    } else {
+      immutable = fromJS(Object.assign({}, this));
+    }
+    return immutable;
+  }
 
   /**
    * @method
    */
   set size(size) {
-    if (!deepEqual(this.size, size)) {
-      this[Sym.SIZE] = size;
-    }
+    this[Sym.SIZE] = size;
   }
 
   get size() {
@@ -96,11 +114,9 @@ class Eggs {
    * @method
    */
   set location(location) {
-    if (!deepEqual(this.location, location)) {
-      this.clear();
-      this[Sym.LOCATION] = location;
-      this.draw();
-    }
+    this.clear();
+    this[Sym.LOCATION] = location;
+    this.draw();
   }
 
   /**
@@ -127,7 +143,7 @@ class Eggs {
    * @method
    */
   set status(status) {
-    if (!deepEqual(this.status, status)) {
+    if (this.status !== status) {
       this.processStatus(status);
       this[Sym.STATUS] = status;
     }

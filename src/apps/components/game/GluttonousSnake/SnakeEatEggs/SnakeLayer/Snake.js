@@ -1,6 +1,6 @@
-import Hammer from 'hammerjs';
+import { fromJS } from 'immutable';
 
-import deepEqual from 'deep-equal';
+import Hammer from 'hammerjs';
 
 import Rtl from '../../Rtl';
 
@@ -13,6 +13,7 @@ const Sym = Object.freeze({
   BODY: Symbol('body'),
   STATUS: Symbol('status'),
   CONTEXT: Symbol('context'),
+  IMMUTABLE: Symbol('immutable'),
 });
 
 /**
@@ -71,18 +72,8 @@ class Snake {
   /**
    * @method
    */
-  mapStateToProps(state) {
-    const {
-      snake,
-    } = state;
-    Object.assign(this, snake);
-  }
-
-  /**
-   * @method
-   */
   set context(context) {
-    if (!deepEqual(this.context, context)) {
+    if (this.context !== context) {
       this.clearAll();
       this[Sym.CONTEXT] = context;
     }
@@ -95,15 +86,41 @@ class Snake {
     return this[Sym.CONTEXT];
   }
 
+  set immutable(immutable) {
+    if (!this.immutable.equals(immutable)) {
+      if (this.immutable.get('body') !== immutable.get('body')) {
+        this.body = immutable.get('body').toJS();
+      }
+
+      if (this.immutable.get('size') !== immutable.get('size')) {
+        this.size = immutable.get('size');
+      }
+
+      if (this.immutable.get('rtl') !== immutable.get('rtl')) {
+        this.rtl = immutable.get('rtl');
+      }
+
+      this[Sym.IMMUTABLE] = immutable;
+    }
+  }
+
+  get immutable() {
+    let immutable;
+    if (this[Sym.IMMUTABLE]) {
+      immutable = this[Sym.IMMUTABLE];
+    } else {
+      immutable = fromJS(Object.assign({}, this));
+    }
+    return immutable;
+  }
+
   /**
    * @method
    */
   set body(body) {
-    if (!deepEqual(this.body, body)) {
-      this.clear();
-      this[Sym.BODY] = body;
-      this.draw();
-    }
+    this.clear();
+    this[Sym.BODY] = body;
+    this.draw();
   }
 
   /**
@@ -117,9 +134,7 @@ class Snake {
    * @method
    */
   set size(size) {
-    if (!deepEqual(this.size, size)) {
-      this[Sym.SIZE] = size;
-    }
+    this[Sym.SIZE] = size;
   }
 
   /**
@@ -133,11 +148,9 @@ class Snake {
    * @method
    */
   set rtl(rtl) {
-    if (!deepEqual(this.rtl, rtl)) {
-      this[Sym.RTL] = rtl;
-      if (rtl !== Rtl.None) {
-        this.move = true;
-      }
+    this[Sym.RTL] = rtl;
+    if (rtl !== Rtl.None) {
+      this.move = true;
     }
   }
 
@@ -146,6 +159,74 @@ class Snake {
    */
   get rtl() {
     return this[Sym.RTL];
+  }
+
+  /**
+   * @method
+   */
+  processStatus(status) {
+    switch (status) {
+      case Status.END:
+        this.pause();
+        break;
+      case Status.PENDING:
+        if (this.status === Status.END) {
+          this.reset();
+        }
+        break;
+      case Status.PAUSE:
+        if (this.status === Status.UNDERWAY) {
+          this.pause();
+        }
+        break;
+      case Status.UNDERWAY:
+        if (this.status === Status.PAUSE) {
+          this.resume();
+        }
+        break;
+    }
+  }
+
+  /**
+   * @method
+   */
+  set status(status) {
+    if (this.status !== status) {
+      this.processStatus(status);
+      this[Sym.STATUS] = status;
+    }
+  }
+
+  /**
+   * @method
+   */
+  get status() {
+    return this[Sym.STATUS];
+  }
+
+  /**
+   * @method
+   */
+  set move(move) {
+    if (this.move !== move) {
+      this[Sym.MOVE] = move;
+      if (move === true) {
+        this.cancelMoveAnimation();
+        this.requestMoveAnimation();
+      } else if (move === false) {
+        this.cancelMoveAnimation();
+      }
+    } else if (move === true) {
+      this.cancelMoveAnimation();
+      this.requestMoveAnimation();
+    }
+  }
+
+  /**
+   * @method
+   */
+  get move() {
+    return this[Sym.MOVE];
   }
 
   /**
@@ -203,74 +284,6 @@ class Snake {
         moveStep = new Function();
     }
     return moveStep;
-  }
-
-  /**
-   * @method
-   */
-  processStatus(status) {
-    switch (status) {
-      case Status.END:
-        this.pause();
-        break;
-      case Status.PENDING:
-        if (this.status === Status.END) {
-          this.reset();
-        }
-        break;
-      case Status.PAUSE:
-        if (this.status === Status.UNDERWAY) {
-          this.pause();
-        }
-        break;
-      case Status.UNDERWAY:
-        if (this.status === Status.PAUSE) {
-          this.resume();
-        }
-        break;
-    }
-  }
-
-  /**
-   * @method
-   */
-  set status(status) {
-    if (!deepEqual(this.status, status)) {
-      this.processStatus(status);
-      this[Sym.STATUS] = status;
-    }
-  }
-
-  /**
-   * @method
-   */
-  get status() {
-    return this[Sym.STATUS];
-  }
-
-  /**
-   * @method
-   */
-  set move(move) {
-    if (!deepEqual(this.move, move)) {
-      this[Sym.MOVE] = move;
-      if (move === true) {
-        this.cancelMoveAnimation();
-        this.requestMoveAnimation();
-      } else if (move === false) {
-        this.cancelMoveAnimation();
-      }
-    } else if (move === true) {
-      this.cancelMoveAnimation();
-      this.requestMoveAnimation();
-    }
-  }
-
-  /**
-   * @method
-   */
-  get move() {
-    return this[Sym.MOVE];
   }
 
   /**
@@ -379,7 +392,7 @@ class Snake {
    * @method
    */
   clearAll() {
-    const {
+    let {
       size,
       body,
     } = this;
@@ -399,7 +412,7 @@ class Snake {
    * @method
    */
   clear() {
-    const {
+    let {
       size,
       body,
     } = this;
@@ -436,10 +449,10 @@ class Snake {
    * @method
    */
   draw() {
-    const {
+    let {
       size,
       color,
-      body ,
+      body,
     } = this;
     if (Array.isArray(body)) {
       body.forEach((location) => {

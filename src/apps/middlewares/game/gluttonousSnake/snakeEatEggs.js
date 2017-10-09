@@ -161,43 +161,6 @@ function selfEatingDetection({ getState, dispatch }) {
   }
 }
 
-function correctionClean({ getState, dispatch }) {
-  return next => action => {
-    switch (action.type) {
-      case 'MOVE_SNAKE':
-        this.background.draw();
-        this.eggs.draw();
-        next(action);
-        break;
-      case 'TRANSLATE_EGGS':
-        next(action);
-        const state = getState();
-        const {
-          snake: {
-            body: {
-              length,
-            },
-          },
-        } = state.toJS();
-        if (length <= 1) {
-          this.snake.draw();
-        }
-        break;
-      default:
-        next(action);
-    }
-  }
-}
-
-function translateEggs({ getState, dispatch }) {
-  return next => action => {
-    next(action);
-    if (action.type === 'RESIZE_BOUNDARY') {
-      this.eggs.translate();
-    }
-  }
-}
-
 function boundaryDetection({ getState, dispatch }) {
   return next => action => {
     if (action.type === 'MOVE_SNAKE') {
@@ -223,8 +186,6 @@ function boundaryDetection({ getState, dispatch }) {
 }
 
 export {
-  translateEggs,
-  correctionClean,
   boundaryDetection,
   collisionDetection,
   selfEatingDetection,

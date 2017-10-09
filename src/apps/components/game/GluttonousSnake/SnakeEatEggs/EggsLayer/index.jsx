@@ -33,8 +33,16 @@ class EggsLayer extends Canvas {
    * @method
    */
   componentWillUpdate(nextProps, nextState) {
-    const context = this.getContext();
-    this.eggs.context = context;
+    const {
+      status,
+      immutable,
+    } = nextProps;
+    if (!this.props.immutable.equals(immutable)) {
+      this.eggs.immutable = immutable;
+    }
+    if (this.props.status !== status) {
+      this.eggs.status = status;
+    }
   }
 }
 
