@@ -1,7 +1,5 @@
 import { bindActionCreators } from 'redux';
 
-import deepEqual from 'deep-equal';
-
 import { checkTwoSquareIntersection } from 'helpers/game/gluttonousSnake/snakeEatEggs';
 
 import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
@@ -130,25 +128,16 @@ function collisionDetection({ getState, dispatch }) {
 function selfEatingDetection({ getState, dispatch }) {
   return next => action => {
     if (action.type === 'MOVE_SNAKE') {
-      const state = getState();
-      const {
-        snake: {
-          spread,
-          size,
-          body,
-        },
-      } = state.toJS();
+      const snake = getState().get('snake');
+      const spread = snake.get('spread');
+      const size = snake.get('size');
       const step = size / spread;
-      if (body.length > step) {
+      const body = snake.get('body');
+      if (body.size > step) {
         let head = body.shift();
-        const square1 = {
-          x: head.x,
-          y: head.y,
-          size,
-        };
         body.splice(0, step - 1);
         body.some((location) => {
-          if (deepEqual(head, location)) {
+          if (head.equals(location)) {
             this.outerActions.changeGameStatus({ status: Status.END });
             return true;
           }
@@ -162,18 +151,10 @@ function selfEatingDetection({ getState, dispatch }) {
 function boundaryDetection({ getState, dispatch }) {
   return next => action => {
     if (action.type === 'MOVE_SNAKE') {
-      const {
-        snake: {
-          body: [prevHead],
-        },
-      } = getState().toJS();
+      const prevHead = getState().get('snake').get('body').get(0);
       next(action);
-      const {
-        snake: {
-          body: [head],
-        },
-      } = getState().toJS();
-      if (deepEqual(head, prevHead)) {
+      const head = getState().get('snake').get('body').get(0);
+      if (head.equals(prevHead)) {
         dispatch(snakeActionCreators.changeSnakeMove({ move: false }));
       }
     } else {
