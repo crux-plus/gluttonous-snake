@@ -131,11 +131,11 @@ function selfEatingDetection({ getState, dispatch }) {
       const snake = getState().get('snake');
       const spread = snake.get('spread');
       const size = snake.get('size');
-      const step = size / spread;
       const body = snake.get('body');
+      const step = size / spread;
       if (body.size > step) {
-        let head = body.shift();
-        body.splice(0, step - 1);
+        const head = body.get(0);
+        body.splice(0, step);
         body.some((location) => {
           if (head.equals(location)) {
             this.outerActions.changeGameStatus({ status: Status.END });
