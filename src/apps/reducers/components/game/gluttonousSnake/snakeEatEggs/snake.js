@@ -70,6 +70,17 @@ function restoreSnake(state, action) {
   });
 }
 
+function changeSnakeMove(state, action) {
+  const {
+    payload: {
+      move,
+    },
+  } = action;
+  return state.mergeDeep({
+    move,
+  });
+}
+
 const initialState = fromJS({
   id: currentTime(),
   rtl: Rtl.None,
@@ -95,6 +106,8 @@ export default function snake(state = initialState, action) {
       return translateSnake(state, action);
     case 'RESTORE_SNAKE':
       return restoreSnake(state, action);
+    case 'CHANGE_SNAKE_MOVE':
+      return changeSnakeMove(state, action);
     default:
       return state;
   }

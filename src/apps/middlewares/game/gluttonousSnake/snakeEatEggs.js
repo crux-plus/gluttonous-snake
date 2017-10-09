@@ -174,8 +174,7 @@ function boundaryDetection({ getState, dispatch }) {
         },
       } = getState().toJS();
       if (deepEqual(head, prevHead)) {
-        this.snake.move = false;
-        this.snake.draw();
+        dispatch(snakeActionCreators.changeSnakeMove({ move: false }));
       }
     } else {
       next(action);

@@ -20,4 +20,7 @@ export default createActions({
   ADJUST_SNAKE: ({ spread=0 }) => ({
     spread,
   }),
+  CHANGE_SNAKE_MOVE: ({ move=true }) => ({
+    move,
+  }),
 });
