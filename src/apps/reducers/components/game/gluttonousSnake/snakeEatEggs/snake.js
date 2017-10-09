@@ -73,6 +73,7 @@ function restoreSnake(state, action) {
 const initialState = fromJS({
   id: currentTime(),
   rtl: Rtl.None,
+  move: false,
   length: 1,
   spread: 2,
   size: 10,

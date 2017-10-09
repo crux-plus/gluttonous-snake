@@ -8,8 +8,6 @@ import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake
 
 import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
 
-import gameActionCreators from 'actions/game/gluttonousSnake/game';
-
 import Rtl from 'components/game/GluttonousSnake/Rtl';
 
 import Status from 'components/game/GluttonousSnake/Status';
@@ -117,9 +115,9 @@ function collisionDetection({ getState, dispatch }) {
       if (checkTwoSquareIntersection(square1, square2)) {
         const size = size2;
         const locations = getIncLocs({ location, size, rtl });
-        this.actions.translateEggs();
-        this.actions.increaseScore();
-        this.actions.increaseSnake({ locations });
+        dispatch(eggsActionCreators.translateEggs());
+        dispatch(snakeActionCreators.increaseSnake({ locations }));
+        this.outerActions.increaseScore();
       }
     }
     return next(action);
@@ -151,7 +149,7 @@ function selfEatingDetection({ getState, dispatch }) {
         body.splice(0, step - 1);
         body.some((location) => {
           if (deepEqual(head, location)) {
-            this.actions.changeGameStatus({ status: Status.END });
+            this.outerActions.changeGameStatus({ status: Status.END });
             return true;
           }
         });
