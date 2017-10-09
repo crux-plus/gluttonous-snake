@@ -28,14 +28,15 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const actions = bindActionCreators({
+  let actions = bindActionCreators({
     ...snakeActionCreators,
     ...eggsActionCreators,
     ...boundaryActionCreators,
     ...snakeEatEggsActionCreators,
   }, dispatch);
+  actions = Object.assign({}, ownProps.actions, actions);
   return {
-    actions: Object.assign({}, ownProps.actions, actions),
+    actions,
   };
 }
 
