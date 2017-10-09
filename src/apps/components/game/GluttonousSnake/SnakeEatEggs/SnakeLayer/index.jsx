@@ -39,9 +39,7 @@ class SnakeLayer extends Canvas {
     if (!this.props.immutable.equals(immutable)) {
       this.snake.immutable = immutable;
     }
-    if (this.props.status !== status) {
-      this.snake.status = status;
-    }
+    this.snake.status = status;
   }
 }
 

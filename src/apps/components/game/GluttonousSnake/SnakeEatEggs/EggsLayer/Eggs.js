@@ -170,6 +170,7 @@ class Eggs {
    */
   reset() {
     this.clear();
+    this.translate();
     return this;
   }
 

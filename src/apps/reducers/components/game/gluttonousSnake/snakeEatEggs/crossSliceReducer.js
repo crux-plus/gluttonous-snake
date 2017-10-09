@@ -61,12 +61,24 @@ function translateEggs(state, action) {
 
 function resetSnakeEatEggs(state, action) {
   const {
+    background,
+    eggs,
+    snake,
     boundary: {
       width,
       height,
     },
   } = state.toJS();
   return initialState.mergeDeep({
+    background: {
+      id: background.id,
+    },
+    eggs: {
+      id: eggs.id,
+    },
+    snake: {
+      id: snake.id,
+    },
     boundary: {
       width,
       height,
@@ -106,6 +118,8 @@ function moveSnake(state, action) {
 }
 
 const initialState = fromJS({
+  background: {
+  },
   boundary: {
     width: 0,
     height: 0,

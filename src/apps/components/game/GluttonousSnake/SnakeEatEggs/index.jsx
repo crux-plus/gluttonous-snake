@@ -17,6 +17,20 @@ class SnakeEatEggs extends React.PureComponent {
   /**
    * @method
    */
+  processStatus(status) {
+    switch (status) {
+      case Status.PENDING:
+        if (this.props.status === Status.END) {
+          this.props.actions.resetSnakeEatEggs();
+          this.props.actions.changeGameStatus({ status: Status.UNDERWAY });
+        }
+        break;
+    }
+  }
+
+  /**
+   * @method
+   */
   constructor(props) {
     super(props);
     const {
@@ -82,6 +96,12 @@ class SnakeEatEggs extends React.PureComponent {
           height: boundary.get('height'),
         };
       });
+    }
+    const {
+      status,
+    } = nextProps;
+    if (this.props.status !== status) {
+      this.processStatus(status);
     }
   }
 

@@ -40,9 +40,7 @@ class EggsLayer extends Canvas {
     if (!this.props.immutable.equals(immutable)) {
       this.eggs.immutable = immutable;
     }
-    if (this.props.status !== status) {
-      this.eggs.status = status;
-    }
+    this.eggs.status = status;
   }
 }
 
