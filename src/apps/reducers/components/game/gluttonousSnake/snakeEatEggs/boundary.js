@@ -14,8 +14,8 @@ function resizeBoundary(state, action) {
 }
 
 const initialState = fromJS({
-  width: 0,
-  height: 0,
+  width: 200,
+  height: 200,
 });
 
 export default (state = initialState, action) => {

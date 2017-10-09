@@ -13,13 +13,17 @@ import boundaryActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/bo
 import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
 
 function mapStateToProps(state) {
-  const {
-    eggs,
-    snake,
-  } = state.toJS();
+  const boundary = state.get('boundary');
+  const eggs = state.get('eggs');
+  const snake = state.get('snake');
+  const background = state.get('background');
   return {
-    eggs,
-    snake,
+    immutable: {
+      boundary,
+      eggs,
+      snake,
+      background,
+    },
   };
 }
 

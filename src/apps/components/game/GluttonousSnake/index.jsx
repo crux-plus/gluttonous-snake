@@ -37,8 +37,6 @@ class GluttonousSnake extends React.PureComponent {
           actions={this.props.actions}
         />
         <SnakeEatEggs
-          {...this.props.canvas}
-          status={this.props.game.status}
           actions={this.props.actions}
         />
       </div>
@@ -52,23 +50,12 @@ GluttonousSnake.propTypes = {
   game: PropTypes.shape({
     status: PropTypes.number,
   }),
-  // An object taking on a particular shape
-  canvas: PropTypes.shape({
-    id: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
 };
 
 // Specifies the default values for props:
 GluttonousSnake.defaultProps = {
   game: {
     status: Status.PENDING,
-  },
-  canvas: {
-    id: 0,
-    width: 0,
-    height: 0,
   },
 };
 

@@ -19,17 +19,15 @@ class SnakeEatEggs extends React.PureComponent {
    */
   constructor(props) {
     super(props);
-  }
-
-  /**
-   * @method
-   */
-  componentWillMount() {
     const {
-      width,
-      height,
+      immutable: {
+        boundary,
+      },
     } = this.props;
-    this.props.actions.resizeBoundary({ width, height });
+    this.state = {
+      width: boundary.get('width'),
+      height: boundary.get('height'),
+    };
   }
 
   /**
@@ -38,11 +36,40 @@ class SnakeEatEggs extends React.PureComponent {
   render() {
     return (
       <div className="comb">
-        <SnakeLayer {...this.props} />
-        <EggsLayer {...this.props} />
-        <BackgroundLayer {...this.props} />
+        <SnakeLayer
+          width={this.state.width}
+          height={this.state.height}
+          actions={this.props.actions}
+        />
+        <EggsLayer
+          width={this.state.width}
+          height={this.state.height}
+          actions={this.props.actions}
+       />
+        <BackgroundLayer
+          width={this.state.width}
+          height={this.state.height}
+          actions={this.props.actions}
+        />
       </div>
     );
+  }
+
+  /**
+   * @method
+   */
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState, props) => {
+      const {
+        immutable: {
+          boundary,
+        },
+      } = nextProps;
+      return {
+        width: boundary.get('width'),
+        height: boundary.get('height'),
+      };
+    });
   }
 
   /**

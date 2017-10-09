@@ -31,9 +31,8 @@ class SnakeLayer extends Canvas {
   /**
    * @method
    */
-  componentWillUpdate(nextProps, nextState) {
-    const context = this.getContext();
-    this.snake.context = context;
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
   }
 }
 

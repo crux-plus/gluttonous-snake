@@ -1,6 +1,8 @@
-import Rtl from 'components/game/GluttonousSnake/Rtl';
-
 import { fromJS } from 'immutable';
+
+import { currentTime } from 'helpers/common';
+
+import Rtl from 'components/game/GluttonousSnake/Rtl';
 
 function transformSnake(state, action) {
   const {
@@ -69,6 +71,7 @@ function restoreSnake(state, action) {
 }
 
 const initialState = fromJS({
+  id: currentTime(),
   rtl: Rtl.None,
   length: 1,
   spread: 2,
