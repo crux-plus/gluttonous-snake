@@ -76,6 +76,7 @@
     "imagemin-pngquant": "^5.0.1",
     "immutable": "^3.8.1",
     "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
     "normalize.css": "^7.0.0",
     "raf": "^3.3.2",
     "react": "^15.6.1",
