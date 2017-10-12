@@ -1,4 +1,4 @@
-// Fast, unopinionated, minimalist web framework for node.
+// Expressive middleware for node.js using ES2017 async functions.
 import Koa from 'koa';
 
 // Authority node http serer package.
