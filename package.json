@@ -7,11 +7,11 @@
     "flow": "flow",
     "test": "ava",
     "lint": "eslint src",
-    "build": "webpack && babel src/ctrls -d dist",
-    "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
+    "build": "NODE_ENV=production webpack && babel src/ctrls -d dist",
+    "watch": "NODE_ENV=development webpack-dev-server --open --config webpack.visual.config.babel.js",
     "sync": "gio open http://localhost:3001 && browser-sync start",
-    "serve": "gio open http://localhost:3000 && pm2 kill && pm2 start process.json",
-    "start": "gio open http://localhost:3000 && nodemon src/ctrls/app.js --exec babel-node"
+    "serve": "gio open http://localhost:3000 && NODE_ENV=production pm2 start process.json",
+    "start": "gio open http://localhost:3000 && NODE_ENV=development nodemon src/ctrls/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
