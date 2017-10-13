@@ -2,7 +2,11 @@
   "presets": ["env", "stage-3", "react", "flow"],
   "plugins": [
     [
-      "transform-runtime",
-    ]
+      "transform-runtime", {
+        "helpers": true,
+        "polyfill": true,
+        "regenerator": false,
+      },
+    ],
   ]
 }

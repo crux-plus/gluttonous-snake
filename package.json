@@ -7,23 +7,23 @@
     "flow": "flow",
     "test": "ava",
     "lint": "eslint src",
-    "build": "webpack && babel src/ctrls -d dist",
+    "build": "babel src/ctrls -d dist",
     "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
     "sync": "gio open http://localhost:3001 && browser-sync start",
     "serve": "gio open http://localhost:3000 && pm2 start process.json",
-    "start": "nodemon src/ctrls/app.js --exec babel-node --ignore dist --presets env"
+    "start": "nodemon src/ctrls/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crux-wild/unnamed.git"
+    "url": "git+https://github.com/crux-plus/gluttonous-snake.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/crux-wild/unnamed/issues"
+    "url": "https://github.com/crux-plus/gluttonous-snake/issues"
   },
-  "homepage": "https://github.com/crux-wild/unnamed#readme",
+  "homepage": "https://github.com/crux-plus/gluttonous-snake#readme",
   "devDependencies": {
     "autoprefixer": "^7.1.4",
     "ava": "^0.22.0",
@@ -76,8 +76,9 @@
     "imagemin-pngquant": "^5.0.1",
     "immutable": "^3.8.1",
     "koa": "^2.3.0",
+    "koa-logger": "^3.1.0",
+    "koa-render-view": "^1.0.0",
     "koa-router": "^7.2.1",
-    "koa-views": "^6.1.1",
     "normalize.css": "^7.0.0",
     "raf": "^3.3.2",
     "react": "^15.6.1",
