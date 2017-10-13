@@ -40,7 +40,7 @@ react(app, {
 app
   .use(logger())
   .use(bodyParser())
-  app.use(session({
+  .use(session({
     store: redisStore({
       // Options specified here
     }),
