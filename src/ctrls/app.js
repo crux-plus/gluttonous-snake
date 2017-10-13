@@ -19,6 +19,12 @@ import logger from 'koa-logger';
 // Compress middleware for koa.
 import compress from 'koa-compress';
 
+// koa session store with memory, redis or others.
+import session from 'koa-generic-session';
+
+// koa session with redis.
+import redisStore from 'koa-redis';
+
 // All custome routes.
 import routers from './routers';
 
@@ -32,12 +38,17 @@ react(app, {
 });
 
 app
-  .use(bodyParser())
   .use(logger())
-  .use(routers.routes())
+  .use(bodyParser())
+  app.use(session({
+    store: redisStore({
+      // Options specified here
+    }),
+  }))
   .use(compress({
     threshold: 2048,
     flush: zlib.Z_SYNC_FLUSH,
-  }));
+  }))
+  .use(routers.routes());
 
 http.createServer(app.callback()).listen(3000);
