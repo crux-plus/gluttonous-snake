@@ -25,11 +25,13 @@ import session from 'koa-generic-session';
 // koa session with redis.
 import redisStore from 'koa-redis';
 
+// compact zlib, deflate, inflate, zip library in JavaScript
+import zlib from 'zlib';
+
 // All custome routes.
 import routers from './routers';
 
-// compact zlib, deflate, inflate, zip library in JavaScript
-import zlib from 'zlib';
+import config from './config';
 
 const app = new Koa();
 
@@ -37,18 +39,20 @@ react(app, {
   views: path.join(__dirname, 'views'),
 });
 
-app
-  .use(logger())
-  .use(bodyParser())
-  .use(session({
-    store: redisStore({
-      // Options specified here
-    }),
-  }))
-  .use(compress({
-    threshold: 2048,
-    flush: zlib.Z_SYNC_FLUSH,
-  }))
-  .use(routers.routes());
+app.use(logger());
+app.use(bodyParser());
 
-http.createServer(app.callback()).listen(3000);
+//app.use(session({
+  //store: redisStore({
+    //// Options specified here
+  //}),
+//}));
+
+app.use(compress({
+  threshold: 2048,
+  flush: zlib.Z_SYNC_FLUSH,
+}));
+
+app.use(routers.routes());
+
+http.createServer(app.callback()).listen(config.port);
