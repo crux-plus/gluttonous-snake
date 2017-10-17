@@ -4,7 +4,7 @@ export default {
     port: process.env.PORT || 3000,
   },
   redis: {
-    host: process.env.HOST || 'localhost',
+    host: 'localhost',
     port: '6379',
   },
 };

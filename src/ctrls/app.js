@@ -43,6 +43,7 @@ react(app, {
 });
 
 app.use(logger());
+
 app.use(bodyParser());
 
 app.use(session({
