@@ -25,6 +25,9 @@ import session from 'koa-generic-session';
 // koa session with redis.
 import redisStore from 'koa-redis';
 
+// Terminal utilities for node.js.
+import { terminal as term } from 'terminal-kit';
+
 // compact zlib, deflate, inflate, zip library in JavaScript
 import zlib from 'zlib';
 
@@ -42,11 +45,12 @@ react(app, {
 app.use(logger());
 app.use(bodyParser());
 
-//app.use(session({
-  //store: redisStore({
-    //// Options specified here
-  //}),
-//}));
+app.use(session({
+  store: redisStore({
+    host: config.redis.host,
+    port: config.redis.port,
+  }),
+}));
 
 app.use(compress({
   threshold: 2048,
@@ -55,4 +59,5 @@ app.use(compress({
 
 app.use(routers.routes());
 
-http.createServer(app.callback()).listen(config.port);
+term.blue(`Project is running at http://${config.koa2.host}:${config.koa2.port}/`);
+http.createServer(app.callback()).listen(config.koa2.port);
