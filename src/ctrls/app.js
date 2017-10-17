@@ -7,6 +7,9 @@ import path from 'path';
 // Expressive middleware for node.js using ES2017 async functions.
 import Koa from 'koa';
 
+// Realtime application framework (Node.JS server).
+import socketIO from 'socket.io';
+
 // a body parser for koa.
 import bodyParser from 'koa-bodyparser';
 
@@ -26,7 +29,7 @@ import session from 'koa-generic-session';
 import redisStore from 'koa-redis';
 
 // Terminal utilities for node.js.
-import { terminal as term } from 'terminal-kit';
+import { terminal } from 'terminal-kit';
 
 // compact zlib, deflate, inflate, zip library in JavaScript
 import zlib from 'zlib';
@@ -60,5 +63,7 @@ app.use(compress({
 
 app.use(routers.routes());
 
-term.blue(`Project is running at http://${config.koa2.host}:${config.koa2.port}/`);
-http.createServer(app.callback()).listen(config.koa2.port);
+terminal.blue(`Project is running at http://${config.koa2.host}:${config.koa2.port}/`);
+const server = http.createServer(app.callback());
+const io = socketIO(server);
+server.listen(config.koa2.port);
