@@ -62,7 +62,7 @@ app.use(compress({
 app.use(routers.routes());
 
 const server = http.createServer(app.callback());
-const io = socketIO(server);
+const socket = socketIO(server);
 
 terminal.blue(`Project is running at http://${config.koa2.host}:${config.koa2.port}/`);
 server.listen(config.koa2.port);
