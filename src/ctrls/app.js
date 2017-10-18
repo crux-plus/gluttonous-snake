@@ -41,7 +41,10 @@ import config from './config';
 
 const app = new Koa();
 
-react(app);
+react(app, {
+  // The root directory of view files.
+  views: path.join(__dirname, 'views'),
+});
 
 app.use(logger());
 
@@ -55,7 +58,7 @@ app.use(session({
 }));
 
 app.use(compress({
-  threshold: 2048,
+  threshold: config.compress.threshold,
   flush: zlib.Z_SYNC_FLUSH,
 }));
 
@@ -64,5 +67,5 @@ app.use(routers.routes());
 const server = http.createServer(app.callback());
 const socket = socketIO(server);
 
-terminal.blue(`Project is running at http://${config.koa2.host}:${config.koa2.port}/`);
-server.listen(config.koa2.port);
+terminal.blue(`Project is running at http://${config.host}:${config.port}/`);
+server.listen(config.port);
