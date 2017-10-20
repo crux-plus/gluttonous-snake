@@ -39,7 +39,9 @@ class Boilerplate extends React.PureComponent {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>{this.props.title}</title>
         </Helemt>
-        <body>{this.props.children}</body>
+        <body>
+          {this.props.children}
+        </body>
       </html>
     );
   }
