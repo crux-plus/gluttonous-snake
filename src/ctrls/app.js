@@ -66,6 +66,6 @@ app.use(routers.routes());
 
 const server = http.createServer(app.callback());
 const socket = socketIO(server);
-
-terminal.blue(`Project is running at http://${config.host}:${config.port}/`);
-server.listen(config.port);
+server.listen(config.port, () => {
+  terminal.blue(`Project is running at http://${config.host}:${config.port}/`);
+});
