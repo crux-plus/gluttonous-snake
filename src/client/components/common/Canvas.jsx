@@ -68,6 +68,7 @@ class Canvas extends React.PureComponent {
   render() {
     return (
       <canvas
+        {...this.props}
         id={this.state.id}
         width={this.state.width}
         height={this.state.height}

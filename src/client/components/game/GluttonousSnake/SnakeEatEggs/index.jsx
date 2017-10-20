@@ -51,6 +51,7 @@ class SnakeEatEggs extends React.PureComponent {
     return (
       <div className="comb">
         <BackgroundLayer
+          className="canvas"
           {...this.props}
           id={this.props.immutable.background.get('id')}
           width={this.state.width}
@@ -58,6 +59,7 @@ class SnakeEatEggs extends React.PureComponent {
           immutable={this.props.immutable.boundary}
         />
         <EggsLayer
+          className="canvas"
           {...this.props}
           id={this.props.immutable.eggs.get('id')}
           width={this.state.width}
@@ -65,6 +67,7 @@ class SnakeEatEggs extends React.PureComponent {
           immutable={this.props.immutable.eggs}
        />
         <SnakeLayer
+          className="canvas"
           {...this.props}
           id={this.props.immutable.snake.get('id')}
           width={this.state.width}
