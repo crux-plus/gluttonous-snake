@@ -2,6 +2,6 @@
   position: relative;
 }
 
-.comb canvas {
+.comb .canvas {
   position: absolute;
 }
