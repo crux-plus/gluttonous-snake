@@ -10,9 +10,6 @@ import Koa from 'koa';
 // Realtime application framework (Node.JS server).
 import socketIO from 'socket.io';
 
-// a body parser for koa.
-import bodyParser from 'koa-bodyparser';
-
 // A Koa view engine which renders React components on server.
 import react from 'koa-react-view';
 
@@ -47,8 +44,6 @@ react(app, {
 });
 
 app.use(logger());
-
-app.use(bodyParser());
 
 app.use(session({
   store: redisStore({
