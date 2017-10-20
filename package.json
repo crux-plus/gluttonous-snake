@@ -105,12 +105,8 @@
     "zlib": "^1.0.5"
   },
   "ava": {
-    "files": [
-      "spec/**/*.spec.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
+    "files": ["spec/**/*.spec.js"],
+    "require": ["babel-register"],
     "concurrency": 5,
     "failFast": true,
     "tap": false,
