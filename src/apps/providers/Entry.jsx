@@ -1,9 +1,12 @@
 // Redux DevTools extension.
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 // Official React bindings for Redux.
 import { Provider } from 'react-redux';
+
 // Ruthlessly simple bindings to keep react-router and redux in sync.
 import { syncHistoryWithStore } from 'react-router-redux'
+
 // Declarative routing for React.
 import { Router, Route } from 'react-router-dom';
 

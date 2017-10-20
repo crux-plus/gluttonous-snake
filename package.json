@@ -11,7 +11,7 @@
     "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
     "sync": "gio open http://localhost:3001 && browser-sync start",
     "serve": "pm2 start process.json && redis-server",
-    "start": "nodemon src/ctrls/app.js --exec babel-node && redis-server"
+    "start": "redis-server & nodemon src/ctrls/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -76,7 +76,6 @@
     "imagemin-pngquant": "^5.0.1",
     "immutable": "^3.8.1",
     "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
     "koa-compress": "^2.0.0",
     "koa-generic-session": "^2.0.0",
     "koa-logger": "^3.1.0",
@@ -88,6 +87,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-gesture": "^0.0.5",
+    "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -95,7 +95,6 @@
     "reduce-reducers": "^0.1.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-batched-actions": "^0.1.6",
     "redux-devtools-extension": "^2.13.2",
     "redux-immutable": "^4.0.0",
     "semantic-ui-css": "^2.2.12",
