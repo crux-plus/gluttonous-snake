@@ -46,14 +46,22 @@ react(app, {
 app.use(logger());
 
 app.use(session({
+  // session store instance. It can be any Object that has
+  // the methods set, get, destroy like MemoryStore.
   store: redisStore({
+    // all node_redis options - Useful things include url,
+    // host, port, and path to the server. Defaults to 127.0.0.1:6379
     host: config.redis.host,
     port: config.redis.port,
   }),
 }));
 
 app.use(compress({
+  // Minimum response size in bytes to compress.
+  // Default 1024 bytes or 1kb.
   threshold: config.compress.threshold,
+  // Flush pending data. Don't call this frivolously, premature
+  // flushes negatively impact the effectiveness of the compression algorithm.
   flush: zlib.Z_SYNC_FLUSH,
 }));
 
