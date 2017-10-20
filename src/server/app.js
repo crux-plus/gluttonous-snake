@@ -32,9 +32,9 @@ import { terminal } from 'terminal-kit';
 import zlib from 'zlib';
 
 // All custome routes.
-import routers from './routers';
+import routers from 'server/routers';
 
-import config from './config';
+import config from 'server/config';
 
 const app = new Koa();
 

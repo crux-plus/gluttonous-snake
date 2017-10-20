@@ -22,6 +22,17 @@
           },
         ]
       ],
+      "plugins": [
+          [
+            "module-resolver", {
+            "root": ["./src"],
+            "alias": {
+              "server": "./server",
+              "isomerism": "./isomerism"
+            }
+          },
+        ]
+      ]
     }
   }
 }

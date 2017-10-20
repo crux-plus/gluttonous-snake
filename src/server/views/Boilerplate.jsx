@@ -1,3 +1,4 @@
+// Runtime type checking for React props and similar objects
 import PropTypes from 'prop-types';
 
 // A declarative, efficient, and flexible JavaScript library
@@ -7,7 +8,7 @@ import React from 'react';
 // The document head manager for React.
 import { Helmet } from 'react-helmet';
 
-import config from '../config';
+import config from 'server/config';
 
 /**
  * A professional front-end template for building fast, robust, and adaptable
