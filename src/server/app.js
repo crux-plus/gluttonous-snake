@@ -67,8 +67,14 @@ app.use(compress({
 
 app.use(routers.routes());
 
+// Return a callback function suitable for the http.createServer()
+// method to handle a request. You may also use this callback function
+// to mount your koa app in a Connect/Express app.
 const server = http.createServer(app.callback());
+
+// The http.Server bind to.
 const socket = socketIO(server);
+
 server.listen(config.port, () => {
   terminal.blue(`Project is running at http://${config.host}:${config.port}/`);
 });
