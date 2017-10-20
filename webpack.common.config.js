@@ -8,7 +8,8 @@ export default {
   // Here the application starts executing
   // and webpack starts bundling
   entry: {
-    polyfills: './src/client/polyfills.js',
+    fetch: './src/client/polyfills/fetch.js',
+    raf: './src/client/polyfills/raf.js',
     entry: './src/client/entry.jsx',
   },
 

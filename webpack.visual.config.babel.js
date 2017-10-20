@@ -25,7 +25,7 @@ export default {
       '/api': 'http://localhost:3000'
     },
     // boolean | string | array, static file location
-    contentBase: path.join(__dirname, 'content'),
+    contentBase: path.join(__dirname, 'content', 'client'),
     // enable gzip compression
     compress: true,
     // true for index.html upon 404, object for multiple paths
@@ -44,7 +44,7 @@ export default {
   // adding plugins to your configuration
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'assets/index.html',
+      template: 'assets/client/index.html',
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
     new webpack.HotModuleReplacementPlugin(),
