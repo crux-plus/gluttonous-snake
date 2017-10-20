@@ -8,8 +8,8 @@ export default {
   // Here the application starts executing
   // and webpack starts bundling
   entry: {
-    polyfills: './src/apps/polyfills.js',
-    entry: './src/apps/entry.jsx',
+    polyfills: './src/client/polyfills.js',
+    entry: './src/client/entry.jsx',
   },
 
   // options related to how webpack emits results
@@ -87,7 +87,7 @@ export default {
     // directories where to look for modules
     modules: [
       'node_modules',
-      path.resolve(__dirname, 'src', 'apps'),
+      path.resolve(__dirname, 'src', 'client'),
     ],
 
     // extensions that are used

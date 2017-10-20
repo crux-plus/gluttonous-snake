@@ -11,7 +11,7 @@
     "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
     "sync": "gio open http://localhost:3001 && browser-sync start",
     "serve": "pm2 start process.json && redis-server",
-    "start": "redis-server & nodemon src/ctrls/app.js --exec babel-node"
+    "start": "redis-server & nodemon src/server/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
