@@ -1,5 +1,5 @@
 export default {
-  title: 'Koa2 Apps',
+  title: 'Koa2 App',
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || 3000,
   redis: {

@@ -63,6 +63,11 @@ export default {
           },
         ]
       },
+      // bundle loader for webpack
+      {
+        test: /\.bundle\.js$/,
+        use: 'bundle-loader'
+      },
       // Image loader module for webpack.
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

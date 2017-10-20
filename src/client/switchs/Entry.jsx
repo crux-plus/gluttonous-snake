@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Route, Switch } from 'react-router';
 
-import Game from 'client/routes/Game';
+import Game from 'client/bundles/Game';
 
 class Entry extends React.Component {
   /**
