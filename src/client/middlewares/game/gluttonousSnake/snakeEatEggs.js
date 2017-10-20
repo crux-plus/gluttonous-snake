@@ -13,7 +13,7 @@ import Status from 'client/components/game/GluttonousSnake/Status';
 /**
  * @private
  */
-function getIncLocs({ rtl, location, size, spread=2 }) {
+function getIncreaseLocations({ rtl, location, size, spread=2 }) {
   const count = Math.floor(size / spread);
   const locations = new Array(count - 1);
   locations.fill(location);
@@ -112,7 +112,7 @@ function collisionDetection({ getState, dispatch }) {
       };
       if (checkTwoSquareIntersection(square1, square2)) {
         const size = size2;
-        const locations = getIncLocs({ location, size, rtl });
+        const locations = getIncreaseLocations({ location, size, rtl });
         dispatch(eggsActionCreators.translateEggs());
         dispatch(snakeActionCreators.increaseSnake({ locations }));
         this.outerActions.increaseScore();
