@@ -7,10 +7,9 @@
     "flow": "flow",
     "test": "ava",
     "lint": "eslint src",
-    "serve": "pm2 start process.json",
     "build": "BABEL_ENV=client webpack && BABEL_ENV=server babel src/server -d dist",
-    "watch": "browser-sync start & BABEL_ENV=client webpack-dev-server --config webpack.visual.config.babel.js",
-    "start": "redis-server & browser-sync start & BABEL_ENV=server nodemon src/server/app.js --exec babel-node"
+    "client:dev": "browser-sync start & BABEL_ENV=client webpack-dev-server --config webpack.visual.config.babel.js",
+    "server:dev": "redis-server & browser-sync start & BABEL_ENV=server nodemon src/server/app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
