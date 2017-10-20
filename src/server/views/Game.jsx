@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 // for building user interfaces.
 import React from 'react';
 
-import GamePage from 'server/pages/Game';
+// The document head manager for React.
+import { Helmet } from 'react-helmet';
+
+import SEOLayout from 'server/components/common/SEOLayout';
+
+import GameRoute from 'isomerism/routes/Game';
 
 class Game extends React.PureComponent {
   /**
@@ -20,7 +25,9 @@ class Game extends React.PureComponent {
    */
   render() {
     return (
-      <GamePage/>
+      <SEOLayout>
+        <GameRoute/>
+      </SEOLayout>
     );
   }
 }
