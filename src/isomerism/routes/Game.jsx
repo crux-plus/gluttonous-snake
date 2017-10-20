@@ -1,9 +1,11 @@
 import React from 'react';
 
-import Bundle from 'client/components/common/Bundle';
+import GluttonousSnake from 'isomerism/containers/game/GluttonousSnake';
 
-import loadGameRoute from 'bundle-loader?lazy!isomerism/routes/Game';
-
+/**
+ * @public
+ * @class
+ */
 class Game extends React.PureComponent {
   /**
    * @constructor
@@ -17,9 +19,7 @@ class Game extends React.PureComponent {
    */
   render() {
     return (
-      <Bundle load={loadGameRoute}>
-        {(GameRoute) => <GameRoute {...this.props}/>}
-      </Bundle>
+      <GluttonousSnake/>
     );
   }
 }

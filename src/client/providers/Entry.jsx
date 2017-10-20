@@ -1,6 +1,3 @@
-// Redux DevTools extension.
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 // Official React bindings for Redux.
 import { Provider } from 'react-redux';
 
