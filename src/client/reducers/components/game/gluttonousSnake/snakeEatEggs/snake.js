@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
 
-import { currentTime } from 'helpers/common';
+import { currentTime } from 'client/helpers/common';
 
-import Rtl from 'components/game/GluttonousSnake/Rtl';
+import Rtl from 'client/components/game/GluttonousSnake/Rtl';
 
 function transformSnake(state, action) {
   const {

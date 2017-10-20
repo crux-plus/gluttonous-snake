@@ -2,9 +2,9 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import GluttonousSnake from 'components/game/GluttonousSnake';
+import GluttonousSnake from 'client/components/game/GluttonousSnake';
 
-import gameActionCreators from 'actions/game/gluttonousSnake/game';
+import gameActionCreators from 'client/actions/game/gluttonousSnake/game';
 
 function mapStateToProps(state, ownProps = {}) {
   const {

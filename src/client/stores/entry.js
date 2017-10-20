@@ -7,7 +7,7 @@ import { routerMiddleware } from 'react-router-redux';
 // Predictable state container for JavaScript apps.
 import { createStore, applyMiddleware } from 'redux';
 
-import entry from 'reducers/entry';
+import entry from 'client/reducers/entry';
 
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history);

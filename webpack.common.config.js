@@ -87,7 +87,7 @@ export default {
     // directories where to look for modules
     modules: [
       'node_modules',
-      path.resolve(__dirname, 'src', 'client'),
+      path.resolve(__dirname, 'src'),
     ],
 
     // extensions that are used
@@ -95,15 +95,8 @@ export default {
 
     // a list of module name aliases
     alias: {
-      'containers': 'containers',
-      'components': 'components',
-      'providers': 'providers',
-      'switchs': 'switchs',
-      'helpers': 'helpers',
-      'actions': 'actions',
-      'routers': 'routers',
-      'styles': 'styles',
-      'stores': 'stores',
+      'client': 'client',
+      'isomerism': 'isomerism',
     },
     /* alternative alias syntax (click to show) */
 

@@ -6,15 +6,15 @@ import { Provider } from 'react-redux';
 
 import React from 'react';
 
-import SnakeEatEggsContainer from 'containers/game/GluttonousSnake/SnakeEatEggs';
+import SnakeEatEggsContainer from 'client/containers/game/GluttonousSnake/SnakeEatEggs';
 
-import snakeEatEggs from 'reducers/components/game/gluttonousSnake/snakeEatEggs';
+import snakeEatEggs from 'client/reducers/components/game/gluttonousSnake/snakeEatEggs';
 
 import {
   boundaryDetection,
   collisionDetection,
   selfEatingDetection,
-} from 'middlewares/game/gluttonousSnake/snakeEatEggs';
+} from 'client/middlewares/game/gluttonousSnake/snakeEatEggs';
 
 /**
  * @public

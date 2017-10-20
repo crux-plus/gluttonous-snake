@@ -2,9 +2,9 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import Canvas from 'components/common/Canvas';
+import Canvas from 'client/components/common/Canvas';
 
-import canvasActionCreators from 'actions/common/canvas';
+import canvasActionCreators from 'client/actions/common/canvas';
 
 function mapStateToProps(state, ownProps = {}) {
   const {

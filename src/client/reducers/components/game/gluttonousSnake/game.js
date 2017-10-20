@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-import Status from 'components/game/GluttonousSnake/Status';
+import Status from 'client/components/game/GluttonousSnake/Status';
 
 function increaseScore(state, action) {
   let {

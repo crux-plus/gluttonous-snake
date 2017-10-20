@@ -18,8 +18,8 @@ import React from 'react';
 import createHistory from 'history/createBrowserHistory';
 
 // Renders the first child <Route> or <Redirect> that matches the location.
-import EntrySwitch from 'switchs/Entry';
-import store from 'stores/entry';
+import EntrySwitch from 'client/switchs/Entry';
+import store from 'client/stores/entry';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const browserHistory = createHistory();

@@ -1,14 +1,14 @@
 import { bindActionCreators } from 'redux';
 
-import { checkTwoSquareIntersection } from 'helpers/game/gluttonousSnake/snakeEatEggs';
+import { checkTwoSquareIntersection } from 'client/helpers/game/gluttonousSnake/snakeEatEggs';
 
-import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
+import snakeActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
+import eggsActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/eggs';
 
-import Rtl from 'components/game/GluttonousSnake/Rtl';
+import Rtl from 'client/components/game/GluttonousSnake/Rtl';
 
-import Status from 'components/game/GluttonousSnake/Status';
+import Status from 'client/components/game/GluttonousSnake/Status';
 
 /**
  * @private

@@ -7,9 +7,9 @@
     "flow": "flow",
     "test": "ava",
     "lint": "eslint src",
-    "build": "babel src/ctrls -d dist",
-    "watch": "webpack-dev-server --open --config webpack.visual.config.babel.js",
-    "sync": "gio open http://localhost:3001 && browser-sync start",
+    "build": "babel src/server -d dist",
+    "watch": "webpack-dev-server --config webpack.visual.config.babel.js",
+    "sync": "browser-sync start",
     "serve": "pm2 start process.json && redis-server",
     "start": "redis-server & nodemon src/server/app.js --exec babel-node"
   },

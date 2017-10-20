@@ -2,15 +2,15 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import SnakeEatEggs from 'components/game/GluttonousSnake/SnakeEatEggs';
+import SnakeEatEggs from 'client/components/game/GluttonousSnake/SnakeEatEggs';
 
-import snakeActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snake';
+import snakeActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/snake';
 
-import eggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/eggs';
+import eggsActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/eggs';
 
-import boundaryActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/boundary';
+import boundaryActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/boundary';
 
-import snakeEatEggsActionCreators from 'actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
+import snakeEatEggsActionCreators from 'client/actions/game/gluttonousSnake/snakeEatEggs/snakeEatEggs.js';
 
 function mapStateToProps(state) {
   const boundary = state.get('boundary');

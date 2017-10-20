@@ -36,6 +36,8 @@ export default {
     https: false,
     // only errors & warns on hot reload
     noInfo: true,
+    //When open is enabled, the dev server will open the browser.
+    open: true,
     // ...
   },
 

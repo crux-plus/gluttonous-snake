@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-import { currentTime } from 'helpers/common';
+import { currentTime } from 'client/helpers/common';
 
 function transformEggs(state, action) {
   const {

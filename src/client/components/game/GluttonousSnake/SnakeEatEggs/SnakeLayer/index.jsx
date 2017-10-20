@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Canvas from 'components/common/Canvas';
+import Canvas from 'client/components/common/Canvas';
 
 import Snake from './Snake';
 

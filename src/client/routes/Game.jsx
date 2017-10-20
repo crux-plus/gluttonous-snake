@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GluttonousSnake from 'containers/game/GluttonousSnake';
+import GluttonousSnake from 'client/containers/game/GluttonousSnake';
 
 class Game extends React.Component {
   render() {
