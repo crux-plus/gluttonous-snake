@@ -14,6 +14,8 @@
     },
     "server": {
       "presets": [
+        "flow",
+        "react",
         [
           "env", {
             "targets": {
