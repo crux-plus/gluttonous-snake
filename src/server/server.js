@@ -44,7 +44,6 @@ import routers from 'server/routers';
 
 import config from 'server/config';
 
-import addAssetsByChunkName from 'server/middlewares/addAssetsByChunkName';
 
 import webpackConfig from '../../webpack.server.config.js';
 
