@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "build": "BABEL_ENV=client webpack && BABEL_ENV=server babel src/server -d dist",
     "client:dev": "browser-sync start & BABEL_ENV=client webpack-dev-server --config webpack.visual.config.babel.js",
-    "server:dev": "redis-server & browser-sync start & BABEL_ENV=server nodemon src/server/app.js --exec babel-node"
+    "server:dev": "redis-server & browser-sync start & BABEL_ENV=server nodemon src/server/server.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
+    "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^0.11.2",
     "flow-bin": "^0.54.1",
     "html-webpack-plugin": "^2.30.1",
@@ -82,6 +83,7 @@
     "koa-react-view": "^3.0.0",
     "koa-redis": "^3.1.1",
     "koa-router": "^7.2.1",
+    "koa-webpack": "^1.0.0",
     "normalize.css": "^7.0.0",
     "raf": "^3.3.2",
     "react": "^15.6.1",

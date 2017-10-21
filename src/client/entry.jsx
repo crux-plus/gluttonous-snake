@@ -5,7 +5,7 @@ import React from 'react';
 // A collection of HTML element and attribute style-normalizations
 import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.css';
-import 'isomerism/styles/entry.css';
+import 'client/styles/entry.css';
 
 // Makes the Redux store available to the connect() calls
 // in the component hierarchy below. Normally, you can’t use connect()

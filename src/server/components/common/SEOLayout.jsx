@@ -41,6 +41,8 @@ class SEOLayout extends React.PureComponent {
   render() {
     return (
       <Boilerplate>
+        <Helmet>
+        </Helmet>
         <SEOLayoutProvider>
           {this.props.children}
         </SEOLayoutProvider>

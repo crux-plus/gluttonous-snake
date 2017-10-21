@@ -25,7 +25,9 @@ class Game extends React.PureComponent {
    */
   render() {
     return (
-      <SEOLayout>
+      <SEOLayout
+        {...this.props}
+      >
         <GameRoute/>
       </SEOLayout>
     );
