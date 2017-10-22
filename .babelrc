@@ -37,7 +37,7 @@
         ]
       ],
       "ignore": [
-        "./src/client/styles/**/.css",
+        "./src/client/styles/**",
       ]
     }
   }

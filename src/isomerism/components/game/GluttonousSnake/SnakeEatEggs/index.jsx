@@ -8,7 +8,7 @@ import SnakeLayer from './SnakeLayer';
 
 import BackgroundLayer from './BackgroundLayer';
 
-import 'client/styles/game/gluttonousSnake/snakeEatEggs.css';
+//import 'client/styles/game/gluttonousSnake/snakeEatEggs.css';
 
 /**
  * @class
