@@ -25,18 +25,43 @@ import config from 'server/config';
  */
 class Boilerplate extends React.PureComponent {
   /**
+   * @static
+   */
+  static getAssetsComponent(webpackStats) {
+    const assetsByChunkName = webpackStats.toJson().assetsByChunkName;
+    let totalAssets = [];
+    Object.keys(assetsByChunkName).forEach((key) => {
+      const assets = assetsByChunkName[key];
+      totalAssets = totalAssets.concat(assets);
+    });
+    return totalAssets.map((path) => {
+      const fullPath = 'assets/'.concat(path);
+      let component;
+      if (fullPath.endsWith('.css')) {
+        component = <link key={fullPath} rel="stylesheet" href={fullPath} />;
+      } else if (fullPath.endsWith('.js')) {
+        component = <script key={fullPath} src={fullPath}></script>;
+      }
+      return component;
+    });
+  }
+
+  /**
    * @constructor
    */
   constructor(props) {
     super(props);
     const helmet = Helmet.renderStatic();
     const {
+      webpackStats,
       children,
     } = this.props;
     this.state = {
+      assets: Boilerplate.getAssetsComponent(webpackStats),
       title: helmet.title.toComponent(),
       meta: helmet.meta.toComponent(),
       link: helmet.link.toComponent(),
+      script: helmet.script.toComponent(),
       innerHTML: ReactDOMServer.renderToString(this.props.children),
     };
   }
@@ -47,9 +72,11 @@ class Boilerplate extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     const helmet = Helmet.renderStatic();
     const {
+      webpackStats,
       children,
     } = nextProps;
     this.setState({
+      assets: Boilerplate.getAssetsComponent(webpackStats),
       title: helmet.title.toComponent(),
       meta: helmet.meta.toComponent(),
       link: helmet.link.toComponent(),
@@ -68,6 +95,7 @@ class Boilerplate extends React.PureComponent {
           <meta http-equiv="x-ua-compatible" content="ie=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Koa App</title>
+          {this.state.assets}
         </Helmet>
         <head>
           {this.state.title}
