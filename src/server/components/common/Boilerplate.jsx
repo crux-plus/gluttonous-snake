@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 // for building user interfaces.
 import React from 'react';
 
+// The ReactDOMServer object enables you to render components to static markup.
+// Typically, it’s used on a Node server:
+import ReactDOMServer from 'react-dom/server';
+
 // The document head manager for React.
 import { Helmet } from 'react-helmet';
 
@@ -25,12 +29,15 @@ class Boilerplate extends React.PureComponent {
    */
   constructor(props) {
     super(props);
-
     const helmet = Helmet.renderStatic();
+    const {
+      children,
+    } = this.props;
     this.state = {
       title: helmet.title.toComponent(),
       meta: helmet.meta.toComponent(),
       link: helmet.link.toComponent(),
+      innerHTML: ReactDOMServer.renderToString(this.props.children),
     };
   }
 
@@ -39,10 +46,14 @@ class Boilerplate extends React.PureComponent {
    */
   componentWillReceiveProps(nextProps) {
     const helmet = Helmet.renderStatic();
+    const {
+      children,
+    } = nextProps;
     this.setState({
       title: helmet.title.toComponent(),
       meta: helmet.meta.toComponent(),
       link: helmet.link.toComponent(),
+      innerHTML: ReactDOMServer.renderToString(children),
     });
   }
 
@@ -65,7 +76,8 @@ class Boilerplate extends React.PureComponent {
           {this.state.script}
         </head>
         <body>
-          {this.props.children}
+          <main dangerouslySetInnerHTML={{__html: this.state.innerHTML}}>
+          </main>
         </body>
       </html>
     );
@@ -74,12 +86,10 @@ class Boilerplate extends React.PureComponent {
 
 // Specifies the verification rule for props:
 Boilerplate.propTypes = {
-  title: PropTypes.string,
 };
 
 // Specifies the default values for props:
 Boilerplate.defaultProps = {
-  title: config.title,
 };
 
 export default Boilerplate;

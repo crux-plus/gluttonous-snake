@@ -37,9 +37,7 @@ class SEOLayout extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <Router
-          {...this.props}
-        >
+        <Router>
           {this.props.children}
         </Router>
       </Provider>
