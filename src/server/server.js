@@ -44,7 +44,6 @@ import routers from 'server/routers';
 
 import config from 'server/config';
 
-
 import webpackConfig from '../../webpack.server.config.js';
 
 const app = new Koa();

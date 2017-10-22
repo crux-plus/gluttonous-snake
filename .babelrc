@@ -31,10 +31,13 @@
               "root": ["./src"],
               "alias": {
                 "server": "./server",
-                "isomerism": "./isomerism"
+                "isomerism": "./isomerism",
               },
             },
         ]
+      ],
+      "ignore": [
+        "./src/client/styles/**/.css",
       ]
     }
   }

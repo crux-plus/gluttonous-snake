@@ -25,6 +25,25 @@ class Boilerplate extends React.PureComponent {
    */
   constructor(props) {
     super(props);
+
+    const helmet = Helmet.renderStatic();
+    this.state = {
+      title: helmet.title.toComponent(),
+      meta: helmet.meta.toComponent(),
+      link: helmet.link.toComponent(),
+    };
+  }
+
+  /**
+   * @method
+   */
+  componentWillReceiveProps(nextProps) {
+    const helmet = Helmet.renderStatic();
+    this.setState({
+      title: helmet.title.toComponent(),
+      meta: helmet.meta.toComponent(),
+      link: helmet.link.toComponent(),
+    });
   }
 
   /**
@@ -36,10 +55,15 @@ class Boilerplate extends React.PureComponent {
         <Helmet>
           <meta charset="utf-8" />
           <meta http-equiv="x-ua-compatible" content="ie=edge" />
-          <meta name="description" content="This is a description" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>{this.props.title}</title>
+          <title>Koa App</title>
         </Helmet>
+        <head>
+          {this.state.title}
+          {this.state.meta}
+          {this.state.link}
+          {this.state.script}
+        </head>
         <body>
           {this.props.children}
         </body>

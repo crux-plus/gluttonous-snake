@@ -44,8 +44,30 @@ export default {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
-        }),
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+              importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: (loader) => [
+                  // Add the plugin
+                  new IconfontWebpackPlugin({
+                    resolve: loader.resolve,
+                    modules: false,
+                  }),
+                ],
+                config: {
+                  path: path.resolve(__dirname, 'postcss.config.js'),
+                },
+              },
+            },
+          ]
+        })
       },
       // bundle loader for webpack
       {
