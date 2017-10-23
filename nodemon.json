@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "execMap": {
+    "js": "babel-node"
+  },
+  "env": {
+    "BABEL_ENV": "server"
+  }
+}

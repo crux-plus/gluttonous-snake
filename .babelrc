@@ -25,19 +25,19 @@
         ]
       ],
       "plugins": [
-          "transform-object-rest-spread",
-          [
-            "module-resolver", {
-              "root": ["./src"],
-              "alias": {
-                "server": "./server",
-                "isomerism": "./isomerism",
-              },
+        "transform-object-rest-spread",
+        [
+          "module-resolver", {
+            "root": ["./src"],
+            "alias": {
+              "server": "./server",
+              "isomerism": "./isomerism",
             },
+          },
         ]
       ],
-      "ignore": [
-        "./src/client/styles/**",
+      "only": [
+        "*.js",
       ]
     }
   }

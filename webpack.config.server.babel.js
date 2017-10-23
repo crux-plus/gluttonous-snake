@@ -7,6 +7,11 @@ import IconfontWebpackPlugin from 'iconfont-webpack-plugin';
 // Extract text from a bundle, or bundles, into a separate file.
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+// Webpack is a module bundler. Its main purpose is to bundle JavaScript
+// files for usage in a browser, yet it is also capable of transforming,
+// bundling, or packaging just about any resource or asset.
+import webpack from 'webpack';
+
 export default {
   // Here the application starts executing
   // and webpack starts bundling
@@ -43,7 +48,6 @@ export default {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
@@ -134,6 +138,13 @@ export default {
   // changes chunk loading behavior and available modules
   //
   plugins: [
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin({
+      filename: 'build.min.css',
+      allChunks: true,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"',
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ]
 };
