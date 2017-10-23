@@ -8,10 +8,6 @@ import React from 'react';
 // The document head manager for React.
 import { Helmet } from 'react-helmet';
 
-// The ReactDOMServer object enables you to render components
-// to static markup. Typically, it’s used on a Node server:
-import ReactDOMServer from 'react-dom/server'
-
 // A professional front-end template for building fast, robust,
 // and adaptable web apps or sites.
 import Boilerplate from './Boilerplate';

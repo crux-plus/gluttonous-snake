@@ -101,11 +101,11 @@ class Boilerplate extends React.PureComponent {
           {this.state.title}
           {this.state.meta}
           {this.state.link}
-          {this.state.script}
         </head>
         <body>
           <main dangerouslySetInnerHTML={{__html: this.state.innerHTML}}>
           </main>
+          {this.state.script}
         </body>
       </html>
     );

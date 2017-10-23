@@ -1,27 +1,10 @@
+import Loadable from 'react-loadable';
+
 import React from 'react';
 
-import Bundle from 'client/components/common/Bundle';
+import { Loader, } from 'semantic-ui-react';
 
-import loadGameRoute from 'bundle-loader?lazy!isomerism/routes/Game';
-
-class Game extends React.PureComponent {
-  /**
-   * @constructor
-   */
-  constructor(props) {
-    super(props);
-  }
-
-  /**
-   * @method
-   */
-  render() {
-    return (
-      <Bundle load={loadGameRoute}>
-        {(GameRoute) => <GameRoute {...this.props}/>}
-      </Bundle>
-    );
-  }
-}
-
-export default Game;
+export default Loadable({
+  loader: () => import('isomerism/routes/Game'),
+  loading: Loader,
+});
