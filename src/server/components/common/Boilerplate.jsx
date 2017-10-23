@@ -30,10 +30,10 @@ class Boilerplate extends React.PureComponent {
   static getAssetsComponent(webpackStats) {
     const assetsByChunkName = webpackStats.toJson().assetsByChunkName;
     let totalAssets = [];
-    Object.keys(assetsByChunkName).forEach((key) => {
-      const assets = assetsByChunkName[key];
-      totalAssets = totalAssets.concat(assets);
-    });
+    const polyfillsAssets = assetsByChunkName['polyfills'];
+    const entryAssets = assetsByChunkName['entry'];
+    totalAssets = totalAssets.concat(polyfillsAssets);
+    totalAssets = totalAssets.concat(entryAssets);
     return totalAssets.map((path) => {
       const fullPath = 'assets/'.concat(path);
       let component;
