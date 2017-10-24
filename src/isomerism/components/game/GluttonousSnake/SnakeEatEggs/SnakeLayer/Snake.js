@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-//import Hammer from 'hammerjs';
+import Hammer from 'hammerjs';
 
 import Rtl from '../../Rtl';
 
@@ -322,12 +322,12 @@ class Snake {
    * @method
    */
   bindKeyboardEvent() {
-    //window.addEventListener('keydown', this.handleKeyboardEvent);
-    //window.addEventListener('blur', this.handleBlurEvent);
+    window.addEventListener('keydown', this.handleKeyboardEvent);
+    window.addEventListener('blur', this.handleBlurEvent);
 
-    //const hammer = new Hammer(window || null);
-    //hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-    //hammer.on('swipe', this.handleSwipeEvent);
+    const hammer = new Hammer(window || null);
+    hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    hammer.on('swipe', this.handleSwipeEvent);
   }
 
   /**

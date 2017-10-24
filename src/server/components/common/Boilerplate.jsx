@@ -105,7 +105,6 @@ class Boilerplate extends React.PureComponent {
         <body>
           <main dangerouslySetInnerHTML={{__html: this.state.innerHTML}}>
           </main>
-          {this.state.script}
         </body>
       </html>
     );

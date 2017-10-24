@@ -8,7 +8,7 @@ import SnakeLayer from './SnakeLayer';
 
 import BackgroundLayer from './BackgroundLayer';
 
-//import 'client/styles/game/gluttonousSnake/snakeEatEggs.css';
+import styles from 'client/styles/game/gluttonousSnake/snakeEatEggs.css';
 
 /**
  * @class
@@ -49,9 +49,9 @@ class SnakeEatEggs extends React.PureComponent {
    */
   render() {
     return (
-      <div className="comb">
+      <div className='comb'>
         <BackgroundLayer
-          className="canvas"
+          className='canvas'
           {...this.props}
           id={this.props.immutable.background.get('id')}
           width={this.state.width}
@@ -59,7 +59,7 @@ class SnakeEatEggs extends React.PureComponent {
           immutable={this.props.immutable.boundary}
         />
         <EggsLayer
-          className="canvas"
+          className='canvas'
           {...this.props}
           id={this.props.immutable.eggs.get('id')}
           width={this.state.width}
@@ -67,7 +67,7 @@ class SnakeEatEggs extends React.PureComponent {
           immutable={this.props.immutable.eggs}
        />
         <SnakeLayer
-          className="canvas"
+          className='canvas'
           {...this.props}
           id={this.props.immutable.snake.get('id')}
           width={this.state.width}
