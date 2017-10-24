@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-//import Hammer from 'hammerjs';
+import Hammer from 'hammerjs';
 
 import Rtl from '../../Rtl';
 

@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "flow": "flow",
-    "test": "webpack --config webpack.server.config.babel.js",
     "lint": "eslint src",
     "build": "BABEL_ENV=client webpack && BABEL_ENV=server babel src/server -d dist",
-    "client:dev": "browser-sync start & BABEL_ENV=client webpack-dev-server --config webpack.visual.config.babel.js",
-    "server:dev": "redis-server & browser-sync start & nodemon src/server/server.js"
+    "client:dev": "browser-sync start & BABEL_ENV=client webpack-dev-server --config webpack.visual.config.babel.js"
   },
   "repository": {
     "type": "git",
