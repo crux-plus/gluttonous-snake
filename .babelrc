@@ -41,7 +41,6 @@
         [
           "css-modules-transform", {
             "devMode": false,
-            "mode": "string",
             "extensions": [".css"],
             "generateScopedName": "[path][name]__[local]--[hash:base64:5]",
           }
